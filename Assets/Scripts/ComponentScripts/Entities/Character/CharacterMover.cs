@@ -11,6 +11,7 @@ namespace ComponentScripts.Entities.Character
         private float _movingSpeed;
 
         [SerializeField] private float tugSpeed;
+        [SerializeField] private float tugDelay;
         
         public void Inject(IPlayerMover mover)
         {
@@ -31,7 +32,7 @@ namespace ComponentScripts.Entities.Character
                 if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
                 {
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed);
+                        _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed, tugDelay);
                     else
                         _mover.Move(KeyCode.A, KeyCode.W, _movingSpeed, transform);
                 }
@@ -39,7 +40,7 @@ namespace ComponentScripts.Entities.Character
                 else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
                 {
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed);
+                        _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed, tugDelay);
                     else
                         _mover.Move(KeyCode.A, KeyCode.S, _movingSpeed, transform);
                 }
@@ -47,7 +48,7 @@ namespace ComponentScripts.Entities.Character
                 else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
                 {
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed);
+                        _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed, tugDelay);
                     else
                         _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform);
                 }
@@ -55,7 +56,7 @@ namespace ComponentScripts.Entities.Character
                 else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
                 {
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed);
+                        _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed, tugDelay);
                     else
                         _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform);
                 }
@@ -64,7 +65,7 @@ namespace ComponentScripts.Entities.Character
                 {
                     keyCode = KeyCode.A;
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed);
+                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay);
                     else
                         _mover.Move(keyCode, _movingSpeed, transform);
                 }
@@ -73,7 +74,7 @@ namespace ComponentScripts.Entities.Character
                 {
                     keyCode = KeyCode.W;
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed);
+                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay);
                     else
                         _mover.Move(keyCode, _movingSpeed, transform);
                 }
@@ -82,7 +83,7 @@ namespace ComponentScripts.Entities.Character
                 {
                     keyCode = KeyCode.S;
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed);
+                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay);
                     else
                         _mover.Move(keyCode, _movingSpeed, transform);
                 }
@@ -91,7 +92,7 @@ namespace ComponentScripts.Entities.Character
                 {
                     keyCode = KeyCode.D;
                     if(Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed);
+                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay);
                     else
                         _mover.Move(keyCode, _movingSpeed, transform);
                 }

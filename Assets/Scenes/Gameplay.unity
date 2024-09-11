@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tugSpeed: 40
+  tugDelay: 0.7
 --- !u!1 &1946549038
 GameObject:
   m_ObjectHideFlags: 0

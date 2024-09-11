@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,31 +6,42 @@ namespace Services.MovingScripts
 {
     public class PlayerMover : MonoBehaviour, IPlayerMover
     {
-        public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed)
+        private float _tugTimer;
+
+        private void Update()
         {
-            if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
+            _tugTimer += Time.deltaTime;
+        }
+
+        public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay)
+        {
+            if (_tugTimer > tugDelay)
             {
-                Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
-                    characterTransform.position.y + 3, 0.0f);
-                StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-            }
-            else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
-            {
-                Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
-                    characterTransform.position.y - 3, 0.0f);
-                StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-            }
-            else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
-            {
-                Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
-                    characterTransform.position.y + 3, 0.0f);
-                StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-            }
-            else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
-            {
-                Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
-                    characterTransform.position.y - 3, 0.0f);
-                StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                _tugTimer = 0;
+                if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
+                {
+                    Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
+                        characterTransform.position.y + 3, 0.0f);
+                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                }
+                else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
+                {
+                    Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
+                        characterTransform.position.y - 3, 0.0f);
+                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                }
+                else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
+                {
+                    Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
+                        characterTransform.position.y + 3, 0.0f);
+                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                }
+                else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
+                {
+                    Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
+                        characterTransform.position.y - 3, 0.0f);
+                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                }
             }
         }
 
@@ -64,31 +76,35 @@ namespace Services.MovingScripts
                 characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, -Time.deltaTime * movingSpeed, 0.0f));
         }
 
-        public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed)
+        public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed, float tugDelay)
         {
-            Vector3 targetPosition;
-            switch (key)
+            if (_tugTimer > tugDelay)
             {
-                case KeyCode.W:
-                    targetPosition = new Vector3(characterTransform.position.x,
-                        characterTransform.position.y + 3, 0.0f);
-                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-                    break;
-                case KeyCode.D:
-                    targetPosition = new Vector3(characterTransform.position.x + 3,
-                        characterTransform.position.y, 0.0f);
-                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-                    break;
-                case KeyCode.S:
-                    targetPosition = new Vector3(characterTransform.position.x,
-                        characterTransform.position.y - 3, 0.0f);
-                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-                    break;
-                case KeyCode.A:
-                    targetPosition = new Vector3(characterTransform.position.x - 3,
-                        characterTransform.position.y, 0.0f);
-                    StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
-                    break;
+                _tugTimer = 0;
+                Vector3 targetPosition;
+                switch (key)
+                {
+                    case KeyCode.W:
+                        targetPosition = new Vector3(characterTransform.position.x,
+                            characterTransform.position.y + 3, 0.0f);
+                        StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                        break;
+                    case KeyCode.D:
+                        targetPosition = new Vector3(characterTransform.position.x + 3,
+                            characterTransform.position.y, 0.0f);
+                        StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                        break;
+                    case KeyCode.S:
+                        targetPosition = new Vector3(characterTransform.position.x,
+                            characterTransform.position.y - 3, 0.0f);
+                        StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                        break;
+                    case KeyCode.A:
+                        targetPosition = new Vector3(characterTransform.position.x - 3,
+                            characterTransform.position.y, 0.0f);
+                        StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
+                        break;
+                }
             }
         }
 
