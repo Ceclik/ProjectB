@@ -1,22 +1,29 @@
-using System;
 using System.Collections;
+using Services.UI;
 using UnityEngine;
 
 namespace Services.MovingScripts
 {
     public class PlayerMover : MonoBehaviour, IPlayerMover
     {
+        private IStaminaHandler _staminaHandler;
         private float _tugTimer;
 
+        public void Inject(IStaminaHandler staminaHandler)
+        {
+            _staminaHandler = staminaHandler;
+        }
+        
         private void Update()
         {
             _tugTimer += Time.deltaTime;
         }
 
-        public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay)
+        public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay, float staminaDecreaseValue)
         {
             if (_tugTimer > tugDelay)
             {
+                _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 _tugTimer = 0;
                 if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
                 {
@@ -45,73 +52,108 @@ namespace Services.MovingScripts
             }
         }
 
-        public void Move(KeyCode key, float movingSpeed, Transform characterTransform, float runSpeed)
+        public void Move(KeyCode key, float movingSpeed, Transform characterTransform, float runSpeed, float staminaDecreaseValue)
         {
             switch(key)
             {
                 case KeyCode.W:
-                    characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                        ? new Vector3(0.0f, Time.deltaTime * runSpeed, 0.0f)
-                        : new Vector3(0.0f, Time.deltaTime * movingSpeed, 0.0f));
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        characterTransform.Translate(new Vector3(0.0f, Time.deltaTime * runSpeed, 0.0f));
+                        _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                    }
+                    else
+                        characterTransform.Translate(new Vector3(0.0f, Time.deltaTime * movingSpeed, 0.0f));
                     break;
                 case KeyCode.A:
-                    characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                        ? new Vector3(-Time.deltaTime * runSpeed, 0.0f, 0.0f)
-                        : new Vector3(-Time.deltaTime * movingSpeed, 0.0f, 0.0f));
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        characterTransform.Translate(new Vector3(-Time.deltaTime * runSpeed, 0.0f, 0.0f));
+                        _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                    }
+                    else
+                        characterTransform.Translate(new Vector3(-Time.deltaTime * movingSpeed, 0.0f, 0.0f));
                     break;
                 case KeyCode.S:
-                    characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                        ? new Vector3(0.0f, -Time.deltaTime * runSpeed, 0.0f)
-                        : new Vector3(0.0f, -Time.deltaTime * movingSpeed, 0.0f));
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        characterTransform.Translate(new Vector3(0.0f, -Time.deltaTime * runSpeed, 0.0f));
+                        _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                    }
+                    else
+                        characterTransform.Translate(new Vector3(0.0f, -Time.deltaTime * movingSpeed, 0.0f));
                     break;
                 case KeyCode.D:
-                    characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                        ? new Vector3(Time.deltaTime * runSpeed, 0.0f, 0.0f)
-                        : new Vector3(Time.deltaTime * movingSpeed, 0.0f, 0.0f));
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        characterTransform.Translate(new Vector3(Time.deltaTime * runSpeed, 0.0f, 0.0f));
+                        _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                    }
+                    else
+                        characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, 0.0f, 0.0f));
                     break;
             }
         }
 
-        public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed)
+        public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed, float staminaDecreaseValue)
         {
             if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
             {
-                characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                    ? new Vector3(-Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
-                        0.0f)
-                    : new Vector3(-Time.deltaTime * movingSpeed, Time.deltaTime * movingSpeed,
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    characterTransform.Translate(new Vector3(-Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
+                        0.0f));
+                    _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                }
+                else
+                    characterTransform.Translate(new Vector3(-Time.deltaTime * movingSpeed,
+                        Time.deltaTime * movingSpeed,
                         0.0f));
             }
             else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
             {
-                characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                    ? new Vector3(-Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
-                        0.0f)
-                    : new Vector3(-Time.deltaTime * movingSpeed, -Time.deltaTime * movingSpeed,
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    characterTransform.Translate(new Vector3(-Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
+                        0.0f));
+                    _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                }
+                else
+                    characterTransform.Translate(new Vector3(-Time.deltaTime * movingSpeed,
+                        -Time.deltaTime * movingSpeed,
                         0.0f));
             }
             else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
             {
-                characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                    ? new Vector3(Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
-                        0.0f)
-                    : new Vector3(Time.deltaTime * movingSpeed, Time.deltaTime * movingSpeed,
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    characterTransform.Translate(new Vector3(Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
+                        0.0f));
+                    _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                }
+                else
+                    characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, Time.deltaTime * movingSpeed,
                         0.0f));
             }
             else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
             {
-                characterTransform.Translate(Input.GetKey(KeyCode.LeftShift)
-                    ? new Vector3(Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
-                        0.0f)
-                    : new Vector3(Time.deltaTime * movingSpeed, -Time.deltaTime * movingSpeed,
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    characterTransform.Translate(new Vector3(Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
+                        0.0f));
+                    _staminaHandler.DecreaseStamina(staminaDecreaseValue);
+                }
+                else
+                    characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, -Time.deltaTime * movingSpeed,
                         0.0f));
             }
         }
 
-        public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed, float tugDelay)
+        public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed, float tugDelay, float staminaDecreaseValue)
         {
             if (_tugTimer > tugDelay)
             {
+                _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 _tugTimer = 0;
                 Vector3 targetPosition;
                 switch (key)
