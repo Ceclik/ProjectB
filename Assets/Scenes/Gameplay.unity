@@ -408,7 +408,7 @@ MonoBehaviour:
   tugDelay: 0.7
   tugStaminaDecreaseValue: 10
   runSpeed: 10
-  runStaminaDecreasingValuePerSecond: 0.1
+  runStaminaDecreasingValuePerSecond: 0.3
 --- !u!114 &976462662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,6 +423,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stamina: 100
   staminaBar: {fileID: 1988556696}
+  increasingStaminaValuePerSecond: 25
+  startStaminaIncreasingDelay: 1.5
 --- !u!1 &1180738196
 GameObject:
   m_ObjectHideFlags: 0

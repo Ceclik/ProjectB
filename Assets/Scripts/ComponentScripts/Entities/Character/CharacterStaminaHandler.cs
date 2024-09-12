@@ -1,3 +1,4 @@
+using System;
 using Services.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,12 +11,12 @@ namespace ComponentScripts.Entities.Character
         //private IStaminaHandler _staminaHandler;
         [SerializeField] [Range(0, 100)] private float stamina;
         [SerializeField] private Image staminaBar;
-        
-        public Image StaminaBar 
-        { 
-            get => staminaBar;
-            set => staminaBar = value;
-        }
+        [SerializeField] private float increasingStaminaValuePerSecond;
+        [SerializeField] private float startStaminaIncreasingDelay;
+
+        public float IncreasingStaminaValuePerSecond => increasingStaminaValuePerSecond;
+        public float StartStaminaIncreasingDelay => startStaminaIncreasingDelay;
+        public Image StaminaBar => staminaBar;
 
         public float Stamina
         {
@@ -27,5 +28,6 @@ namespace ComponentScripts.Entities.Character
         {
             _staminaHandler = staminaHandler;
         }*/
+        
     }
 }
