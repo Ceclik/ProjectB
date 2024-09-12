@@ -1,5 +1,3 @@
-using System;
-using Services.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +6,6 @@ namespace ComponentScripts.Entities.Character
     [RequireComponent(typeof(Character))]
     public class CharacterStaminaHandler : MonoBehaviour
     {
-        //private IStaminaHandler _staminaHandler;
         [SerializeField] [Range(0, 100)] private float stamina;
         [SerializeField] private Image staminaBar;
         [SerializeField] private float increasingStaminaValuePerSecond;
@@ -23,11 +20,5 @@ namespace ComponentScripts.Entities.Character
             get => stamina;
             set => stamina = value;
         }
-
-        /*public void Inject(IStaminaHandler staminaHandler)
-        {
-            _staminaHandler = staminaHandler;
-        }*/
-        
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Services.MovingScripts
 {
-    public class PlayerMover : MonoBehaviour, IPlayerMover
+    public class PlayerMoverService : MonoBehaviour, IPlayerMover
     {
         private IStaminaHandler _staminaHandler;
         private float _tugTimer;

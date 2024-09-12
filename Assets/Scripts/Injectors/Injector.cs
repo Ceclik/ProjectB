@@ -8,16 +8,13 @@ namespace Injectors
     public class Injector : MonoBehaviour
     {
         [SerializeField] private CharacterMover character;
-        //private CharacterStaminaHandler _characterStamina;
 
         private void Awake()
         {
-            IPlayerMover playerMover = gameObject.AddComponent<PlayerMover>();
+            IPlayerMover playerMover = gameObject.AddComponent<PlayerMoverService>();
             character.Inject(playerMover);
-            //_characterStamina = character.gameObject.GetComponent<CharacterStaminaHandler>();
-            IStaminaHandler staminaHandler = gameObject.AddComponent<StaminaHandler>();
+            IStaminaHandler staminaHandler = gameObject.AddComponent<StaminaHandlerService>();
             playerMover.Inject(staminaHandler);
-            //_characterStamina.Inject(staminaHandler);
         }
     }
 }

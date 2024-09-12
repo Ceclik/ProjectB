@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Services.UI
 {
-    public class StaminaHandler : MonoBehaviour, IStaminaHandler
+    public class StaminaHandlerService : MonoBehaviour, IStaminaHandler
     {
         private CharacterStaminaHandler _characterStamina;
 

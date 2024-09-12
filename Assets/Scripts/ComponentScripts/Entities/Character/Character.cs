@@ -9,6 +9,5 @@ namespace ComponentScripts.Entities.Character
         private int _experienceAmount { get; set; }
         [Space(10)][Header("Character's stats")]
         [SerializeField] private int coins;
-        
     }
 }
