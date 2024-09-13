@@ -1,13 +1,26 @@
+using System;
 using Interfaces;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ComponentScripts
 {
     public abstract class  Entity : MonoBehaviour
     {
-        [FormerlySerializedAs("_healthPoints")] [SerializeField] protected int baseHealthPoints;
+        [SerializeField] protected int baseHealthPoints;
         protected IDespawner _despawner;
+        private int _actualHealth;
+
+        public int ActualHealth
+        {
+            get => _actualHealth;
+            set => _actualHealth = value;
+        }
         
+        public int BaseHealth => baseHealthPoints;
+
+        private void Start()
+        {
+            _actualHealth = baseHealthPoints;
+        }
     }
 }

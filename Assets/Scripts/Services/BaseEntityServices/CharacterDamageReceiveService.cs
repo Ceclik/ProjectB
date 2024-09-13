@@ -4,7 +4,7 @@ using Services.CharacterServices.CharacterStatsScripts;
 
 namespace Services.BaseEntityServices
 {
-    public class CharacterDamageReceiveService : IDamageReceiver
+    public class CharacterDamageReceiveService : ICharacterDamageReceiver
     {
         private ICharacterHealthHandler _characterHealthHandler;
 

@@ -9,15 +9,15 @@ namespace ComponentScripts.Entities.Character
     public class CharacterHealthHandler : MonoBehaviour
     {
         private ICharacterHealthHandler _healthService;
-        private IDamageReceiver _damageReceiver;
+        private ICharacterDamageReceiver _characterDamageReceiver;
         private Character _character;
 
         [SerializeField] private Image healthBar;
 
-        public void Inject(ICharacterHealthHandler healthHandler, IDamageReceiver damageReceiver)
+        public void Inject(ICharacterHealthHandler healthHandler, ICharacterDamageReceiver characterDamageReceiver)
         {
             _healthService = healthHandler;
-            _damageReceiver = damageReceiver;
+            _characterDamageReceiver = characterDamageReceiver;
         }
 
         private void IncreaseHealthForBonusUse()
@@ -27,7 +27,7 @@ namespace ComponentScripts.Entities.Character
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            _damageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>());
+            _characterDamageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>());
             _healthService.UpdateHealthBar(healthBar);
         }
     }

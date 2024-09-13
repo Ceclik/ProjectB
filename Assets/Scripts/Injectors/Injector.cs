@@ -23,9 +23,9 @@ namespace Injectors
             _characterHealthHandler = character.gameObject.GetComponent<CharacterHealthHandler>();
             ICharacterHealthHandler characterHealthHandler = gameObject.AddComponent<CharacterHealthHandlerService>();
             
-            IDamageReceiver damageReceiver = new CharacterDamageReceiveService();
-            _characterHealthHandler.Inject(characterHealthHandler, damageReceiver);
-            damageReceiver.Inject(characterHealthHandler);
+            ICharacterDamageReceiver characterDamageReceiver = new CharacterDamageReceiveService();
+            _characterHealthHandler.Inject(characterHealthHandler, characterDamageReceiver);
+            characterDamageReceiver.Inject(characterHealthHandler);
         }
     }
 }
