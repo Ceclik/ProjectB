@@ -1,4 +1,3 @@
-using DataClasses;
 using Interfaces;
 using UnityEngine;
 
@@ -11,5 +10,6 @@ namespace ComponentScripts
         protected IDamageReceiver _damageReceiver;
 
         public float BaseMovingSpeed => baseMovingSpeed;
+        public int BaseDamage => baseDamage;
     }
 }

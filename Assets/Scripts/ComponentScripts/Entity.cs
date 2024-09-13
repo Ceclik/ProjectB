@@ -1,11 +1,12 @@
 using Interfaces;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace DataClasses
+namespace ComponentScripts
 {
     public abstract class  Entity : MonoBehaviour
     {
-        [SerializeField] protected int _healthPoints;
+        [FormerlySerializedAs("_healthPoints")] [SerializeField] protected int baseHealthPoints;
         protected IDamageReceiver _damageReceiver;
         protected IDespawner _despawner;
         

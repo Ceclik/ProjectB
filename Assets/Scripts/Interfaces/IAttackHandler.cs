@@ -1,4 +1,4 @@
-using DataClasses;
+using ComponentScripts;
 
 namespace Interfaces
 {
