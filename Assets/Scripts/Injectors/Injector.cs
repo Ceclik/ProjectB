@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.Character;
+using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
 using UnityEngine;
@@ -21,7 +22,10 @@ namespace Injectors
 
             _characterHealthHandler = character.gameObject.GetComponent<CharacterHealthHandler>();
             ICharacterHealthHandler characterHealthHandler = gameObject.AddComponent<CharacterHealthHandlerService>();
-            _characterHealthHandler.Inject(characterHealthHandler);
+            
+            IDamageReceiver damageReceiver = new CharacterDamageReceiveService();
+            _characterHealthHandler.Inject(characterHealthHandler, damageReceiver);
+            damageReceiver.Inject(characterHealthHandler);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,13 +9,15 @@ namespace ComponentScripts.Entities.Character
     public class CharacterHealthHandler : MonoBehaviour
     {
         private ICharacterHealthHandler _healthService;
+        private IDamageReceiver _damageReceiver;
         private Character _character;
 
         [SerializeField] private Image healthBar;
 
-        public void Inject(ICharacterHealthHandler healthHandler)
+        public void Inject(ICharacterHealthHandler healthHandler, IDamageReceiver damageReceiver)
         {
             _healthService = healthHandler;
+            _damageReceiver = damageReceiver;
         }
 
         private void IncreaseHealthForBonusUse()
@@ -24,11 +27,8 @@ namespace ComponentScripts.Entities.Character
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.TryGetComponent(out ActiveEntity enemy))
-            {
-                _healthService.DecreaseHealthValue(enemy);
-                _healthService.UpdateHealthBar(healthBar);
-            }
+            _damageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>());
+            _healthService.UpdateHealthBar(healthBar);
         }
     }
 }

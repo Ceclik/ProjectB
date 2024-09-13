@@ -1,4 +1,3 @@
-using Interfaces;
 using UnityEngine;
 
 namespace ComponentScripts
@@ -7,7 +6,6 @@ namespace ComponentScripts
     {
         [SerializeField] protected float baseMovingSpeed;
         [SerializeField] protected int baseDamage;
-        protected IDamageReceiver _damageReceiver;
 
         public float BaseMovingSpeed => baseMovingSpeed;
         public int BaseDamage => baseDamage;
