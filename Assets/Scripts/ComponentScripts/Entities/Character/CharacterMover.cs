@@ -1,4 +1,4 @@
-using Services.MovingScripts;
+using Services.CharacterServices.MovingScripts;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Character
@@ -18,7 +18,7 @@ namespace ComponentScripts.Entities.Character
 
         [Space(10)] [Header("Run stats")] [SerializeField]
         private float runSpeed;
-        [SerializeField] private float runStaminaDecreasingValuePerSecond;
+        [SerializeField] private float runStaminaDecreasingValuePerFrame;
         
         public void Inject(IPlayerMover mover)
         {
@@ -42,7 +42,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(KeyCode.A, KeyCode.W, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(KeyCode.A, KeyCode.W, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
                 
                 else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
@@ -50,7 +50,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(KeyCode.A, KeyCode.S, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(KeyCode.A, KeyCode.S, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
                 
                 else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
@@ -58,7 +58,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
                 
                 else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
@@ -66,7 +66,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
                 
                 else if (Input.GetKey(KeyCode.A))
@@ -75,7 +75,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
 
                 else if (Input.GetKey(KeyCode.W))
@@ -84,7 +84,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
 
                 else if (Input.GetKey(KeyCode.S))
@@ -93,7 +93,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
 
                 else if (Input.GetKey(KeyCode.D))
@@ -102,7 +102,7 @@ namespace ComponentScripts.Entities.Character
                     if(Input.GetKeyDown(KeyCode.Space))
                         _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                     else
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerSecond);
+                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                 }
             }
         }

@@ -1,6 +1,6 @@
 using ComponentScripts.Entities.Character;
-using Services.MovingScripts;
-using Services.UI;
+using Services.CharacterServices.CharacterStatsScripts;
+using Services.CharacterServices.MovingScripts;
 using UnityEngine;
 
 namespace Injectors
