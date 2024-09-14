@@ -1,7 +1,6 @@
 using ComponentScripts;
-using Services.CharacterServices.CharacterStatsScripts;
 
-namespace Services.BaseEntityServices
+namespace Services.CharacterServices.CharacterStatsScripts
 {
     public interface ICharacterDamageReceiver
     {

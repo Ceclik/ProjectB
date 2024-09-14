@@ -1,7 +1,7 @@
 using ComponentScripts.Entities.Character;
 using UnityEngine;
 
-namespace Services.BaseEntityServices
+namespace Services.CharacterServices.CharacterAttackScripts
 {
     public interface ICharacterAttackHandler
     {

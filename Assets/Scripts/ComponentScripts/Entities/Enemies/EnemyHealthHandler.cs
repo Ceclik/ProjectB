@@ -1,4 +1,5 @@
 using Services.BaseEntityServices;
+using Services.EnemyServices;
 using UnityEngine;
 using UnityEngine.UI;
 

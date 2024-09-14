@@ -1,10 +1,12 @@
 using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
-using Interfaces;
+using ComponentScripts.Entities.Nest;
 using Services.BaseEntityServices;
+using Services.CharacterServices.CharacterAttackScripts;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
+using Services.EnemyServices;
 using UnityEngine;
 
 namespace Injectors
@@ -39,6 +41,10 @@ namespace Injectors
             IDespawner despawnerI = gameObject.AddComponent<EntityDespawnerService>();
             EntityDespawnHandler entityDespawnHandler = enemy.GetComponent<EntityDespawnHandler>();
             entityDespawnHandler.Inject(despawnerI);
+
+            ISpawner iSpawner = gameObject.AddComponent<SpawnerService>();
+            EnemySpawnHandler spawnHandler = GameObject.Find("Nest").GetComponent<EnemySpawnHandler>(); //TEMPORARY
+            spawnHandler.Inject(iSpawner);
         }
     }
 }

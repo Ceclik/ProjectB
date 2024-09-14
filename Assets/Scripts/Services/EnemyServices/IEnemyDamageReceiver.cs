@@ -1,7 +1,7 @@
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
 
-namespace Services.BaseEntityServices
+namespace Services.EnemyServices
 {
     public interface IEnemyDamageReceiver
     {

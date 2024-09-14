@@ -1,8 +1,8 @@
 using ComponentScripts;
 using ComponentScripts.Entities.Enemies;
-using Services.CharacterServices.CharacterStatsScripts;
+using Services.BaseEntityServices;
 
-namespace Services.BaseEntityServices
+namespace Services.CharacterServices.CharacterStatsScripts
 {
     public class CharacterDamageReceiveService : ICharacterDamageReceiver
     {

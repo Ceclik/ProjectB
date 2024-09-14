@@ -2,7 +2,7 @@ using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
 using UnityEngine;
 
-namespace Services.BaseEntityServices
+namespace Services.CharacterServices.CharacterAttackScripts
 {
     public class CharacterAttackService : ICharacterAttackHandler
     {

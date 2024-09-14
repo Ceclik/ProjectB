@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Interfaces
+namespace Services.BaseEntityServices
 {
     public interface IDespawner
     {
