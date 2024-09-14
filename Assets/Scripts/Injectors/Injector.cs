@@ -10,8 +10,6 @@ namespace Injectors
     {
         [SerializeField] private CharacterMover character;
 
-        private CharacterHealthHandler _characterHealthHandler;
-
         private void Awake()
         {
             IPlayerMover playerMover = gameObject.AddComponent<PlayerMoverService>();
@@ -20,12 +18,16 @@ namespace Injectors
             IStaminaHandler staminaHandler = gameObject.AddComponent<StaminaHandlerService>();
             playerMover.Inject(staminaHandler);
 
-            _characterHealthHandler = character.gameObject.GetComponent<CharacterHealthHandler>();
-            ICharacterHealthHandler characterHealthHandler = gameObject.AddComponent<CharacterHealthHandlerService>();
+            CharacterHealthHandler characterHealthHandler = character.gameObject.GetComponent<CharacterHealthHandler>();
+            ICharacterHealthHandler characterHealthHandlerI = gameObject.AddComponent<CharacterHealthHandlerService>();
             
             ICharacterDamageReceiver characterDamageReceiver = new CharacterDamageReceiveService();
-            _characterHealthHandler.Inject(characterHealthHandler, characterDamageReceiver);
-            characterDamageReceiver.Inject(characterHealthHandler);
+            characterHealthHandler.Inject(characterHealthHandlerI, characterDamageReceiver);
+            characterDamageReceiver.Inject(characterHealthHandlerI);
+
+            ICharacterAttackHandler characterAttackHandlerI = new CharacterAttackService();
+            CharacterAttackHandler characterAttackHandler = character.GetComponent<CharacterAttackHandler>();
+            characterAttackHandler.Inject(characterAttackHandlerI);
         }
     }
 }
