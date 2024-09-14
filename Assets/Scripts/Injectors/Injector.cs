@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.Character;
+using ComponentScripts.Entities.Enemies;
 using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
@@ -9,6 +10,7 @@ namespace Injectors
     public class Injector : MonoBehaviour
     {
         [SerializeField] private CharacterMover character;
+        [SerializeField] private EnemyHealthHandler enemy;
 
         private void Awake()
         {
@@ -28,6 +30,10 @@ namespace Injectors
             ICharacterAttackHandler characterAttackHandlerI = new CharacterAttackService();
             CharacterAttackHandler characterAttackHandler = character.GetComponent<CharacterAttackHandler>();
             characterAttackHandler.Inject(characterAttackHandlerI);
+            
+
+            IEnemyDamageReceiver enemyDamageReceiverI = new EnemyDamageReceiveService();
+            enemy.Inject(enemyDamageReceiverI);
         }
     }
 }

@@ -35,25 +35,25 @@ namespace Services.CharacterServices.MovingScripts
                 if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
                 {
                     Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
-                        characterTransform.position.y + 3, 0.0f);
+                        characterTransform.position.y + 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
                 else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
                 {
                     Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
-                        characterTransform.position.y - 3, 0.0f);
+                        characterTransform.position.y - 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
                 else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
                 {
                     Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
-                        characterTransform.position.y + 3, 0.0f);
+                        characterTransform.position.y + 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
                 else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
                 {
                     Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
-                        characterTransform.position.y - 3, 0.0f);
+                        characterTransform.position.y - 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
             }
@@ -167,22 +167,22 @@ namespace Services.CharacterServices.MovingScripts
                 {
                     case KeyCode.W:
                         targetPosition = new Vector3(characterTransform.position.x,
-                            characterTransform.position.y + 3, 0.0f);
+                            characterTransform.position.y + 3, characterTransform.position.z);
                         StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                         break;
                     case KeyCode.D:
                         targetPosition = new Vector3(characterTransform.position.x + 3,
-                            characterTransform.position.y, 0.0f);
+                            characterTransform.position.y, characterTransform.position.z);
                         StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                         break;
                     case KeyCode.S:
                         targetPosition = new Vector3(characterTransform.position.x,
-                            characterTransform.position.y - 3, 0.0f);
+                            characterTransform.position.y - 3, characterTransform.position.z);
                         StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                         break;
                     case KeyCode.A:
                         targetPosition = new Vector3(characterTransform.position.x - 3,
-                            characterTransform.position.y, 0.0f);
+                            characterTransform.position.y, characterTransform.position.z);
                         StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                         break;
                 }

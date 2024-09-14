@@ -20,7 +20,7 @@ namespace ComponentScripts.Entities.Character
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Vector3 mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-                _attackHandler.Attack(mousePosition, enemiesParent, transform.position, maxDistanceForAttack, GetComponent<Character>());
+                _attackHandler.Attack(mousePosition, maxDistanceForAttack, GetComponent<Character>());
             }
         }
     }

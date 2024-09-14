@@ -6,30 +6,15 @@ namespace Services.BaseEntityServices
 {
     public class CharacterAttackService : ICharacterAttackHandler
     {
-        public void Attack(Vector3 mousePosition, Transform enemiesParent, Vector3 characterPosition,
-            float maxDistanceForAttack, Character attackCharacter)
+        public void Attack(Vector3 mousePosition, float maxDistanceForAttack, Character attackCharacter)
         {
-            //Debug.Log($"Mouse coordinates: {mousePosition.ToString()}");
-            /*for (int i = 0; i < enemiesParent.childCount; i++)
-            {
-                if (mousePosition == enemiesParent.GetChild(i).position &&
-                    DistanceCounter(characterPosition, mousePosition) < maxDistanceForAttack)
-                {
-                    enemiesParent.GetChild(i).GetComponent<EnemyHealthHandler>().ReceiveCharacterAttack(attackCharacter);
-                }
-            }*/
-            
-            Ray ray = Camera.main!.ScreenPointToRay(Input.mousePosition);
-            //Debug.Log($"{ray.ToString()}");
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Debug.Log("After hit");
-                if (hit.collider.TryGetComponent(out EnemyHealthHandler enemy))
-                {
-                    Debug.Log("Receiving damage");
+
+            RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+            if (hit.collider != null)
+                if (hit.collider.TryGetComponent(out EnemyHealthHandler enemy) &&
+                    DistanceCounter(enemy.transform.position, attackCharacter.transform.position) <
+                    maxDistanceForAttack)
                     enemy.ReceiveCharacterAttack(attackCharacter);
-                }
-            }
 
         }
 

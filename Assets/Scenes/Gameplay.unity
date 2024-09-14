@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 585198328}
   - component: {fileID: 585198327}
   - component: {fileID: 585198326}
+  - component: {fileID: 585198331}
   - component: {fileID: 585198330}
   m_Layer: 0
   m_Name: ColoradoBug
@@ -393,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b0adb9961144ff98b4e9ce1965675c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseHealthPoints: 0
+  baseHealthPoints: 30
   baseMovingSpeed: 0
   baseDamage: 5
 --- !u!58 &585198327
@@ -529,6 +530,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &585198331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585198325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2d17b2dbd94ccf804352342dc9f3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 78312822}
 --- !u!1 &756808262
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesParent: {fileID: 1387319664}
-  maxDistanceForAttack: 5
+  maxDistanceForAttack: 2
 --- !u!1 &1180738196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,6 +1262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 976462661}
+  enemy: {fileID: 585198331}
 --- !u!4 &1946549040
 Transform:
   m_ObjectHideFlags: 0

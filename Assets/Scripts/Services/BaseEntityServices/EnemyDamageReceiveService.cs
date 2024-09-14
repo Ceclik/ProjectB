@@ -10,10 +10,5 @@ namespace Services.BaseEntityServices
         {
             hittedEnemy.ActualHealth -= character.ActualDamage;
         }
-
-        public void Inject(ICharacterHealthHandler characterHealthHandler)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
