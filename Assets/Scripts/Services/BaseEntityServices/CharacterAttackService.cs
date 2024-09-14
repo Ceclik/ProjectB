@@ -15,7 +15,6 @@ namespace Services.BaseEntityServices
                     DistanceCounter(enemy.transform.position, attackCharacter.transform.position) <
                     maxDistanceForAttack)
                     enemy.ReceiveCharacterAttack(attackCharacter);
-
         }
 
         private float DistanceCounter(Vector3 characterPosition, Vector3 enemyPosition)

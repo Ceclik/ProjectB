@@ -1,6 +1,5 @@
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
-using Services.CharacterServices.CharacterStatsScripts;
 
 namespace Services.BaseEntityServices
 {

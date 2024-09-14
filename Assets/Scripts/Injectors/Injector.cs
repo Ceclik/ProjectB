@@ -1,5 +1,7 @@
+using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
+using Interfaces;
 using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
@@ -30,10 +32,13 @@ namespace Injectors
             ICharacterAttackHandler characterAttackHandlerI = new CharacterAttackService();
             CharacterAttackHandler characterAttackHandler = character.GetComponent<CharacterAttackHandler>();
             characterAttackHandler.Inject(characterAttackHandlerI);
-            
 
             IEnemyDamageReceiver enemyDamageReceiverI = new EnemyDamageReceiveService();
             enemy.Inject(enemyDamageReceiverI);
+
+            IDespawner despawnerI = gameObject.AddComponent<EntityDespawnerService>();
+            EntityDespawnHandler entityDespawnHandler = enemy.GetComponent<EntityDespawnHandler>();
+            entityDespawnHandler.Inject(despawnerI);
         }
     }
 }

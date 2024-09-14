@@ -1,4 +1,3 @@
-using System;
 using Interfaces;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace ComponentScripts
     public abstract class  Entity : MonoBehaviour
     {
         [SerializeField] protected int baseHealthPoints;
-        protected IDespawner _despawner;
+        protected IDespawner Despawner;
         private int _actualHealth;
 
         public int ActualHealth
