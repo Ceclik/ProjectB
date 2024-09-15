@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using ComponentScripts;
 using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
@@ -14,10 +16,18 @@ namespace Injectors
     public class Injector : MonoBehaviour
     {
         [SerializeField] private CharacterMover character;
-        [SerializeField] private EnemyHealthHandler enemy;
+        [SerializeField] private List<EntitySpawnHandler> spawners;
 
         private void Awake()
         {
+            InjectToSpawners();
+
+            foreach (var spawner in spawners)
+            {
+                spawner.OnEntitySpawn += InjectToEntities;
+            }
+            
+            
             IPlayerMover playerMover = gameObject.AddComponent<PlayerMoverService>();
             character.Inject(playerMover);
             
@@ -34,17 +44,38 @@ namespace Injectors
             ICharacterAttackHandler characterAttackHandlerI = new CharacterAttackService();
             CharacterAttackHandler characterAttackHandler = character.GetComponent<CharacterAttackHandler>();
             characterAttackHandler.Inject(characterAttackHandlerI);
+            
+        }
 
-            IEnemyDamageReceiver enemyDamageReceiverI = new EnemyDamageReceiveService();
-            enemy.Inject(enemyDamageReceiverI);
+        private void OnDestroy()
+        {
+            foreach (var spawner in spawners)
+            {
+                spawner.OnEntitySpawn -= InjectToEntities;
+            }
+        }
 
-            IDespawner despawnerI = gameObject.AddComponent<EntityDespawnerService>();
-            EntityDespawnHandler entityDespawnHandler = enemy.GetComponent<EntityDespawnHandler>();
-            entityDespawnHandler.Inject(despawnerI);
-
+        private void InjectToSpawners()
+        {
             ISpawner iSpawner = gameObject.AddComponent<SpawnerService>();
-            EnemySpawnHandler spawnHandler = GameObject.Find("Nest").GetComponent<EnemySpawnHandler>(); //TEMPORARY
-            spawnHandler.Inject(iSpawner);
+            foreach (var spawner in spawners)
+            {
+                if (spawner is EnemySpawnHandler)
+                {
+                    spawner.GetComponent<EnemySpawnHandler>().Inject(iSpawner);
+                }
+            }
+        }
+
+        private void InjectToEntities(Entity spawnedEntity)
+        {
+            if (spawnedEntity is Enemy)
+            {
+                IEnemyDamageReceiver enemyDamageReceiverI = new EnemyDamageReceiveService();
+                IDespawner despawnerI = gameObject.AddComponent<EntityDespawnerService>();
+                spawnedEntity.GetComponent<EnemyHealthHandler>().Inject(enemyDamageReceiverI);
+                spawnedEntity.GetComponent<EntityDespawnHandler>().Inject(despawnerI);
+            }
         }
     }
 }

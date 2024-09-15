@@ -1,11 +1,12 @@
 using System.Collections;
+using ComponentScripts.Entities.Enemies;
 using Services.BaseEntityServices;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Nest
 {
     [RequireComponent(typeof(Nest))]
-    public class EnemySpawnHandler : MonoBehaviour
+    public class EnemySpawnHandler : EntitySpawnHandler
     {
         [Space(10)] [Header("Spawn enemy info")] [SerializeField]
         private GameObject enemyToSpawn;
@@ -31,8 +32,11 @@ namespace ComponentScripts.Entities.Nest
             while (gameObject.activeSelf)
             {
                 yield return new WaitForSeconds(spawnFrequency);
-                _spawner.SpawnEntities(enemyToSpawn, amountOfEnemiesToSpawn, enemiesParent, transform.position,
-                    distanceFromNest);
+                Entity[] spawnedEnemies =
+                    _spawner.SpawnEntities(enemyToSpawn, amountOfEnemiesToSpawn, enemiesParent, transform.position,
+                        distanceFromNest);
+                foreach (var enemy in spawnedEnemies)
+                    InvokeOnEntitySpawnEvent(enemy);
             }
         }
     }

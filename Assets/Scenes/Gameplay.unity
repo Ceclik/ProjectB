@@ -484,17 +484,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
   m_PrefabInstance: {fileID: 7448193322561690480}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &585198331 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1587352494559531864, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-  m_PrefabInstance: {fileID: 7448193322561690480}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2d17b2dbd94ccf804352342dc9f3a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &756808262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +1133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 976462661}
-  enemy: {fileID: 585198331}
+  spawners:
+  - {fileID: 301373593}
 --- !u!4 &1946549040
 Transform:
   m_ObjectHideFlags: 0
