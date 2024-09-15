@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using ComponentScripts;
 using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
@@ -8,7 +7,6 @@ using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterAttackScripts;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
-using Services.EnemyServices;
 using UnityEngine;
 
 namespace Injectors
@@ -58,22 +56,26 @@ namespace Injectors
         private void InjectToSpawners()
         {
             ISpawner iSpawner = gameObject.AddComponent<SpawnerService>();
+            IEntityDamageReceiver entityDamageReceiverI = new EntityDamageReceiveService();
+            IDespawner despawnerI = gameObject.AddComponent<EntityDespawnerService>();
             foreach (var spawner in spawners)
             {
                 if (spawner is EnemySpawnHandler)
                 {
                     spawner.GetComponent<EnemySpawnHandler>().Inject(iSpawner);
+                    spawner.GetComponent<EntityHealthHandler>().Inject(entityDamageReceiverI);
+                    spawner.GetComponent<EntityDespawnHandler>().Inject(despawnerI);
                 }
             }
         }
 
-        private void InjectToEntities(Entity spawnedEntity)
+        private void InjectToEntities(ComponentScripts.Entity spawnedEntity)
         {
             if (spawnedEntity is Enemy)
             {
-                IEnemyDamageReceiver enemyDamageReceiverI = new EnemyDamageReceiveService();
+                IEntityDamageReceiver entityDamageReceiverI = new EntityDamageReceiveService();
                 IDespawner despawnerI = gameObject.AddComponent<EntityDespawnerService>();
-                spawnedEntity.GetComponent<EnemyHealthHandler>().Inject(enemyDamageReceiverI);
+                spawnedEntity.GetComponent<EntityHealthHandler>().Inject(entityDamageReceiverI);
                 spawnedEntity.GetComponent<EntityDespawnHandler>().Inject(despawnerI);
             }
         }

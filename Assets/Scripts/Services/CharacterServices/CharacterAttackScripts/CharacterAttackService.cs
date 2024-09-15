@@ -1,3 +1,4 @@
+using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;
 using UnityEngine;
@@ -8,10 +9,9 @@ namespace Services.CharacterServices.CharacterAttackScripts
     {
         public void Attack(Vector3 mousePosition, float maxDistanceForAttack, Character attackCharacter)
         {
-
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
             if (hit.collider != null)
-                if (hit.collider.TryGetComponent(out EnemyHealthHandler enemy) &&
+                if (hit.collider.TryGetComponent(out EntityHealthHandler enemy) &&
                     DistanceCounter(enemy.transform.position, attackCharacter.transform.position) <
                     maxDistanceForAttack)
                     enemy.ReceiveCharacterAttack(attackCharacter);
