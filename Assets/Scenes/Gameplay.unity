@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 301373591}
   - component: {fileID: 301373594}
   - component: {fileID: 301373595}
+  - component: {fileID: 301373596}
   m_Layer: 0
   m_Name: ColoradoBugNest
   m_TagString: Untagged
@@ -387,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyToSpawn: {fileID: 8042816585482338127, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-  spawnFrequency: 5
+  spawnFrequency: 20
   amountOfEnemiesToSpawn: 3
   enemiesParent: {fileID: 1387319664}
   distanceFromNest: 2.5
@@ -403,7 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2d17b2dbd94ccf804352342dc9f3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 1946371715}
 --- !u!114 &301373595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +416,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb53e0407694de89ca9e1595854bd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &301373596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301373587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a016871e69584de5985dc88854e470be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarBackground: {fileID: 129173115}
+  healthBar: {fileID: 1946371715}
+  healthBarFadeDelay: 3
+  healthBarFadeDuration: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,11 +599,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567162296}
   m_CullTransparentMesh: 1
---- !u!4 &585198329 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-  m_PrefabInstance: {fileID: 7448193322561690480}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &756808262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,8 +1137,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 585198329}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1737539457
@@ -1506,71 +1516,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988556694}
   m_CullTransparentMesh: 1
---- !u!1001 &7448193322561690480
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1387319664}
-    m_Modifications:
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.48
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7996678659879259179, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8042816585482338127, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_Name
-      value: ColoradoBug
-      objectReference: {fileID: 0}
-    - target: {fileID: 8042816585482338127, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712582576498004798, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 519420031}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

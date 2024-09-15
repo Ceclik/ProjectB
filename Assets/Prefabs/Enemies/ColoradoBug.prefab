@@ -263,10 +263,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7996678659879259179}
   - component: {fileID: 8685338510493821954}
-  - component: {fileID: 7034512452023582273}
   - component: {fileID: 4824374012444134394}
   - component: {fileID: 1587352494559531864}
   - component: {fileID: 2732028049764048191}
+  - component: {fileID: -4109572238846228226}
+  - component: {fileID: 7034512452023582273}
   - component: {fileID: 6725100188526272182}
   m_Layer: 0
   m_Name: ColoradoBug
@@ -345,6 +346,61 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4824374012444134394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4b0adb9961144ff98b4e9ce1965675c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealthPoints: 30
+  baseMovingSpeed: 0
+  baseDamage: 5
+--- !u!114 &1587352494559531864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd2d17b2dbd94ccf804352342dc9f3a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2732028049764048191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb53e0407694de89ca9e1595854bd92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4109572238846228226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a016871e69584de5985dc88854e470be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarBackground: {fileID: 2975495117637341430}
+  healthBar: {fileID: 4839708092324896924}
+  healthBarFadeDelay: 3
+  healthBarFadeDuration: 1
 --- !u!58 &7034512452023582273
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -381,46 +437,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &4824374012444134394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042816585482338127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4b0adb9961144ff98b4e9ce1965675c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseHealthPoints: 30
-  baseMovingSpeed: 0
-  baseDamage: 5
---- !u!114 &1587352494559531864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042816585482338127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd2d17b2dbd94ccf804352342dc9f3a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 4839708092324896924}
---- !u!114 &2732028049764048191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8042816585482338127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cb53e0407694de89ca9e1595854bd92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &6725100188526272182
 Rigidbody2D:
   serializedVersion: 4

@@ -1,29 +1,30 @@
 using Services.BaseEntityServices;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ComponentScripts.Entities
 {
     public class EntityHealthHandler : MonoBehaviour
     {
         private IEntityDamageReceiver _entityDamageReceiver;
-        [SerializeField] private Image healthBar;
+
+        private EntityHealthBarHandler _healthBarHandler;
+        private Entity _selfEntity;
 
         public void Inject(IEntityDamageReceiver entityDamageReceiver)
         {
             _entityDamageReceiver = entityDamageReceiver;
         }
 
-        public void ReceiveCharacterAttack(Character.Character character)
+        private void Start()
         {
-            _entityDamageReceiver.ReceiveDamage(character, GetComponent<Entity>());
-            UpdateHealthBar();
+            _healthBarHandler = GetComponent<EntityHealthBarHandler>();
+            _selfEntity = GetComponent<Entity>();
         }
 
-        private void UpdateHealthBar()
+        public void ReceiveCharacterAttack(Character.Character character)
         {
-            healthBar.fillAmount =
-                (float)GetComponent<Entity>().ActualHealth * 100 / GetComponent<Entity>().BaseHealth / 100;
+            _entityDamageReceiver.ReceiveDamage(character, _selfEntity);
+            _healthBarHandler.UpdateHealthBar(_selfEntity);
         }
     }
 }
