@@ -52,13 +52,6 @@ namespace ComponentScripts.Entities
                     healthBarBackground.gameObject.SetActive(false);
                 }
             }
-
-            /*if (healthBarBackground.gameObject.activeSelf && fade)
-            {
-                _fadeTimer = 0;
-                _fadingTimer = 0;
-                healthBarBackground.gameObject.SetActive(false);
-            }*/
         }
 
         public void UpdateHealthBar(Entity selfEntity)

@@ -1,4 +1,3 @@
-using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
 using UnityEngine.UI;
