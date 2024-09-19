@@ -11,9 +11,12 @@ namespace Services.CharacterServices.MovingScripts
         private float _tugTimer;
         private CharacterStaminaHandler _staminaValues;
 
+        private Rigidbody2D _rigidbody;
+
         private void Start()
         {
             _staminaValues = GameObject.Find("Character").GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
+            _rigidbody = _staminaValues.GetComponent<Rigidbody2D>();
         }
 
         public void Inject(IStaminaHandler staminaHandler)
@@ -61,98 +64,135 @@ namespace Services.CharacterServices.MovingScripts
 
         public void Move(KeyCode key, float movingSpeed, Transform characterTransform, float runSpeed, float staminaDecreaseValue)
         {
+            Vector3 movement;
             switch(key)
             {
                 case KeyCode.W:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                     {
-                        characterTransform.Translate(new Vector3(0.0f, Time.deltaTime * runSpeed, 0.0f));
+                        movement = new Vector3(0.0f, Time.fixedDeltaTime * runSpeed, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                         _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                     }
                     else
-                        characterTransform.Translate(new Vector3(0.0f, Time.deltaTime * movingSpeed, 0.0f));
+                    {
+                        movement = new Vector3(0.0f, Time.fixedDeltaTime * movingSpeed, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                    }
                     break;
                 case KeyCode.A:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                     {
-                        characterTransform.Translate(new Vector3(-Time.deltaTime * runSpeed, 0.0f, 0.0f));
+                        movement = new Vector3(-Time.fixedDeltaTime * runSpeed, 0.0f, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                         _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                     }
                     else
-                        characterTransform.Translate(new Vector3(-Time.deltaTime * movingSpeed, 0.0f, 0.0f));
+                    {
+                        movement = new Vector3(-Time.fixedDeltaTime * movingSpeed, 0.0f, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                    }
                     break;
                 case KeyCode.S:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                     {
-                        characterTransform.Translate(new Vector3(0.0f, -Time.deltaTime * runSpeed, 0.0f));
+                        movement = new Vector3(0.0f, -Time.fixedDeltaTime * runSpeed, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                         _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                     }
                     else
-                        characterTransform.Translate(new Vector3(0.0f, -Time.deltaTime * movingSpeed, 0.0f));
+                    {
+                        movement = new Vector3(0.0f, -Time.fixedDeltaTime * movingSpeed, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                    }
                     break;
                 case KeyCode.D:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                     {
-                        characterTransform.Translate(new Vector3(Time.deltaTime * runSpeed, 0.0f, 0.0f));
+                        movement = new Vector3(Time.fixedDeltaTime * runSpeed, 0.0f, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                         _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                     }
                     else
-                        characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, 0.0f, 0.0f));
+                    {
+                        movement = new Vector3(Time.fixedDeltaTime * movingSpeed, 0.0f, 0.0f);
+                        _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                    }
                     break;
             }
         }
 
         public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed, float staminaDecreaseValue)
         {
+            Vector3 movement;
             if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    characterTransform.Translate(new Vector3(-Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
-                        0.0f));
+                    movement = new Vector3(-Time.fixedDeltaTime * runSpeed, Time.fixedDeltaTime * runSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
-                    characterTransform.Translate(new Vector3(-Time.deltaTime * movingSpeed,
-                        Time.deltaTime * movingSpeed,
-                        0.0f));
+                {
+                    movement = new Vector3(-Time.fixedDeltaTime * movingSpeed,
+                        Time.fixedDeltaTime * movingSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                }
+
+                
             }
             else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    characterTransform.Translate(new Vector3(-Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
-                        0.0f));
+                    movement = new Vector3(-Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
-                    characterTransform.Translate(new Vector3(-Time.deltaTime * movingSpeed,
+                {
+                    movement = new Vector3(-Time.deltaTime * movingSpeed,
                         -Time.deltaTime * movingSpeed,
-                        0.0f));
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                }
             }
             else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    characterTransform.Translate(new Vector3(Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
-                        0.0f));
+                    movement = new Vector3(Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
-                    characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, Time.deltaTime * movingSpeed,
-                        0.0f));
+                {
+                    movement = new Vector3(Time.deltaTime * movingSpeed, Time.deltaTime * movingSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                }
             }
             else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    characterTransform.Translate(new Vector3(Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
-                        0.0f));
+                    movement = new Vector3(Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
-                    characterTransform.Translate(new Vector3(Time.deltaTime * movingSpeed, -Time.deltaTime * movingSpeed,
-                        0.0f));
+                {
+                    movement = new Vector3(Time.deltaTime * movingSpeed,
+                        -Time.deltaTime * movingSpeed,
+                        0.0f);
+                    _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                }
             }
         }
 

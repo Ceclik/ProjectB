@@ -1,3 +1,4 @@
+using ComponentScripts.Entities.Character.InventoryScripts;
 using Services.CharacterServices.MovingScripts;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace ComponentScripts.Entities.Character
         private CharacterStaminaHandler _staminaHandler;
         private IPlayerMover _mover;
         private float _movingSpeed;
+        private InventoryOpener _inventory;
 
         [Header("Tug stats")]
         [SerializeField] private float tugSpeed;
@@ -29,11 +31,12 @@ namespace ComponentScripts.Entities.Character
             _character = GetComponent<Character>();
             _staminaHandler = GetComponent<CharacterStaminaHandler>();
             _movingSpeed = _character.BaseMovingSpeed; //TODO speed counting before invocation move method
+            _inventory = GetComponent<InventoryOpener>();
         }
         
-        private void Update()
+        private void FixedUpdate()
         {
-            if (Input.anyKey)
+            if (Input.anyKey && !_inventory.Inventory.activeSelf)
             {
                 KeyCode keyCode;
 
