@@ -2,8 +2,10 @@ using UnityEngine;
 
 namespace ComponentScripts.Items.Food
 {
-    public class Food : MonoBehaviour
+    public abstract class Food : Item
     {
-        private int _amountOfRestoringHungerUnits;
+        [SerializeField] private int amountOfRestoringHungerUnits;
+
+        public int AmountOfRestoringHungerUnits => amountOfRestoringHungerUnits;
     }
 }

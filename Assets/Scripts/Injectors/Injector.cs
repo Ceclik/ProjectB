@@ -1,12 +1,15 @@
 using System.Collections.Generic;
+using ComponentScripts;
 using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
+using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.Enemies;
 using ComponentScripts.Entities.Nest;
 using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterAttackScripts;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
+using Services.CharacterServices.UIScripts;
 using UnityEngine;
 
 namespace Injectors
@@ -14,6 +17,7 @@ namespace Injectors
     public class Injector : MonoBehaviour
     {
         [SerializeField] private CharacterMover character;
+        //[SerializeField] private GameObject mainCanvas;
         [SerializeField] private List<EntitySpawnHandler> spawners;
 
         private void Awake()
@@ -42,6 +46,11 @@ namespace Injectors
             ICharacterAttackHandler characterAttackHandlerI = new CharacterAttackService();
             CharacterAttackHandler characterAttackHandler = character.GetComponent<CharacterAttackHandler>();
             characterAttackHandler.Inject(characterAttackHandlerI);
+
+            IActionTextHandler actionTextHandlerI = new ActionTextHandlerService();
+            ActionTextHandler actionTextHandler = character.GetComponent<ActionTextHandler>();
+            actionTextHandler.Inject(actionTextHandlerI);
+            
             
         }
 
@@ -69,7 +78,7 @@ namespace Injectors
             }
         }
 
-        private void InjectToEntities(ComponentScripts.Entity spawnedEntity)
+        private void InjectToEntities(Entity spawnedEntity)
         {
             if (spawnedEntity is Enemy)
             {
