@@ -8,6 +8,7 @@ using ComponentScripts.Entities.Nest;
 using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterAttackScripts;
 using Services.CharacterServices.CharacterStatsScripts;
+using Services.CharacterServices.InventoryScripts;
 using Services.CharacterServices.MovingScripts;
 using Services.CharacterServices.UIScripts;
 using UnityEngine;
@@ -50,8 +51,10 @@ namespace Injectors
             IActionTextHandler actionTextHandlerI = new ActionTextHandlerService();
             ActionTextHandler actionTextHandler = character.GetComponent<ActionTextHandler>();
             actionTextHandler.Inject(actionTextHandlerI);
-            
-            
+
+            IInventoryHandler inventoryHandlerI = new InventoryHandlerService();
+            ItemsPicker itemsPicker = character.GetComponent<ItemsPicker>();
+            itemsPicker.Inject(inventoryHandlerI);
         }
 
         private void OnDestroy()

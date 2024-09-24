@@ -1,4 +1,6 @@
+using System;
 using ComponentScripts.Items;
+using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Character.InventoryScripts
@@ -6,6 +8,12 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     public class ItemsPicker : MonoBehaviour
     {
         private ActionTextHandler _textHandler;
+        private IInventoryHandler _inventoryHandler;
+        
+        public void Inject(IInventoryHandler inventoryHandler)
+        {
+            _inventoryHandler = inventoryHandler;
+        }
 
         private void Start()
         {
@@ -19,6 +27,16 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
                 _textHandler.ActionText.ShowActionText("Press 'f' to pick object", _textHandler.ActionTextElement);
             }
         }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Item droppedItem) && Input.GetKeyDown(KeyCode.F))
+            {
+                _inventoryHandler.PutToInventory(droppedItem, GetComponent<Inventory>());
+                Destroy(droppedItem.gameObject);
+            }
+        }
+        
 
         private void OnTriggerExit2D(Collider2D other)
         {
