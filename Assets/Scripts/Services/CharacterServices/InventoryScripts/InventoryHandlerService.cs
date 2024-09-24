@@ -9,53 +9,68 @@ namespace Services.CharacterServices.InventoryScripts
     {
         public bool PutToInventory(Item item, Inventory inventory)
         {
-            bool isPut = false;
             foreach (var inventoryItem in inventory.Items)
             {
                 if (inventoryItem != null)
                 {
+                    Debug.Log("inside active logic");
                     if (inventoryItem.Name == item.Name &&
                         inventoryItem.Amount + item.Amount < inventoryItem.MaxAvailableAmount)
                     {
                         inventoryItem.Amount += item.Amount;
-                        isPut = true;
+                        Debug.Log("Just increasing amount");
                         DebugInventoryState(inventory);
                         return true;
                     }
-                    else if (inventoryItem.Name == item.Name &&
+                    if (inventoryItem.Name == item.Name &&
                              !(inventoryItem.Amount + item.Amount < inventoryItem.MaxAvailableAmount))
                     {
+                        Debug.Log("Increasing amount and creating new field");
                         int delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
                         inventoryItem.Amount += delta;
                         item.Amount -= delta;
-                        Item itemVar = HasEmptySlot(inventory);
+                        /*Item itemVar = HasEmptySlot(inventory);
                         if (itemVar == null)
                         {
                             itemVar = item;
-                            isPut = true;
                             DebugInventoryState(inventory);
                             return true;
+                        }*/
+                        int index = HasEmptySlot(inventory);
+                        if (index != -1)
+                        {
+                            inventory.Items[index] = item;
+                            DebugInventoryState(inventory);
+                            return true;
+                        }
+                        else
+                        {
+                            Debug.LogError("Inventory is full"); //TODO create UI warning
+                            return false;
                         }
                     }
                     else
                     {
-                        Item itemVar = HasEmptySlot(inventory);
-                        if (itemVar == null)
+                        Debug.Log("Creating new field");
+                        int index = HasEmptySlot(inventory);
+                        if (index != -1)
                         {
-                            itemVar = item;
-                            isPut = true;
+                            inventory.Items[index] = item;
                             DebugInventoryState(inventory);
                             return true;
+                        }
+                        else
+                        {
+                            Debug.LogError("Inventory is full"); //TODO create UI warning
+                            return false;
                         }
                         
                     }
                 }
             }
 
-            if (!isPut)
-            {
-                
-            }
+            Debug.Log("inventory is empty, creating new field");
+            inventory.Items[0] = item;
             
             DebugInventoryState(inventory);
             return false;
@@ -66,7 +81,8 @@ namespace Services.CharacterServices.InventoryScripts
             Debug.Log("Inventory: ");
             foreach (var item in inventory.Items)
             {
-                Debug.Log($"Name: {item.Name}, Amount: {item.Amount}, maxAmount: {item.MaxAvailableAmount}");
+                if(item != null)
+                    Debug.Log($"Name: {item.Name}, Amount: {item.Amount}, maxAmount: {item.MaxAvailableAmount}");
             }
             
         }
@@ -76,14 +92,15 @@ namespace Services.CharacterServices.InventoryScripts
             throw new System.NotImplementedException();
         }
 
-        private Item HasEmptySlot(Inventory inventory)
+        private int HasEmptySlot(Inventory inventory)
         {
-            foreach (var item in inventory.Items)
+            for (int i = 0; i < inventory.Items.Length; i++)
             {
-                if (item == null) return item;
+                if (inventory.Items[i] == null)
+                    return i;
             }
 
-            return new Potato(); 
+            return -1;
         }
     }
 }

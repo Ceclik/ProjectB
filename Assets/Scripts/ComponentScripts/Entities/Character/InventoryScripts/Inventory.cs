@@ -7,16 +7,32 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private int amountOfSlots;
-        
-        private List<Item> _items;
-        
-        public List<Item> Items => _items;
+        public Item[] Items{ get; set; }
         
         private void Start()
         {
-            _items = new List<Item>(amountOfSlots);
-            for(int i = 0; i < amountOfSlots; i++)
-                _items.Add(null);
+            Items = new Item[amountOfSlots];
+            for (int i = 0; i < amountOfSlots; i++)
+                Items[i] = null;
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.B))
+                WatchInventory();
+        }
+
+        private void WatchInventory()
+        {
+            foreach (var item in Items)
+            {
+                if (item != null)
+                {
+                    Debug.Log($"Name: {item.Name}, Amount: {item.Amount}, maxAmount: {item.MaxAvailableAmount}");
+                }
+            }
+            Debug.Log("Empty!");
+            
         }
     }
 }

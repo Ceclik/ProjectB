@@ -13,14 +13,11 @@ namespace ComponentScripts.Items
 
         public int Amount
         {
-            get => Amount;
-            set
-            {
-                if (value + Amount < MaxAvailableAmount)
-                    Amount = value;
-            }
+            get => _amount;
+            set => _amount = value;
         }
 
         protected IDropable Dropable;
+        [SerializeField] private int _amount;
     }
 }
