@@ -1,6 +1,5 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
-using ComponentScripts.Items.Food;
 using UnityEngine;
 
 namespace Services.CharacterServices.InventoryScripts
@@ -29,13 +28,6 @@ namespace Services.CharacterServices.InventoryScripts
                         int delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
                         inventoryItem.Amount += delta;
                         item.Amount -= delta;
-                        /*Item itemVar = HasEmptySlot(inventory);
-                        if (itemVar == null)
-                        {
-                            itemVar = item;
-                            DebugInventoryState(inventory);
-                            return true;
-                        }*/
                         int index = HasEmptySlot(inventory);
                         if (index != -1)
                         {

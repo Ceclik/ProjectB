@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using ComponentScripts.Items;
 using UnityEngine;
 
@@ -8,6 +7,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     {
         [SerializeField] private int amountOfSlots;
         public Item[] Items{ get; set; }
+
+        public int AmountOfSlots => amountOfSlots;
         
         private void Start()
         {
