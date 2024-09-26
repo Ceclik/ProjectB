@@ -6,7 +6,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private int amountOfSlots;
-        public Item[] Items{ get; set; }
+        public Item[] Items { get; set; }
 
         public int AmountOfSlots => amountOfSlots;
         

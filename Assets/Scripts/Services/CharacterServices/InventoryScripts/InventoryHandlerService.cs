@@ -1,5 +1,6 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
+using ComponentScripts.Items.Food;
 using UnityEngine;
 
 namespace Services.CharacterServices.InventoryScripts

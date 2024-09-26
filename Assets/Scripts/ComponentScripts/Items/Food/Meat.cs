@@ -7,5 +7,9 @@ namespace ComponentScripts.Items.Food
             Name = "Meat";
             MaxAvailableAmount = 6;
         }
+
+        public Meat(Food otherFood) : base(otherFood)
+        {
+        }
     }
 }

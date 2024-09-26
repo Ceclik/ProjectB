@@ -1032,7 +1032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1072737513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1103,11 +1103,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30800bbc1ee44b5ac59cdbf87bf28b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsPanel: {fileID: 0}
-  inventory: {fileID: 0}
-  itemPanelPrefab: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  itemsPanel: {fileID: 60762474}
+  inventory: {fileID: 976462670}
+  itemPanelPrefab: {fileID: 1430947433890956791, guid: 1cb2574191f78464989b27026e69ca3c, type: 3}
+  leftHand: {fileID: 2097372433}
+  rightHand: {fileID: 869894621}
 --- !u!1 &1110822499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1413,10 @@ PrefabInstance:
     - target: {fileID: 767774056077442829, guid: 3e21f9e74e2ae261dac5e7b765f51407, type: 3}
       propertyPath: m_enableAutoSizing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1084783157347447619, guid: 3e21f9e74e2ae261dac5e7b765f51407, type: 3}
+      propertyPath: amount
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2460692177817650274, guid: 3e21f9e74e2ae261dac5e7b765f51407, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1926,6 +1930,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4777292282235830020, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Size.x
+      value: 1.265355
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777292282235830020, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Size.y
+      value: 1.771497
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777292282235830020, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.040327568
+      objectReference: {fileID: 0}
+    - target: {fileID: 4777292282235830020, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.106057346
+      objectReference: {fileID: 0}
     - target: {fileID: 5061139040845438626, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1933,6 +1953,38 @@ PrefabInstance:
     - target: {fileID: 6406686803548280660, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
       propertyPath: m_Name
       value: Potato
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597222456313695943, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: amount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597222456313695943, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: itemIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f71c67aee5bcbcc69ca9c81e1811a70, type: 3}
+    - target: {fileID: 8855056647139116069, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1333333
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855056647139116069, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Size.y
+      value: 1.0666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855056647139116069, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1f71c67aee5bcbcc69ca9c81e1811a70, type: 3}
+    - target: {fileID: 8855056647139116069, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855056647139116069, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855056647139116069, guid: c4721c4691c6994c8bd5eea67cdd8a13, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

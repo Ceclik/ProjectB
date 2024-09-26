@@ -32,6 +32,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             if (other.TryGetComponent(out Item droppedItem) && Input.GetKeyDown(KeyCode.F))
             {
                 _inventoryHandler.PutToInventory(droppedItem, GetComponent<Inventory>());
+                //Destroy(droppedItem.gameObject);
                 droppedItem.gameObject.SetActive(false);
             }
         }
