@@ -20,6 +20,7 @@ namespace Injectors
         [SerializeField] private CharacterMover character;
         //[SerializeField] private GameObject mainCanvas;
         [SerializeField] private List<EntitySpawnHandler> spawners;
+        [SerializeField] private InventoryUI inventoryUI;
 
         private void Awake()
         {
@@ -29,7 +30,6 @@ namespace Injectors
             {
                 spawner.OnEntitySpawn += InjectToEntities;
             }
-            
             
             IPlayerMover playerMover = gameObject.AddComponent<PlayerMoverService>();
             character.Inject(playerMover);
@@ -55,6 +55,9 @@ namespace Injectors
             IInventoryHandler inventoryHandlerI = new InventoryHandlerService();
             ItemsPicker itemsPicker = character.GetComponent<ItemsPicker>();
             itemsPicker.Inject(inventoryHandlerI);
+
+            IInventoryUIHandler inventoryUIHandlerI = new InventoryUIHandlerService();
+            inventoryUI.Inject(inventoryUIHandlerI);
         }
 
         private void OnDestroy()

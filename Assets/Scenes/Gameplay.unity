@@ -1596,6 +1596,7 @@ MonoBehaviour:
   character: {fileID: 976462661}
   spawners:
   - {fileID: 301373593}
+  inventoryUI: {fileID: 1072737516}
 --- !u!4 &1946549040
 Transform:
   m_ObjectHideFlags: 0

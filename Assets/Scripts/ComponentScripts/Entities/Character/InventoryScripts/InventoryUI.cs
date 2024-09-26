@@ -1,3 +1,4 @@
+using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +14,17 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         [Space(10)] [Header("Hand panels")] [SerializeField]
         private RectTransform leftHand;
 
+        private IInventoryUIHandler _uiHandler;
+
         [SerializeField] private RectTransform rightHand;
         
         private RectTransform[] panels;
 
+        public void Inject(IInventoryUIHandler uiHandler)
+        {
+            _uiHandler = uiHandler;
+        }
+        
         private void Awake()
         {
             panels = new RectTransform[inventory.AmountOfSlots];
@@ -29,16 +37,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         private void OnEnable()
         {
-            for (int i = 0; i < panels.Length; i++)
-            {
-                if (inventory.Items[i] != null)
-                {
-                    Image itemImage = panels[i].GetComponentInChildren<Image>();
-                    itemImage.sprite = inventory.Items[i].ItemIcon;
-                    TextMeshProUGUI amountText = panels[i].GetComponentInChildren<TextMeshProUGUI>();
-                    amountText.text = inventory.Items[i].Amount.ToString();
-                }
-            }
+           _uiHandler.UpdateUI(inventory, panels);
         }
     }
 }
