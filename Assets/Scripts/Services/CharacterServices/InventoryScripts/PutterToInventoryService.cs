@@ -1,38 +1,40 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
 using ComponentScripts.Items.Food;
+using DataClasses;
 using UnityEngine;
 
 namespace Services.CharacterServices.InventoryScripts
 {
-    public class InventoryHandlerService : IInventoryHandler
+    public class PutterToInventoryService : IPutterToInventory
     {
         public bool PutToInventory(Item item, Inventory inventory)
         {
+            ItemData itemToInventory = CreateItemDataObject(item);
             foreach (var inventoryItem in inventory.Items)
             {
                 if (inventoryItem != null)
                 {
                     Debug.Log("inside active logic");
-                    if (inventoryItem.Name == item.Name &&
-                        inventoryItem.Amount + item.Amount < inventoryItem.MaxAvailableAmount)
+                    if (inventoryItem.Name == itemToInventory.Name &&
+                        inventoryItem.Amount + itemToInventory.Amount < inventoryItem.MaxAvailableAmount)
                     {
-                        inventoryItem.Amount += item.Amount;
+                        inventoryItem.Amount += itemToInventory.Amount;
                         Debug.Log("Just increasing amount");
                         DebugInventoryState(inventory);
                         return true;
                     }
-                    if (inventoryItem.Name == item.Name &&
-                             !(inventoryItem.Amount + item.Amount < inventoryItem.MaxAvailableAmount))
+                    if (inventoryItem.Name == itemToInventory.Name &&
+                             !(inventoryItem.Amount + itemToInventory.Amount < inventoryItem.MaxAvailableAmount))
                     {
                         Debug.Log("Increasing amount and creating new field");
                         int delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
                         inventoryItem.Amount += delta;
-                        item.Amount -= delta;
+                        itemToInventory.Amount -= delta;
                         int index = HasEmptySlot(inventory);
                         if (index != -1)
                         {
-                            inventory.Items[index] = item;
+                            inventory.Items[index] = itemToInventory;
                             DebugInventoryState(inventory);
                             return true;
                         }
@@ -48,7 +50,7 @@ namespace Services.CharacterServices.InventoryScripts
                         int index = HasEmptySlot(inventory);
                         if (index != -1)
                         {
-                            inventory.Items[index] = item;
+                            inventory.Items[index] = itemToInventory;
                             DebugInventoryState(inventory);
                             return true;
                         }
@@ -63,7 +65,7 @@ namespace Services.CharacterServices.InventoryScripts
             }
 
             Debug.Log("inventory is empty, creating new field");
-            inventory.Items[0] = item;
+            inventory.Items[0] = itemToInventory;
             
             DebugInventoryState(inventory);
             return false;
@@ -80,9 +82,11 @@ namespace Services.CharacterServices.InventoryScripts
             
         }
 
-        public void ThrowFromInventory(Item item, Inventory inventory)
+        private ItemData CreateItemDataObject(Item receivedItem)
         {
-            throw new System.NotImplementedException();
+            if (receivedItem is Food)
+                return new FoodData((Food)receivedItem);
+            else return null;
         }
 
         private int HasEmptySlot(Inventory inventory)

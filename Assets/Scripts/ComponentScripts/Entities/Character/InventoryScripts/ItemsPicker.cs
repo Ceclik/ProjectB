@@ -7,11 +7,11 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     public class ItemsPicker : MonoBehaviour
     {
         private ActionTextHandler _textHandler;
-        private IInventoryHandler _inventoryHandler;
+        private IPutterToInventory _putterToInventory;
         
-        public void Inject(IInventoryHandler inventoryHandler)
+        public void Inject(IPutterToInventory putterToInventory)
         {
-            _inventoryHandler = inventoryHandler;
+            _putterToInventory = putterToInventory;
         }
 
         private void Start()
@@ -31,9 +31,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         {
             if (other.TryGetComponent(out Item droppedItem) && Input.GetKeyDown(KeyCode.F))
             {
-                _inventoryHandler.PutToInventory(droppedItem, GetComponent<Inventory>());
-                //Destroy(droppedItem.gameObject);
-                droppedItem.gameObject.SetActive(false);
+                _putterToInventory.PutToInventory(droppedItem, GetComponent<Inventory>());
+                Destroy(droppedItem.gameObject);
             }
         }
         

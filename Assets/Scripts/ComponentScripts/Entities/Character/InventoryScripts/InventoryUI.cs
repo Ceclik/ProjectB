@@ -1,3 +1,5 @@
+using ComponentScripts.Items;
+using Injectors;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;
@@ -19,6 +21,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         [SerializeField] private RectTransform rightHand;
         
         private RectTransform[] panels;
+        private Injector _injector;
 
         public void Inject(IInventoryUIHandler uiHandler)
         {
@@ -27,11 +30,14 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         
         private void Awake()
         {
+            _injector = GameObject.Find("Injector").GetComponent<Injector>();
             panels = new RectTransform[inventory.AmountOfSlots];
             for (int i = 0; i < inventory.AmountOfSlots; i++)
             {
                 panels[i] = Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
                     .GetComponent<RectTransform>();
+                panels[i].GetComponent<ItemPanel>().PanelIndex = i;
+                _injector.InjectToPanel(panels[i].GetComponent<ItemPanel>());
             }
         }
 

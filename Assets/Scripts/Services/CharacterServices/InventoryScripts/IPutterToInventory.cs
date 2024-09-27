@@ -3,9 +3,8 @@ using ComponentScripts.Items;
 
 namespace Services.CharacterServices.InventoryScripts
 {
-    public interface IInventoryHandler
+    public interface IPutterToInventory
     {
         public bool PutToInventory(Item item, Inventory inventory);
-        public void ThrowFromInventory(Item item, Inventory inventory);
     }
 }

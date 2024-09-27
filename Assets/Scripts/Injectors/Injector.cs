@@ -5,6 +5,7 @@ using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.Enemies;
 using ComponentScripts.Entities.Nest;
+using ComponentScripts.Items;
 using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterAttackScripts;
 using Services.CharacterServices.CharacterStatsScripts;
@@ -18,7 +19,6 @@ namespace Injectors
     public class Injector : MonoBehaviour
     {
         [SerializeField] private CharacterMover character;
-        //[SerializeField] private GameObject mainCanvas;
         [SerializeField] private List<EntitySpawnHandler> spawners;
         [SerializeField] private InventoryUI inventoryUI;
 
@@ -52,12 +52,14 @@ namespace Injectors
             ActionTextHandler actionTextHandler = character.GetComponent<ActionTextHandler>();
             actionTextHandler.Inject(actionTextHandlerI);
 
-            IInventoryHandler inventoryHandlerI = new InventoryHandlerService();
+            IPutterToInventory putterToInventoryI = new PutterToInventoryService();
             ItemsPicker itemsPicker = character.GetComponent<ItemsPicker>();
-            itemsPicker.Inject(inventoryHandlerI);
+            itemsPicker.Inject(putterToInventoryI);
 
             IInventoryUIHandler inventoryUIHandlerI = new InventoryUIHandlerService();
             inventoryUI.Inject(inventoryUIHandlerI);
+            
+            
         }
 
         private void OnDestroy()
@@ -93,6 +95,12 @@ namespace Injectors
                 spawnedEntity.GetComponent<EntityHealthHandler>().Inject(entityDamageReceiverI);
                 spawnedEntity.GetComponent<EntityDespawnHandler>().Inject(despawnerI);
             }
+        }
+
+        public void InjectToPanel(ItemPanel itemPanel)
+        {
+            IItemsDropper itemsDropper = gameObject.AddComponent<ItemDropperService>();
+            itemPanel.Inject(itemsDropper);
         }
     }
 }

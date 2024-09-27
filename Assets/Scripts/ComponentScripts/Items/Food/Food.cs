@@ -7,10 +7,6 @@ namespace ComponentScripts.Items.Food
         [SerializeField] private int amountOfRestoringHungerUnits;
 
         public int AmountOfRestoringHungerUnits => amountOfRestoringHungerUnits;
-
-        public Food(Food otherFood) : base(otherFood)
-        {
-            amountOfRestoringHungerUnits = otherFood.amountOfRestoringHungerUnits;
-        }
+        
     }
 }

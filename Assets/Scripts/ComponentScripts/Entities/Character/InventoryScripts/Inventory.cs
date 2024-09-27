@@ -1,4 +1,4 @@
-using ComponentScripts.Items;
+using DataClasses;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Character.InventoryScripts
@@ -6,13 +6,13 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     public class Inventory : MonoBehaviour
     {
         [SerializeField] private int amountOfSlots;
-        public Item[] Items { get; set; }
+        public ItemData[] Items { get; private set; }
 
         public int AmountOfSlots => amountOfSlots;
         
         private void Start()
         {
-            Items = new Item[amountOfSlots];
+            Items = new ItemData[amountOfSlots];
             for (int i = 0; i < amountOfSlots; i++)
                 Items[i] = null;
         }
@@ -25,14 +25,17 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         private void WatchInventory()
         {
+            int emptyCount = 0;
             foreach (var item in Items)
             {
                 if (item != null)
-                {
-                    Debug.Log($"Name: {item.Name}, Amount: {item.Amount}, maxAmount: {item.MaxAvailableAmount}");
-                }
+                    Debug.Log(
+                        $"Name: {Items[0].Name}, Amount: {Items[0].Amount}, maxAmount: {Items[0].MaxAvailableAmount}");
+                else
+                    emptyCount++;
             }
-            Debug.Log("Empty!");
+            if(emptyCount == Items.Length)
+                Debug.Log("Empty!");
             
         }
     }
