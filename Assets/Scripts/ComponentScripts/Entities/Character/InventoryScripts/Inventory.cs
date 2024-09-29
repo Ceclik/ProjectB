@@ -30,7 +30,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             {
                 if (item != null)
                     Debug.Log(
-                        $"Name: {Items[0].Name}, Amount: {Items[0].Amount}, maxAmount: {Items[0].MaxAvailableAmount}");
+                        $"Name: {item.Name}, Amount: {item.Amount}, maxAmount: {item.MaxAvailableAmount}");
                 else
                     emptyCount++;
             }

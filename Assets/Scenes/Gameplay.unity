@@ -178,7 +178,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 116, y: 109.09}
+  m_Spacing: {x: 116, y: 110}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &60762475
@@ -1823,6 +1823,10 @@ PrefabInstance:
     - target: {fileID: 3049767752806522655, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
       propertyPath: m_Name
       value: ColoradoBugNest
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049767752806522655, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5043465847368198257, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
       propertyPath: m_Constraints

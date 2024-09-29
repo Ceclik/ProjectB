@@ -1,6 +1,7 @@
-using System;
 using ComponentScripts;
+using ComponentScripts.Items;
 using DataClasses;
+using TMPro;
 using UnityEngine;
 
 namespace Services.CharacterServices.InventoryScripts
@@ -18,7 +19,11 @@ namespace Services.CharacterServices.InventoryScripts
 
         public void DropItem(ItemData newItem, Vector3 characterPosition)
         {
-            Instantiate(_itemsSpawner.GetItemPrefab(newItem), characterPosition, Quaternion.identity, _itemsParent);
+            Item spawnedItem =
+                Instantiate(_itemsSpawner.GetItemPrefab(newItem), characterPosition, Quaternion.identity, _itemsParent)
+                    .GetComponent<Item>();
+            spawnedItem.Amount = newItem.Amount;
+            spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = newItem.Amount.ToString();
         }
     }
 }

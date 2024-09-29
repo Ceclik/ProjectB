@@ -15,7 +15,6 @@ namespace Services.CharacterServices.InventoryScripts
             {
                 if (inventoryItem != null)
                 {
-                    Debug.Log("inside active logic");
                     if (inventoryItem.Name == itemToInventory.Name &&
                         inventoryItem.Amount + itemToInventory.Amount < inventoryItem.MaxAvailableAmount)
                     {
@@ -24,17 +23,17 @@ namespace Services.CharacterServices.InventoryScripts
                         DebugInventoryState(inventory);
                         return true;
                     }
-                    if (inventoryItem.Name == itemToInventory.Name &&
-                             !(inventoryItem.Amount + itemToInventory.Amount < inventoryItem.MaxAvailableAmount))
+                    else if (inventoryItem.Name == itemToInventory.Name &&
+                             inventoryItem.Amount + itemToInventory.Amount > inventoryItem.MaxAvailableAmount)
                     {
                         Debug.Log("Increasing amount and creating new field");
                         int delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
                         inventoryItem.Amount += delta;
                         itemToInventory.Amount -= delta;
-                        int index = HasEmptySlot(inventory);
-                        if (index != -1)
+                        int indexi = HasEmptySlot(inventory);
+                        if (indexi != -1)
                         {
-                            inventory.Items[index] = itemToInventory;
+                            inventory.Items[indexi] = itemToInventory;
                             DebugInventoryState(inventory);
                             return true;
                         }
@@ -43,32 +42,23 @@ namespace Services.CharacterServices.InventoryScripts
                             Debug.LogError("Inventory is full"); //TODO create UI warning
                             return false;
                         }
-                    }
-                    else
-                    {
-                        Debug.Log("Creating new field");
-                        int index = HasEmptySlot(inventory);
-                        if (index != -1)
-                        {
-                            inventory.Items[index] = itemToInventory;
-                            DebugInventoryState(inventory);
-                            return true;
-                        }
-                        else
-                        {
-                            Debug.LogError("Inventory is full"); //TODO create UI warning
-                            return false;
-                        }
-                        
                     }
                 }
             }
 
-            Debug.Log("inventory is empty, creating new field");
-            inventory.Items[0] = itemToInventory;
-            
-            DebugInventoryState(inventory);
-            return false;
+            Debug.Log("Creating new field");
+            int index = HasEmptySlot(inventory);
+            if (index != -1)
+            {
+                inventory.Items[index] = itemToInventory;
+                DebugInventoryState(inventory);
+                return true;
+            }
+            else
+            {
+                Debug.LogError("Inventory is full"); //TODO create UI warning
+                return false;
+            }
         }
 
         private void DebugInventoryState(Inventory inventory)

@@ -26,6 +26,7 @@ namespace ComponentScripts.Items
 
         private void Start()
         {
+            _isPointerOnPanel = false;
             _inventory = GameObject.Find("Character").GetComponent<Inventory>();
             _itemIcon = GetComponentInChildren<Image>();
             _amountText = GetComponentInChildren<TextMeshProUGUI>();
@@ -33,7 +34,8 @@ namespace ComponentScripts.Items
         
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _isPointerOnPanel = true;
+            _isPointerOnPanel = true; 
+            Debug.Log($"Pointer is on {PanelIndex} panel");
         }
 
         private void Update()
@@ -45,6 +47,7 @@ namespace ComponentScripts.Items
                 {
                     CleanItemPanel();
                     _itemsDropper.DropItem(_inventory.Items[PanelIndex], _inventory.transform.position);
+                    _inventory.Items[PanelIndex] = null;
                 }
                 else
                 {
@@ -72,7 +75,7 @@ namespace ComponentScripts.Items
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _isPointerOnPanel = true;
+            _isPointerOnPanel = false;
         }
     }
 }
