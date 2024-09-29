@@ -42,22 +42,25 @@ namespace ComponentScripts.Items
         {
             if (Input.GetKeyDown(KeyCode.Q) && _isPointerOnPanel)
             {
-                Debug.Log($"Panel index of dropping item: {PanelIndex}");
-                if (_inventory.Items[PanelIndex].Amount - 1 == 0)
+                if (_inventory.Items[PanelIndex] != null)
                 {
-                    CleanItemPanel();
-                    _itemsDropper.DropItem(_inventory.Items[PanelIndex], _inventory.transform.position);
-                    _inventory.Items[PanelIndex] = null;
-                }
-                else
-                {
-                    _inventory.Items[PanelIndex].Amount--;
-                    _amountText.text = _inventory.Items[PanelIndex].Amount.ToString();
-                    ItemData itemToSpawn = new ItemData(_inventory.Items[PanelIndex])
+                    Debug.Log($"Panel index of dropping item: {PanelIndex}");
+                    if (_inventory.Items[PanelIndex].Amount - 1 == 0)
                     {
-                        Amount = 1
-                    };
-                    _itemsDropper.DropItem(itemToSpawn, _inventory.transform.position);
+                        CleanItemPanel();
+                        _itemsDropper.DropItem(_inventory.Items[PanelIndex], _inventory.transform.position);
+                        _inventory.Items[PanelIndex] = null;
+                    }
+                    else
+                    {
+                        _inventory.Items[PanelIndex].Amount--;
+                        _amountText.text = _inventory.Items[PanelIndex].Amount.ToString();
+                        ItemData itemToSpawn = new ItemData(_inventory.Items[PanelIndex])
+                        {
+                            Amount = 1
+                        };
+                        _itemsDropper.DropItem(itemToSpawn, _inventory.transform.position);
+                    }
                 }
             }
         }
