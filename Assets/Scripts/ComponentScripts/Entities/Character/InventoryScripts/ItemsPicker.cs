@@ -32,7 +32,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            if (_textHandler.ActionTextElement.IsActive() && Input.GetKeyDown(KeyCode.F))
             {
                 _putterToInventory.PutToInventory(_involvedItem, GetComponent<Inventory>());
                 Destroy(_involvedItem.gameObject);
