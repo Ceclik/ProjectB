@@ -1,4 +1,5 @@
 using System.Collections;
+using ComponentScripts.CameraScripts;
 using ComponentScripts.Entities.Character;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
@@ -12,9 +13,11 @@ namespace Services.CharacterServices.MovingScripts
         private CharacterStaminaHandler _staminaValues;
 
         private Rigidbody2D _rigidbody;
+        private CameraCharacterFollower _camera;
 
         private void Start()
         {
+            _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraCharacterFollower>();
             _staminaValues = GameObject.Find("Character").GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
             _rigidbody = _staminaValues.GetComponent<Rigidbody2D>();
         }
@@ -231,12 +234,14 @@ namespace Services.CharacterServices.MovingScripts
 
         private IEnumerator TugMaker(Vector3 targetPosition, Transform characterTransform, float tugSpeed)
         {
+            _camera.StartDash();
             while (characterTransform.position != targetPosition)
             {
                 yield return new WaitForEndOfFrame();
                 characterTransform.position =
                     Vector3.MoveTowards(characterTransform.position, targetPosition, Time.deltaTime * tugSpeed);
             }
+            _camera.EndDash();
         }
     }
 }
