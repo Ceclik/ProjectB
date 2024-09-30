@@ -55,6 +55,53 @@ namespace Services.CharacterServices.InventoryScripts
             Debug.LogError("Inventory is full"); //TODO create UI warning
             return false;
         }
+        
+        public bool PutToInventory(ItemData itemToInventory, Inventory inventory)
+        {
+            foreach (var inventoryItem in inventory.Items)
+                if (inventoryItem != null)
+                {
+                    if (inventoryItem.Name == itemToInventory.Name &&
+                        inventoryItem.Amount + itemToInventory.Amount < inventoryItem.MaxAvailableAmount)
+                    {
+                        inventoryItem.Amount += itemToInventory.Amount;
+                        Debug.Log("Just increasing amount");
+                        DebugInventoryState(inventory);
+                        return true;
+                    }
+
+                    if (inventoryItem.Name == itemToInventory.Name &&
+                        inventoryItem.Amount + itemToInventory.Amount > inventoryItem.MaxAvailableAmount)
+                    {
+                        Debug.Log("Increasing amount and creating new field");
+                        var delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
+                        inventoryItem.Amount += delta;
+                        itemToInventory.Amount -= delta;
+                        var indexi = HasEmptySlot(inventory);
+                        if (indexi != -1)
+                        {
+                            inventory.Items[indexi] = itemToInventory;
+                            DebugInventoryState(inventory);
+                            return true;
+                        }
+
+                        Debug.LogError("Inventory is full"); //TODO create UI warning
+                        return false;
+                    }
+                }
+
+            Debug.Log("Creating new field");
+            var index = HasEmptySlot(inventory);
+            if (index != -1)
+            {
+                inventory.Items[index] = itemToInventory;
+                DebugInventoryState(inventory);
+                return true;
+            }
+
+            Debug.LogError("Inventory is full"); //TODO create UI warning
+            return false;
+        }
 
         private void DebugInventoryState(Inventory inventory)
         {

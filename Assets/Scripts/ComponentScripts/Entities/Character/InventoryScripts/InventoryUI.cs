@@ -2,6 +2,7 @@ using ComponentScripts.Items;
 using Injectors;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ComponentScripts.Entities.Character.InventoryScripts
@@ -13,9 +14,10 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         [SerializeField] private GameObject itemPanelPrefab;
 
         [Space(10)] [Header("Hand panels")] [SerializeField]
-        private RectTransform leftHand;
+        private RectTransform mainHand;
 
-        [SerializeField] private RectTransform rightHand;
+        [SerializeField] private RectTransform secondHandHand;
+        
         private Injector _injector;
 
         private IInventoryUIHandler _uiHandler;
@@ -33,6 +35,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
                 panels[i].GetComponent<ItemPanel>().PanelIndex = i;
                 _injector.InjectToPanel(panels[i].GetComponent<ItemPanel>());
             }
+            _injector.InjectToPanel(mainHand.GetComponent<SecondHandPanel>());
+            _injector.InjectToPanel(secondHandHand.GetComponent<MainHandPanel>());
         }
 
         private void OnEnable()

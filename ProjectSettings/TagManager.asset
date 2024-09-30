@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ItemsParent
   - ItemsSpawner
+  - Injector
   layers:
   - Default
   - TransparentFX

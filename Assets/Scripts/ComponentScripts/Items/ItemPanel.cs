@@ -1,5 +1,7 @@
 using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
+using ComponentScripts.Items.Tools;
+using ComponentScripts.Items.Weapons;
 using DataClasses;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
@@ -11,46 +13,71 @@ namespace ComponentScripts.Items
 {
     public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        private TextMeshProUGUI _amountText;
-        private Inventory _inventory;
-        private bool _isPointerOnPanel;
-        private Image _itemIcon;
+        protected TextMeshProUGUI AmountText;
+        protected Inventory Inventory;
+        protected bool IsPointerOnPanel;
+        protected Image ItemIcon;
 
-        private IItemsDropper _itemsDropper;
+        protected IItemsDropper ItemsDropper;
+
+        private SecondHandPanel _secondHandPanel;
+        private MainHandPanel _mainHandPanel;
 
         public int PanelIndex { get; set; }
 
         private void Start()
         {
-            _isPointerOnPanel = false;
-            _inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-            _itemIcon = GetComponentInChildren<Image>();
-            _amountText = GetComponentInChildren<TextMeshProUGUI>();
+            _secondHandPanel = GameObject.Find("LeftHandPanel").GetComponent<SecondHandPanel>();
+            _mainHandPanel = GameObject.Find("RightHandPanel").GetComponent<MainHandPanel>();
+            IsPointerOnPanel = false;
+            Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+            ItemIcon = GetComponentInChildren<Image>();
+            AmountText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        protected void HandleDropping()
+        {
+            if (Inventory.Items[PanelIndex] != null)
+            {
+                Debug.Log($"Panel index of dropping item: {PanelIndex}");
+                if (Inventory.Items[PanelIndex].Amount - 1 == 0)
+                {
+                    CleanItemPanel();
+                    ItemsDropper.DropItem(Inventory.Items[PanelIndex], Inventory.transform.position);
+                    Inventory.Items[PanelIndex] = null;
+                }
+                else
+                {
+                    Inventory.Items[PanelIndex].Amount--;
+                    AmountText.text = Inventory.Items[PanelIndex].Amount.ToString();
+                    var itemToSpawn = new ItemData(Inventory.Items[PanelIndex])
+                    {
+                        Amount = 1
+                    };
+                    ItemsDropper.DropItem(itemToSpawn, Inventory.transform.position);
+                }
+            }
+        }
+
+        private void PutToMainHand()
+        {
+            if (Inventory.Items[PanelIndex] is ToolData || Inventory.Items[PanelIndex] is WeaponData)
+            {
+                _mainHandPanel.PanelIndex = PanelIndex;
+                _mainHandPanel.ItemIcon.sprite = ItemIcon.sprite;
+                _mainHandPanel.AmountText.text = AmountText.text;
+                CleanItemPanel();
+                Inventory.MainHand = Inventory.Items[PanelIndex];
+                Inventory.Items[PanelIndex] = null;
+            }
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Q) && _isPointerOnPanel)
-                if (_inventory.Items[PanelIndex] != null)
-                {
-                    Debug.Log($"Panel index of dropping item: {PanelIndex}");
-                    if (_inventory.Items[PanelIndex].Amount - 1 == 0)
-                    {
-                        CleanItemPanel();
-                        _itemsDropper.DropItem(_inventory.Items[PanelIndex], _inventory.transform.position);
-                        _inventory.Items[PanelIndex] = null;
-                    }
-                    else
-                    {
-                        _inventory.Items[PanelIndex].Amount--;
-                        _amountText.text = _inventory.Items[PanelIndex].Amount.ToString();
-                        var itemToSpawn = new ItemData(_inventory.Items[PanelIndex])
-                        {
-                            Amount = 1
-                        };
-                        _itemsDropper.DropItem(itemToSpawn, _inventory.transform.position);
-                    }
-                }
+            if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
+                HandleDropping();
+            if(Input.GetKeyDown(KeyCode.Mouse0) && IsPointerOnPanel)
+                PutToMainHand();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -60,24 +87,24 @@ namespace ComponentScripts.Items
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            _isPointerOnPanel = true;
+            IsPointerOnPanel = true;
             Debug.Log($"Pointer is on {PanelIndex} panel");
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _isPointerOnPanel = false;
+            IsPointerOnPanel = false;
         }
 
         public void Inject(IItemsDropper dropper)
         {
-            _itemsDropper = dropper;
+            ItemsDropper = dropper;
         }
 
-        private void CleanItemPanel()
+        public void CleanItemPanel()
         {
-            _itemIcon.sprite = null;
-            _amountText.enabled = false;
+            ItemIcon.sprite = null;
+            AmountText.enabled = false;
         }
     }
 }
