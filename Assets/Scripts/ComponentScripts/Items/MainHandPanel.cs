@@ -11,9 +11,11 @@ namespace ComponentScripts.Items
     public class MainHandPanel : ItemPanel
     {
         private IPutterToInventory _putterToInventory;
+        private InventoryUI _panelsHandler;
         
         private void Start()
         {
+            _panelsHandler = GetComponentInParent<InventoryUI>();
             _putterToInventory = new PutterToInventoryService();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
@@ -31,7 +33,10 @@ namespace ComponentScripts.Items
 
         private void PutToInventory()
         {
-            _putterToInventory.PutToInventory(Inventory.MainHand, Inventory);
+            int itemIndex = _putterToInventory.PutToInventory(Inventory.MainHand, Inventory);
+            _panelsHandler.Panels[itemIndex].GetComponentInChildren<Image>().sprite = Inventory.MainHand.ItemIcon;
+            _panelsHandler.Panels[itemIndex].GetComponentInChildren<TextMeshProUGUI>().text =
+                Inventory.MainHand.Amount.ToString();
             CleanItemPanel();
         }
         

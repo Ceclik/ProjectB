@@ -27,8 +27,8 @@ namespace ComponentScripts.Items
 
         private void Start()
         {
-            _secondHandPanel = GameObject.Find("LeftHandPanel").GetComponent<SecondHandPanel>();
-            _mainHandPanel = GameObject.Find("RightHandPanel").GetComponent<MainHandPanel>();
+            _secondHandPanel = GameObject.Find("MainHandPanel").GetComponent<SecondHandPanel>();
+            _mainHandPanel = GameObject.Find("SecondHandPanel").GetComponent<MainHandPanel>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             ItemIcon = GetComponentInChildren<Image>();

@@ -56,39 +56,42 @@ namespace Services.CharacterServices.InventoryScripts
             return false;
         }
         
-        public bool PutToInventory(ItemData itemToInventory, Inventory inventory)
+        public int PutToInventory(ItemData itemToInventory, Inventory inventory)
         {
-            foreach (var inventoryItem in inventory.Items)
-                if (inventoryItem != null)
+            for (int i = 0; i < inventory.Items.Length; i++)
+            {
+                if (inventory.Items[i] != null)
                 {
-                    if (inventoryItem.Name == itemToInventory.Name &&
-                        inventoryItem.Amount + itemToInventory.Amount < inventoryItem.MaxAvailableAmount)
+                    if (inventory.Items[i].Name == itemToInventory.Name &&
+                        inventory.Items[i].Amount + itemToInventory.Amount < inventory.Items[i].MaxAvailableAmount)
                     {
-                        inventoryItem.Amount += itemToInventory.Amount;
+                        inventory.Items[i].Amount += itemToInventory.Amount;
                         Debug.Log("Just increasing amount");
                         DebugInventoryState(inventory);
-                        return true;
+                        return i;
                     }
 
-                    if (inventoryItem.Name == itemToInventory.Name &&
-                        inventoryItem.Amount + itemToInventory.Amount > inventoryItem.MaxAvailableAmount)
+                    if (inventory.Items[i].Name == itemToInventory.Name &&
+                        inventory.Items[i].Amount + itemToInventory.Amount > inventory.Items[i].MaxAvailableAmount)
                     {
                         Debug.Log("Increasing amount and creating new field");
-                        var delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
-                        inventoryItem.Amount += delta;
+                        var delta = inventory.Items[i].MaxAvailableAmount - inventory.Items[i].Amount;
+                        inventory.Items[i].Amount += delta;
                         itemToInventory.Amount -= delta;
                         var indexi = HasEmptySlot(inventory);
                         if (indexi != -1)
                         {
                             inventory.Items[indexi] = itemToInventory;
                             DebugInventoryState(inventory);
-                            return true;
+                            return i;
                         }
 
                         Debug.LogError("Inventory is full"); //TODO create UI warning
-                        return false;
+                        return -1;
                     }
                 }
+            }
+                
 
             Debug.Log("Creating new field");
             var index = HasEmptySlot(inventory);
@@ -96,11 +99,11 @@ namespace Services.CharacterServices.InventoryScripts
             {
                 inventory.Items[index] = itemToInventory;
                 DebugInventoryState(inventory);
-                return true;
+                return index;
             }
 
             Debug.LogError("Inventory is full"); //TODO create UI warning
-            return false;
+            return -1;
         }
 
         private void DebugInventoryState(Inventory inventory)

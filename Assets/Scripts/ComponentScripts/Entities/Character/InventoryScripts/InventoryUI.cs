@@ -23,6 +23,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         private IInventoryUIHandler _uiHandler;
 
         private RectTransform[] panels;
+        public RectTransform[] Panels => panels;
 
         private void Awake()
         {
@@ -35,8 +36,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
                 panels[i].GetComponent<ItemPanel>().PanelIndex = i;
                 _injector.InjectToPanel(panels[i].GetComponent<ItemPanel>());
             }
-            _injector.InjectToPanel(mainHand.GetComponent<SecondHandPanel>());
-            _injector.InjectToPanel(secondHandHand.GetComponent<MainHandPanel>());
+            _injector.InjectToPanel(mainHand.GetComponent<MainHandPanel>());
+            _injector.InjectToPanel(secondHandHand.GetComponent<SecondHandPanel>());
         }
 
         private void OnEnable()
