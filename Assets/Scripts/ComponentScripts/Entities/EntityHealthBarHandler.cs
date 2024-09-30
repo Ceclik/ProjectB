@@ -12,16 +12,16 @@ namespace ComponentScripts.Entities
 
         private float _fadeTimer;
         private float _fadingTimer;
-        
-        private Color _finishImageColor;
         private Color _finishBackgroundColor;
-        private Color _normalImageColor;
+
+        private Color _finishImageColor;
         private Color _normalBackgroundColor;
+        private Color _normalImageColor;
 
         private void Start()
         {
             healthBarBackground.gameObject.SetActive(false);
-            
+
             _finishImageColor = new Color(healthBar.color.r, healthBar.color.g, healthBar.color.b, 0.0f);
             _finishBackgroundColor = new Color(healthBarBackground.color.r, healthBarBackground.color.g,
                 healthBarBackground.color.b, 0.0f);
@@ -39,7 +39,7 @@ namespace ComponentScripts.Entities
             {
                 _fadingTimer += Time.deltaTime;
 
-                float fadingProgress = Mathf.Clamp01(_fadingTimer / healthBarFadeDuration);
+                var fadingProgress = Mathf.Clamp01(_fadingTimer / healthBarFadeDuration);
 
                 healthBar.color = Color.Lerp(_normalImageColor, _finishImageColor, fadingProgress);
                 healthBarBackground.color =
@@ -62,7 +62,5 @@ namespace ComponentScripts.Entities
             healthBar.fillAmount =
                 (float)selfEntity.ActualHealth * 100 / selfEntity.BaseHealth / 100;
         }
-
-       
     }
 }

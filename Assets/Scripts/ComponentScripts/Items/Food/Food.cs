@@ -7,6 +7,5 @@ namespace ComponentScripts.Items.Food
         [SerializeField] private int amountOfRestoringHungerUnits;
 
         public int AmountOfRestoringHungerUnits => amountOfRestoringHungerUnits;
-        
     }
 }

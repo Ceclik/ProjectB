@@ -4,11 +4,11 @@ namespace ComponentScripts.Entities.Character
 {
     public class Character : ActiveEntity
     {
-        
+        [Space(10)] [Header("Character's stats")] [SerializeField]
+        private int coins;
+
         private int _experienceLevel { get; }
         private int _experienceAmount { get; set; }
-        [Space(10)][Header("Character's stats")]
-        [SerializeField] private int coins;
         public int ActualMaxHealth { get; private set; }
         public int ActualDamage { get; private set; }
 

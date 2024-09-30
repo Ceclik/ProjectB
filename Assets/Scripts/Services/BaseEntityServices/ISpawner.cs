@@ -7,6 +7,7 @@ namespace Services.BaseEntityServices
     {
         public Entity[] SpawnEntities(GameObject entityToSpawn, int entitiesCount, Transform entitiesParent,
             Vector3 nestPosition, float distanceFromNest);
+
         public Entity SpawnEntity(GameObject entityToSpawn, Transform entityParent, Vector3 entityPosition);
     }
 }

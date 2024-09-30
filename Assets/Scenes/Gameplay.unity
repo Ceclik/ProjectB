@@ -774,7 +774,7 @@ GameObject:
   - component: {fileID: 785389295}
   m_Layer: 0
   m_Name: Items
-  m_TagString: Untagged
+  m_TagString: ItemsParent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1611,7 +1611,7 @@ GameObject:
   - component: {fileID: 1783846908}
   m_Layer: 0
   m_Name: ItemsSpawner
-  m_TagString: Untagged
+  m_TagString: ItemsSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

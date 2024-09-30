@@ -1,4 +1,3 @@
-using Services.BaseEntityServices;
 using Services.CharacterServices.CharacterAttackScripts;
 using UnityEngine;
 
@@ -12,17 +11,18 @@ namespace ComponentScripts.Entities.Character
 
         private ICharacterAttackHandler _attackHandler;
 
-        public void Inject(ICharacterAttackHandler attackHandler)
-        {
-            _attackHandler = attackHandler;
-        }
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Vector3 mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 _attackHandler.Attack(mousePosition, maxDistanceForAttack, GetComponent<Character>());
             }
+        }
+
+        public void Inject(ICharacterAttackHandler attackHandler)
+        {
+            _attackHandler = attackHandler;
         }
     }
 }

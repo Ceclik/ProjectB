@@ -8,10 +8,10 @@ namespace Services.BaseEntityServices
         public Entity[] SpawnEntities(GameObject entityToSpawn, int entitiesCount, Transform entitiesParent,
             Vector3 nestPosition, float distanceFromNest)
         {
-            Entity[] spawnedEntities = new Entity[entitiesCount];
-            for (int i = 0; i < entitiesCount; i++)
+            var spawnedEntities = new Entity[entitiesCount];
+            for (var i = 0; i < entitiesCount; i++)
             {
-                Vector3 newEntityPosition = new Vector3(
+                var newEntityPosition = new Vector3(
                     Random.Range(nestPosition.x - distanceFromNest, nestPosition.x + distanceFromNest),
                     Random.Range(nestPosition.y - 1.5f, nestPosition.y + distanceFromNest), nestPosition.z);
                 spawnedEntities[i] = Instantiate(entityToSpawn, newEntityPosition, Quaternion.identity, entitiesParent)

@@ -7,23 +7,25 @@ namespace Services.CharacterServices.CharacterStatsScripts
     public class StaminaHandlerService : MonoBehaviour, IStaminaHandler
     {
         private CharacterStaminaHandler _characterStamina;
-
-        private float _lastStaminaDecreaseTimer;
         private bool _isDecreasing;
         private bool _isIncreasing;
+
+        private float _lastStaminaDecreaseTimer;
+
+        private void Start()
+        {
+            _characterStamina =
+                GameObject.FindGameObjectWithTag("Player")
+                    .GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
+        }
 
         private void Update()
         {
             if (_isDecreasing)
                 _lastStaminaDecreaseTimer += Time.deltaTime;
-            
-            if(_lastStaminaDecreaseTimer >= _characterStamina.StartStaminaIncreasingDelay)
-                IncreaseStamina(_characterStamina.IncreasingStaminaValuePerSecond / 50);
-        }
 
-        private void Start()
-        {
-            _characterStamina = GameObject.Find("Character").GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
+            if (_lastStaminaDecreaseTimer >= _characterStamina.StartStaminaIncreasingDelay)
+                IncreaseStamina(_characterStamina.IncreasingStaminaValuePerSecond / 50);
         }
 
         public void UpdateStaminaBar()
@@ -38,6 +40,16 @@ namespace Services.CharacterServices.CharacterStatsScripts
             StartCoroutine(StaminaIncreaser(increasingValue / 50));
         }
 
+        public void DecreaseStamina(float decreasingValue)
+        {
+            _isIncreasing = false;
+            if (!_isDecreasing) _isDecreasing = true;
+            _lastStaminaDecreaseTimer = 0;
+            _characterStamina.Stamina -= decreasingValue;
+            Debug.Log($"Current stamina value: {_characterStamina.Stamina}");
+            UpdateStaminaBar();
+        }
+
         private IEnumerator StaminaIncreaser(float increasingValue)
         {
             while (_isIncreasing && _characterStamina.Stamina < 100)
@@ -47,16 +59,6 @@ namespace Services.CharacterServices.CharacterStatsScripts
                 Debug.Log($"Current stamina value: {_characterStamina.Stamina}");
                 UpdateStaminaBar();
             }
-        }
-
-        public void DecreaseStamina(float decreasingValue)
-        {
-            _isIncreasing = false;
-            if (!_isDecreasing) _isDecreasing = true;
-            _lastStaminaDecreaseTimer = 0;
-            _characterStamina.Stamina -= decreasingValue;
-            Debug.Log($"Current stamina value: {_characterStamina.Stamina}");
-            UpdateStaminaBar();
         }
     }
 }

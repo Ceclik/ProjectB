@@ -1,4 +1,3 @@
-using System;
 using ComponentScripts.Items;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
@@ -7,27 +6,13 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 {
     public class ItemsPicker : MonoBehaviour
     {
-        private ActionTextHandler _textHandler;
-        private IPutterToInventory _putterToInventory;
         private Item _involvedItem;
-        
-        public void Inject(IPutterToInventory putterToInventory)
-        {
-            _putterToInventory = putterToInventory;
-        }
+        private IPutterToInventory _putterToInventory;
+        private ActionTextHandler _textHandler;
 
         private void Start()
         {
             _textHandler = GetComponent<ActionTextHandler>();
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out Item droppedItem))
-            {
-                _involvedItem = droppedItem;
-                _textHandler.ActionText.ShowActionText("Press 'f' to pick object", _textHandler.ActionTextElement);
-            }
         }
 
         private void Update()
@@ -39,6 +24,15 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             }
         }
 
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.TryGetComponent(out Item droppedItem))
+            {
+                _involvedItem = droppedItem;
+                _textHandler.ActionText.ShowActionText("Press 'f' to pick object", _textHandler.ActionTextElement);
+            }
+        }
+
 
         private void OnTriggerExit2D(Collider2D other)
         {
@@ -47,6 +41,11 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
                 _involvedItem = null;
                 _textHandler.ActionText.HideActionText(_textHandler.ActionTextElement);
             }
+        }
+
+        public void Inject(IPutterToInventory putterToInventory)
+        {
+            _putterToInventory = putterToInventory;
         }
     }
 }

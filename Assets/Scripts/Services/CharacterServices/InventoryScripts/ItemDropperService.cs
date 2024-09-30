@@ -8,32 +8,30 @@ namespace Services.CharacterServices.InventoryScripts
 {
     public class ItemDropperService : MonoBehaviour, IItemsDropper
     {
-        private ItemsSpawner _itemsSpawner;
         private Transform _itemsParent;
+        private ItemsSpawner _itemsSpawner;
 
         private void Start()
         {
-            _itemsSpawner = GameObject.Find("ItemsSpawner").GetComponent<ItemsSpawner>();
-            _itemsParent = GameObject.Find("Items").transform;
+            _itemsSpawner = GameObject.FindGameObjectWithTag("ItemsSpawner").GetComponent<ItemsSpawner>();
+            _itemsParent = GameObject.FindGameObjectWithTag("ItemsParent").transform;
         }
 
         public void DropItem(ItemData newItem, Vector3 characterPosition)
         {
-            Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(characterPosition, 0.2f);
+            var nearbyObjects = Physics2D.OverlapCircleAll(characterPosition, 0.2f);
 
             foreach (var objects in nearbyObjects)
-            {
                 if (objects.TryGetComponent(out Item droppedItem))
                     if (droppedItem.Name == newItem.Name &&
-                        (droppedItem.Amount + newItem.Amount <= droppedItem.MaxAvailableAmount))
+                        droppedItem.Amount + newItem.Amount <= droppedItem.MaxAvailableAmount)
                     {
                         droppedItem.Amount += newItem.Amount;
                         droppedItem.GetComponentInChildren<TextMeshProUGUI>().text = droppedItem.Amount.ToString();
                         return;
                     }
-            }
-            
-            Item spawnedItem =
+
+            var spawnedItem =
                 Instantiate(_itemsSpawner.GetItemPrefab(newItem), characterPosition, Quaternion.identity, _itemsParent)
                     .GetComponent<Item>();
             spawnedItem.Amount = newItem.Amount;

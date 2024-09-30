@@ -5,8 +5,8 @@ namespace ComponentScripts.Items
 {
     public class AmountTextHandler : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI amountText;
         private Canvas _itemCanvas;
-        [SerializeField]private TextMeshProUGUI amountText;
         private Item _measuringItem;
 
         private void Start()

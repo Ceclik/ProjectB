@@ -3,14 +3,8 @@ using UnityEngine;
 
 namespace DataClasses
 {
-    public  class ItemData
+    public class ItemData
     {
-        public Sprite ItemIcon { get; private set; }
-        public string Name { get; protected set; }
-        public int MaxAvailableAmount { get; protected set; }
-        public int Amount { get; set; }
-        
-
         public ItemData(Item otherItem)
         {
             ItemIcon = otherItem.ItemIcon;
@@ -18,7 +12,7 @@ namespace DataClasses
             MaxAvailableAmount = otherItem.MaxAvailableAmount;
             Amount = otherItem.Amount;
         }
-        
+
         public ItemData(ItemData otherItem)
         {
             ItemIcon = otherItem.ItemIcon;
@@ -26,7 +20,14 @@ namespace DataClasses
             MaxAvailableAmount = otherItem.MaxAvailableAmount;
             Amount = otherItem.Amount;
         }
-        
-        public ItemData(){}
+
+        public ItemData()
+        {
+        }
+
+        public Sprite ItemIcon { get; }
+        public string Name { get; protected set; }
+        public int MaxAvailableAmount { get; protected set; }
+        public int Amount { get; set; }
     }
 }

@@ -8,31 +8,34 @@ namespace Services.CharacterServices.MovingScripts
 {
     public class PlayerMoverService : MonoBehaviour, IPlayerMover
     {
-        private IStaminaHandler _staminaHandler;
-        private float _tugTimer;
-        private CharacterStaminaHandler _staminaValues;
+        private CameraCharacterFollower _camera;
 
         private Rigidbody2D _rigidbody;
-        private CameraCharacterFollower _camera;
+        private IStaminaHandler _staminaHandler;
+        private CharacterStaminaHandler _staminaValues;
+        private float _tugTimer;
 
         private void Start()
         {
             _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraCharacterFollower>();
-            _staminaValues = GameObject.Find("Character").GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
+            _staminaValues =
+                GameObject.FindGameObjectWithTag("Player")
+                    .GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
             _rigidbody = _staminaValues.GetComponent<Rigidbody2D>();
+        }
+
+        private void Update()
+        {
+            _tugTimer += Time.deltaTime;
         }
 
         public void Inject(IStaminaHandler staminaHandler)
         {
             _staminaHandler = staminaHandler;
         }
-        
-        private void Update()
-        {
-            _tugTimer += Time.deltaTime;
-        }
 
-        public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay, float staminaDecreaseValue)
+        public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay,
+            float staminaDecreaseValue)
         {
             if (_tugTimer > tugDelay && _staminaValues.Stamina - staminaDecreaseValue >= 0)
             {
@@ -40,35 +43,36 @@ namespace Services.CharacterServices.MovingScripts
                 _tugTimer = 0;
                 if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
                 {
-                    Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
+                    var targetPosition = new Vector3(characterTransform.position.x - 3,
                         characterTransform.position.y + 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
                 else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
                 {
-                    Vector3 targetPosition = new Vector3(characterTransform.position.x - 3,
+                    var targetPosition = new Vector3(characterTransform.position.x - 3,
                         characterTransform.position.y - 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
                 else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
                 {
-                    Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
+                    var targetPosition = new Vector3(characterTransform.position.x + 3,
                         characterTransform.position.y + 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
                 else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
                 {
-                    Vector3 targetPosition = new Vector3(characterTransform.position.x + 3,
+                    var targetPosition = new Vector3(characterTransform.position.x + 3,
                         characterTransform.position.y - 3, characterTransform.position.z);
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
             }
         }
 
-        public void Move(KeyCode key, float movingSpeed, Transform characterTransform, float runSpeed, float staminaDecreaseValue)
+        public void Move(KeyCode key, float movingSpeed, Transform characterTransform, float runSpeed,
+            float staminaDecreaseValue)
         {
             Vector3 movement;
-            switch(key)
+            switch (key)
             {
                 case KeyCode.W:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
@@ -82,6 +86,7 @@ namespace Services.CharacterServices.MovingScripts
                         movement = new Vector3(0.0f, Time.fixedDeltaTime * movingSpeed, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     }
+
                     break;
                 case KeyCode.A:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
@@ -95,6 +100,7 @@ namespace Services.CharacterServices.MovingScripts
                         movement = new Vector3(-Time.fixedDeltaTime * movingSpeed, 0.0f, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     }
+
                     break;
                 case KeyCode.S:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
@@ -108,6 +114,7 @@ namespace Services.CharacterServices.MovingScripts
                         movement = new Vector3(0.0f, -Time.fixedDeltaTime * movingSpeed, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     }
+
                     break;
                 case KeyCode.D:
                     if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
@@ -121,11 +128,13 @@ namespace Services.CharacterServices.MovingScripts
                         movement = new Vector3(Time.fixedDeltaTime * movingSpeed, 0.0f, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     }
+
                     break;
             }
         }
 
-        public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed, float staminaDecreaseValue)
+        public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed,
+            float staminaDecreaseValue)
         {
             Vector3 movement;
             if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
@@ -144,8 +153,6 @@ namespace Services.CharacterServices.MovingScripts
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                 }
-
-                
             }
             else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
             {
@@ -199,7 +206,8 @@ namespace Services.CharacterServices.MovingScripts
             }
         }
 
-        public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed, float tugDelay, float staminaDecreaseValue)
+        public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed, float tugDelay,
+            float staminaDecreaseValue)
         {
             if (_tugTimer > tugDelay && _staminaValues.Stamina - staminaDecreaseValue >= 0)
             {
@@ -241,6 +249,7 @@ namespace Services.CharacterServices.MovingScripts
                 characterTransform.position =
                     Vector3.MoveTowards(characterTransform.position, targetPosition, Time.deltaTime * tugSpeed);
             }
+
             _camera.EndDash();
         }
     }

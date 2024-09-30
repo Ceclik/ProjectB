@@ -9,18 +9,16 @@ namespace Services.CharacterServices.InventoryScripts
     {
         public void UpdateUI(Inventory inventory, RectTransform[] panels)
         {
-            for (int i = 0; i < panels.Length; i++)
-            {
+            for (var i = 0; i < panels.Length; i++)
                 if (inventory.Items[i] != null)
                 {
-                    Image itemImage = panels[i].GetComponentInChildren<Image>();
+                    var itemImage = panels[i].GetComponentInChildren<Image>();
                     itemImage.sprite = inventory.Items[i].ItemIcon;
-                    TextMeshProUGUI amountText = panels[i].GetComponentInChildren<TextMeshProUGUI>();
-                    if(!amountText.isActiveAndEnabled)
+                    var amountText = panels[i].GetComponentInChildren<TextMeshProUGUI>();
+                    if (!amountText.isActiveAndEnabled)
                         amountText.enabled = true;
                     amountText.text = inventory.Items[i].Amount.ToString();
                 }
-            }
         }
     }
 }

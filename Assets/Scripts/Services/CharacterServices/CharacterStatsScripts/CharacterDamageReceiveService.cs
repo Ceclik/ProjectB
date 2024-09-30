@@ -1,6 +1,5 @@
 using ComponentScripts;
 using ComponentScripts.Entities.Enemies;
-using Services.BaseEntityServices;
 
 namespace Services.CharacterServices.CharacterStatsScripts
 {
@@ -12,7 +11,7 @@ namespace Services.CharacterServices.CharacterStatsScripts
         {
             _characterHealthHandler = characterHealthHandler;
         }
-        
+
         public void ReceiveDamage(ActiveEntity hitEntity)
         {
             if (hitEntity is Enemy)

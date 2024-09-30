@@ -1,3 +1,4 @@
+using System;
 using ComponentScripts;
 using ComponentScripts.Entities.Character;
 using UnityEngine;
@@ -8,17 +9,15 @@ namespace Services.CharacterServices.CharacterStatsScripts
     public class CharacterHealthHandlerService : MonoBehaviour, ICharacterHealthHandler
     {
         private Character _character;
-        //private CharacterHealthHandler _healthHandler;
 
         private void Start()
         {
-            _character = GameObject.Find("Character").GetComponent<Character>();
-            //_healthHandler = _character.GetComponent<CharacterHealthHandler>();
+            _character = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
         }
-        
+
         public void IncreaseHealth(int increaseValue)
         {
-            throw new System.NotImplementedException();//////////////
+            throw new NotImplementedException(); //////////////
         }
 
         public void DecreaseHealthValue(int decreaseValue)
@@ -34,7 +33,7 @@ namespace Services.CharacterServices.CharacterStatsScripts
         public void UpdateHealthBar(Image healthBar)
         {
             Debug.Log($"Actual character's health: {_character.ActualHealth}");
-            healthBar.fillAmount = ((float)_character.ActualHealth * 100 / _character.ActualMaxHealth) / 100;
+            healthBar.fillAmount = (float)_character.ActualHealth * 100 / _character.ActualMaxHealth / 100;
         }
     }
 }

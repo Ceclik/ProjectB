@@ -7,7 +7,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         [SerializeField] private GameObject inventoryBackground;
 
         public GameObject Inventory => inventoryBackground;
-        
+
 
         private void Start()
         {
@@ -18,7 +18,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         {
             if (Input.GetKeyDown(KeyCode.E) && !inventoryBackground.activeSelf)
                 inventoryBackground.SetActive(true);
-            else if((Input.GetKeyDown(KeyCode.E) || Input.GetKey(KeyCode.Escape)) && inventoryBackground.activeSelf)
+            else if ((Input.GetKeyDown(KeyCode.E) || Input.GetKey(KeyCode.Escape)) && inventoryBackground.activeSelf)
                 inventoryBackground.SetActive(false);
         }
     }

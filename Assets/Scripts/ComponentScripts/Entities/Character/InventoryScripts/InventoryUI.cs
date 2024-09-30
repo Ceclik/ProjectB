@@ -1,7 +1,6 @@
 using ComponentScripts.Items;
 using Injectors;
 using Services.CharacterServices.InventoryScripts;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,23 +15,18 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         [Space(10)] [Header("Hand panels")] [SerializeField]
         private RectTransform leftHand;
 
-        private IInventoryUIHandler _uiHandler;
-
         [SerializeField] private RectTransform rightHand;
-        
-        private RectTransform[] panels;
         private Injector _injector;
 
-        public void Inject(IInventoryUIHandler uiHandler)
-        {
-            _uiHandler = uiHandler;
-        }
-        
+        private IInventoryUIHandler _uiHandler;
+
+        private RectTransform[] panels;
+
         private void Awake()
         {
-            _injector = GameObject.Find("Injector").GetComponent<Injector>();
+            _injector = GameObject.FindGameObjectWithTag("Injector").GetComponent<Injector>();
             panels = new RectTransform[inventory.AmountOfSlots];
-            for (int i = 0; i < inventory.AmountOfSlots; i++)
+            for (var i = 0; i < inventory.AmountOfSlots; i++)
             {
                 panels[i] = Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
                     .GetComponent<RectTransform>();
@@ -43,7 +37,12 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         private void OnEnable()
         {
-           _uiHandler.UpdateUI(inventory, panels);
+            _uiHandler.UpdateUI(inventory, panels);
+        }
+
+        public void Inject(IInventoryUIHandler uiHandler)
+        {
+            _uiHandler = uiHandler;
         }
     }
 }

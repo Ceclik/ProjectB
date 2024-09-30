@@ -7,11 +7,16 @@ namespace ComponentScripts.Entities.Character
     [RequireComponent(typeof(Character))]
     public class CharacterHealthHandler : MonoBehaviour
     {
-        private ICharacterHealthHandler _healthService;
-        private ICharacterDamageReceiver _characterDamageReceiver;
-        private Character _character;
-
         [SerializeField] private Image healthBar;
+        private Character _character;
+        private ICharacterDamageReceiver _characterDamageReceiver;
+        private ICharacterHealthHandler _healthService;
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            _characterDamageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>());
+            _healthService.UpdateHealthBar(healthBar);
+        }
 
         public void Inject(ICharacterHealthHandler healthHandler, ICharacterDamageReceiver characterDamageReceiver)
         {
@@ -22,12 +27,6 @@ namespace ComponentScripts.Entities.Character
         private void IncreaseHealthForBonusUse()
         {
             //TODO if player use bonus _healthService.IncreaseHealth(); check in Update();
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            _characterDamageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>());
-            _healthService.UpdateHealthBar(healthBar);
         }
     }
 }
