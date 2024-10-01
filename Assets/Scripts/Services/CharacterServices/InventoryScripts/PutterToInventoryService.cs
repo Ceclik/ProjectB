@@ -1,6 +1,8 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
 using ComponentScripts.Items.Food;
+using ComponentScripts.Items.Tools;
+using ComponentScripts.Items.Weapons;
 using DataClasses;
 using UnityEngine;
 
@@ -118,6 +120,10 @@ namespace Services.CharacterServices.InventoryScripts
         {
             if (receivedItem is Food)
                 return new FoodData((Food)receivedItem);
+            if (receivedItem is Weapon)
+                return new WeaponData((Weapon)receivedItem);
+            if (receivedItem is Tool)
+                return new ToolData((Tool)receivedItem);
             return null;
         }
 

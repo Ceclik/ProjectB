@@ -1,5 +1,7 @@
 using ComponentScripts;
 using ComponentScripts.Items;
+using ComponentScripts.Items.Tools;
+using ComponentScripts.Items.Weapons;
 using DataClasses;
 using TMPro;
 using UnityEngine;
@@ -35,7 +37,8 @@ namespace Services.CharacterServices.InventoryScripts
                 Instantiate(_itemsSpawner.GetItemPrefab(newItem), characterPosition, Quaternion.identity, _itemsParent)
                     .GetComponent<Item>();
             spawnedItem.Amount = newItem.Amount;
-            spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = newItem.Amount.ToString();
+            if(!(spawnedItem is Weapon) && !(spawnedItem is Tool))
+                spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = newItem.Amount.ToString();
         }
     }
 }

@@ -3,7 +3,6 @@ using DataClasses;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace ComponentScripts.Items
@@ -29,6 +28,17 @@ namespace ComponentScripts.Items
                 HandleDropping();
             if(Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
                 PutToInventory();
+        }
+        
+        private void HandleDropping()
+        {
+            if (Inventory.MainHand != null)
+            {
+                Debug.Log("Panel index of dropping item: main hand");
+                ItemsDropper.DropItem(Inventory.MainHand, Inventory.transform.position);
+                Inventory.MainHand = null;
+                CleanItemPanel();
+            }
         }
 
         private void PutToInventory()

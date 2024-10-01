@@ -1,7 +1,4 @@
-using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
-using ComponentScripts.Items.Tools;
-using ComponentScripts.Items.Weapons;
 using DataClasses;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
@@ -11,7 +8,7 @@ using UnityEngine.UI;
 
 namespace ComponentScripts.Items
 {
-    public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         protected TextMeshProUGUI AmountText;
         protected Inventory Inventory;
@@ -27,15 +24,15 @@ namespace ComponentScripts.Items
 
         private void Start()
         {
-            _secondHandPanel = GameObject.Find("MainHandPanel").GetComponent<SecondHandPanel>();
-            _mainHandPanel = GameObject.Find("SecondHandPanel").GetComponent<MainHandPanel>();
+            _secondHandPanel = GameObject.Find("SecondHandPanel").GetComponent<SecondHandPanel>();
+            _mainHandPanel = GameObject.Find("MainHandPanel").GetComponent<MainHandPanel>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             ItemIcon = GetComponentInChildren<Image>();
             AmountText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        protected void HandleDropping()
+        private void HandleDropping()
         {
             if (Inventory.Items[PanelIndex] != null)
             {
@@ -72,17 +69,24 @@ namespace ComponentScripts.Items
             }
         }
 
+        private void PutToSecondHand()
+        {
+            _secondHandPanel.PanelIndex = PanelIndex;
+            _secondHandPanel.ItemIcon.sprite = ItemIcon.sprite;
+            _secondHandPanel.AmountText.text = AmountText.text;
+            CleanItemPanel();
+            Inventory.SecondHand = Inventory.Items[PanelIndex];
+            Inventory.Items[PanelIndex] = null;
+        }
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
                 HandleDropping();
             if(Input.GetKeyDown(KeyCode.Mouse0) && IsPointerOnPanel)
                 PutToMainHand();
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            throw new NotImplementedException();
+            if(Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
+                PutToSecondHand();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -101,7 +105,7 @@ namespace ComponentScripts.Items
             ItemsDropper = dropper;
         }
 
-        public void CleanItemPanel()
+        protected void CleanItemPanel()
         {
             ItemIcon.sprite = null;
             AmountText.enabled = false;
