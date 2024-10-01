@@ -9,8 +9,11 @@ namespace ComponentScripts
         [SerializeField] private GameObject potato;
         [SerializeField] private GameObject meat;
 
-        [Space(15)] [Header("Weapons")] [SerializeField]
+        [Space(15)] [Header("Tools")] [SerializeField]
         private GameObject axe;
+
+        [Space(15)] [Header("Ingredients")] [SerializeField]
+        private GameObject wood;
 
         public GameObject GetItemPrefab(ItemData requiredItem)
         {
@@ -19,6 +22,7 @@ namespace ComponentScripts
                 case "Potato": return potato;
                 case "Meat": return meat;
                 case "Axe": return axe;
+                case "Wood": return wood;
             }
 
             return null;

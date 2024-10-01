@@ -71,12 +71,15 @@ namespace ComponentScripts.Items
 
         private void PutToSecondHand()
         {
-            _secondHandPanel.PanelIndex = PanelIndex;
-            _secondHandPanel.ItemIcon.sprite = ItemIcon.sprite;
-            _secondHandPanel.AmountText.text = AmountText.text;
-            CleanItemPanel();
-            Inventory.SecondHand = Inventory.Items[PanelIndex];
-            Inventory.Items[PanelIndex] = null;
+            if (Inventory.Items[PanelIndex] is ToolData)
+            {
+                _secondHandPanel.PanelIndex = PanelIndex;
+                _secondHandPanel.ItemIcon.sprite = ItemIcon.sprite;
+                _secondHandPanel.AmountText.text = AmountText.text;
+                CleanItemPanel();
+                Inventory.SecondHand = Inventory.Items[PanelIndex];
+                Inventory.Items[PanelIndex] = null;
+            }
         }
 
         private void Update()

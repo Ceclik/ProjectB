@@ -1,6 +1,7 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
 using ComponentScripts.Items.Food;
+using ComponentScripts.Items.Ingredients;
 using ComponentScripts.Items.Tools;
 using ComponentScripts.Items.Weapons;
 using DataClasses;
@@ -124,6 +125,8 @@ namespace Services.CharacterServices.InventoryScripts
                 return new WeaponData((Weapon)receivedItem);
             if (receivedItem is Tool)
                 return new ToolData((Tool)receivedItem);
+            if (receivedItem is Ingredient)
+                return new IngredientData((Ingredient)receivedItem);
             return null;
         }
 
