@@ -1,6 +1,6 @@
 namespace ComponentScripts.Entities.ResourceObjects
 {
-    public class Tree : ResourceObject
+    public class Rock : ResourceObject
     {
         
     }

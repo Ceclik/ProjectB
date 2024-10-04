@@ -7,8 +7,8 @@ namespace ComponentScripts.Entities
     {
         [SerializeField] private Image healthBarBackground;
         [SerializeField] private Image healthBar;
-        [SerializeField] private float healthBarFadeDelay;
-        [SerializeField] private float healthBarFadeDuration;
+        [SerializeField] private float healthBarFadeDelay = 3;
+        [SerializeField] private float healthBarFadeDuration = 1;
 
         private float _fadeTimer;
         private float _fadingTimer;
