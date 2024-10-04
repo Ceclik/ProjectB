@@ -1,3 +1,4 @@
+using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
 using Services.CharacterServices.InventoryScripts;
@@ -99,6 +100,11 @@ namespace ComponentScripts.Items
         }
 
         public void OnPointerExit(PointerEventData eventData)
+        {
+            IsPointerOnPanel = false;
+        }
+
+        private void OnDisable()
         {
             IsPointerOnPanel = false;
         }

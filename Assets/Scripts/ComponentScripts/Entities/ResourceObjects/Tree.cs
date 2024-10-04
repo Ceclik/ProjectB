@@ -13,7 +13,7 @@ namespace ComponentScripts.Entities.ResourceObjects
             DroppingItems = new ItemData[droppingItems.Count];
             for (int i = 0; i < droppingItems.Count; i++)
             { 
-                Debug.Log($"Tree dropping item is: {droppingItems[i].GetComponent<Item>().Name}");
+                //Debug.Log($"Tree dropping item is: {droppingItems[i].GetComponent<Item>().Name}");
                 DroppingItems[i] = new ItemData(droppingItems[i].GetComponent<Item>());
                 
             }

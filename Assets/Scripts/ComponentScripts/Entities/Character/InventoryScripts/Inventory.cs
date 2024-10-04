@@ -30,12 +30,15 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         private void WatchInventory()
         {
             var emptyCount = 0;
-            foreach (var item in Items)
-                if (item != null)
+            for (int i = 0; i < Items.Length; i++)
+            {
+                if (Items[i] != null)
                     Debug.Log(
-                        $"Name: {item.Name}, Amount: {item.Amount}, maxAmount: {item.MaxAvailableAmount}");
-                else
-                    emptyCount++;
+                        $"Name: {Items[i].Name}, Amount: {Items[i].Amount}, maxAmount: {Items[i].MaxAvailableAmount}," +
+                        $" index: {i}");
+                else emptyCount++;
+            }
+
             if (emptyCount == Items.Length)
                 Debug.Log("Empty!");
         }
