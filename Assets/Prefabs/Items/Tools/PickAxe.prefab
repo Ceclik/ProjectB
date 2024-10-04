@@ -177,4 +177,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: b389bd7f7d3577639878878571fae19d, type: 3}
   amount: 1
   maxAvailableAmount: 1
-  itemName: PickAxe
+  itemName: Pickaxe

@@ -1,8 +1,4 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
-using ComponentScripts.Entities.ResourceObjects;
-using ComponentScripts.Items.Tools;
-using DataClasses;
-using Services.CharacterServices.InventoryScripts;
 using Services.CharacterServices.ResourcesExtractionScripts;
 using UnityEngine;
 

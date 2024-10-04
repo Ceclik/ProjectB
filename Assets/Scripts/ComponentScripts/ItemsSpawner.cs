@@ -11,6 +11,7 @@ namespace ComponentScripts
 
         [Space(15)] [Header("Tools")] [SerializeField]
         private GameObject axe;
+        [SerializeField] private GameObject pickaxe;
 
         [Space(15)] [Header("Ingredients")] [SerializeField]
         private GameObject wood;
@@ -25,6 +26,7 @@ namespace ComponentScripts
                 case "Axe": return axe;
                 case "Wood": return wood;
                 case "RockItem": return rockItem;
+                case "Pickaxe": return pickaxe;
             }
 
             return null;

@@ -1,4 +1,3 @@
-using System;
 using ComponentScripts.Entities.ResourceObjects;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;

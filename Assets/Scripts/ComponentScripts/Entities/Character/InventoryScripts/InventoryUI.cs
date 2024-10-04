@@ -2,7 +2,6 @@ using ComponentScripts.Items;
 using Injectors;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ComponentScripts.Entities.Character.InventoryScripts

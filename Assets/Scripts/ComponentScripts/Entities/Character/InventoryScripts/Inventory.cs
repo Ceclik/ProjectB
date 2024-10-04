@@ -40,7 +40,15 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             }
 
             if (emptyCount == Items.Length)
-                Debug.Log("Empty!");
+                Debug.Log("Inventory is empty!");
+
+            Debug.Log(MainHand == null
+                ? "Main hand is empty"
+                : $"Main hand item\nName: {MainHand.Name}, Amount: {MainHand.Amount}, maxAmount: {MainHand.MaxAvailableAmount}");
+            
+            Debug.Log(SecondHand == null
+                ? "Second hand is empty"
+                : $"Second hand item\nName: {SecondHand.Name}, Amount: {SecondHand.Amount}, maxAmount: {SecondHand.MaxAvailableAmount}");
         }
     }
 }

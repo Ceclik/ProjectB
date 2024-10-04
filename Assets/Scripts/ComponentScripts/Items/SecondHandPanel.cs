@@ -41,11 +41,13 @@ namespace ComponentScripts.Items
         
         private void PutToInventory()
         {
-            int itemIndex = _putterToInventory.PutToInventory(Inventory.MainHand, Inventory);
-            _panelsHandler.Panels[itemIndex].GetComponentInChildren<Image>().sprite = Inventory.MainHand.ItemIcon;
+            int itemIndex = _putterToInventory.PutToInventory(Inventory.SecondHand, Inventory);
+            _panelsHandler.Panels[itemIndex].GetComponentInChildren<Image>().sprite = Inventory.SecondHand.ItemIcon;
             _panelsHandler.Panels[itemIndex].GetComponentInChildren<TextMeshProUGUI>().text =
-                Inventory.MainHand.Amount.ToString();
+                Inventory.SecondHand.Amount.ToString();
             CleanItemPanel();
+            Inventory.SecondHand = null;
+            PanelIndex = -1;
         }
     }
 }

@@ -59,7 +59,8 @@ namespace ComponentScripts.Items
 
         private void PutToMainHand()
         {
-            if (Inventory.Items[PanelIndex] is ToolData || Inventory.Items[PanelIndex] is WeaponData)
+            if ((Inventory.Items[PanelIndex] is ToolData || Inventory.Items[PanelIndex] is WeaponData) &&
+                Inventory.MainHand == null)
             {
                 _mainHandPanel.PanelIndex = PanelIndex;
                 _mainHandPanel.ItemIcon.sprite = ItemIcon.sprite;
@@ -72,7 +73,7 @@ namespace ComponentScripts.Items
 
         private void PutToSecondHand()
         {
-            if (Inventory.Items[PanelIndex] is ToolData)
+            if (Inventory.Items[PanelIndex] is ToolData && Inventory.SecondHand == null)
             {
                 _secondHandPanel.PanelIndex = PanelIndex;
                 _secondHandPanel.ItemIcon.sprite = ItemIcon.sprite;

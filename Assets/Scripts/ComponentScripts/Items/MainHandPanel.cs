@@ -48,6 +48,7 @@ namespace ComponentScripts.Items
             _panelsHandler.Panels[itemIndex].GetComponentInChildren<TextMeshProUGUI>().text =
                 Inventory.MainHand.Amount.ToString();
             CleanItemPanel();
+            PanelIndex = -1;
             Inventory.MainHand = null;
         }
         
