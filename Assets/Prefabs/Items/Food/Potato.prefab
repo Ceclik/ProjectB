@@ -241,6 +241,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 1f71c67aee5bcbcc69ca9c81e1811a70, type: 3}
   amount: 8
+  maxAvailableAmount: 10
+  itemName: Potato
   amountOfRestoringHungerUnits: 0
 --- !u!70 &4777292282235830020
 CapsuleCollider2D:

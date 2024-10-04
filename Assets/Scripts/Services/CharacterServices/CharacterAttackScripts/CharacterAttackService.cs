@@ -16,7 +16,7 @@ namespace Services.CharacterServices.CharacterAttackScripts
                     enemy.ReceiveCharacterAttack(attackCharacter);
         }
 
-        private float DistanceCounter(Vector3 characterPosition, Vector3 enemyPosition)
+        public float DistanceCounter(Vector3 characterPosition, Vector3 enemyPosition)
         {
             var xDelta = Mathf.Abs(characterPosition.x - enemyPosition.x);
             var yDelta = Mathf.Abs(characterPosition.y - enemyPosition.y);

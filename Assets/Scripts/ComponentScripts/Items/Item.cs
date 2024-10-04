@@ -6,9 +6,11 @@ namespace ComponentScripts.Items
     {
         [SerializeField] protected Sprite itemIcon;
         [SerializeField] protected int amount;
+        [SerializeField] protected int maxAvailableAmount;
+        [SerializeField] protected string itemName;
 
-        public string Name { get; protected set; }
-        public int MaxAvailableAmount { get; protected set; }
+        public string Name => itemName;
+        public int MaxAvailableAmount => maxAvailableAmount;
 
         public int Amount
         {

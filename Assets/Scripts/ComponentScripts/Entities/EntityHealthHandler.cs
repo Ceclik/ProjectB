@@ -12,6 +12,7 @@ namespace ComponentScripts.Entities
 
         private void Start()
         {
+            _entityDamageReceiver = new EntityDamageReceiveService();
             _healthBarHandler = GetComponent<EntityHealthBarHandler>();
             _selfEntity = GetComponent<Entity>();
         }

@@ -6,7 +6,6 @@ namespace ComponentScripts.Entities.Character
     [RequireComponent(typeof(Character))]
     public class CharacterAttackHandler : MonoBehaviour
     {
-        [SerializeField] private Transform enemiesParent;
         [SerializeField] private float maxDistanceForAttack;
 
         private ICharacterAttackHandler _attackHandler;

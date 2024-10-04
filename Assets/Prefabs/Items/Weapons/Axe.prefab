@@ -176,3 +176,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: e7b2943446b64defaaa02d67ff8a682e, type: 3}
   amount: 1
+  maxAvailableAmount: 1
+  itemName: Axe
