@@ -6,7 +6,6 @@ namespace DataClasses
     {
         public ToolData(Tool otherTool) : base(otherTool)
         {
-            
         }
     }
 }

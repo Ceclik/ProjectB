@@ -7,7 +7,6 @@ namespace DataClasses
     {
         public IngredientData(Ingredient otherIngredient) : base(otherIngredient)
         {
-            
         }
     }
 }

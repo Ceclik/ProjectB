@@ -8,8 +8,9 @@ namespace ComponentScripts.Items
 {
     public class SecondHandPanel : ItemPanel
     {
-        private IPutterToInventory _putterToInventory;
         private InventoryUI _panelsHandler;
+        private IPutterToInventory _putterToInventory;
+
         private void Start()
         {
             _panelsHandler = GetComponentInParent<InventoryUI>();
@@ -19,15 +20,15 @@ namespace ComponentScripts.Items
             ItemIcon = GetComponentInChildren<Image>();
             AmountText = GetComponentInChildren<TextMeshProUGUI>();
         }
-        
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
                 HandleDropping();
-            if(Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
                 PutToInventory();
         }
-        
+
         private void HandleDropping()
         {
             if (Inventory.SecondHand != null)
@@ -38,10 +39,10 @@ namespace ComponentScripts.Items
                 CleanItemPanel();
             }
         }
-        
+
         private void PutToInventory()
         {
-            int itemIndex = _putterToInventory.PutToInventory(Inventory.SecondHand, Inventory);
+            var itemIndex = _putterToInventory.PutToInventory(Inventory.SecondHand, Inventory);
             _panelsHandler.Panels[itemIndex].GetComponentInChildren<Image>().sprite = Inventory.SecondHand.ItemIcon;
             _panelsHandler.Panels[itemIndex].GetComponentInChildren<TextMeshProUGUI>().text =
                 Inventory.SecondHand.Amount.ToString();

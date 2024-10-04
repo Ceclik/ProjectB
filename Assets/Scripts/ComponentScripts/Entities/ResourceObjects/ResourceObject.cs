@@ -7,17 +7,14 @@ namespace ComponentScripts.Entities.ResourceObjects
 {
     public class ResourceObject : Entity
     {
-        public ItemData[] DroppingItems { get; protected set; }
-        
         [SerializeField] private List<GameObject> droppingItems;
+        public ItemData[] DroppingItems { get; protected set; }
+
         private void Awake()
         {
             DroppingItems = new ItemData[droppingItems.Count];
-            for (int i = 0; i < droppingItems.Count; i++)
-            { 
+            for (var i = 0; i < droppingItems.Count; i++)
                 DroppingItems[i] = new ItemData(droppingItems[i].GetComponent<Item>());
-            }
         }
-        
     }
 }

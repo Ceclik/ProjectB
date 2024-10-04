@@ -5,16 +5,18 @@ namespace ComponentScripts
 {
     public class ItemsSpawner : MonoBehaviour
     {
-        [Header("Food")]
-        [SerializeField] private GameObject potato;
+        [Header("Food")] [SerializeField] private GameObject potato;
+
         [SerializeField] private GameObject meat;
 
         [Space(15)] [Header("Tools")] [SerializeField]
         private GameObject axe;
+
         [SerializeField] private GameObject pickaxe;
 
         [Space(15)] [Header("Ingredients")] [SerializeField]
         private GameObject wood;
+
         [SerializeField] private GameObject rockItem;
 
         public GameObject GetItemPrefab(ItemData requiredItem)

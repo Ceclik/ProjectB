@@ -16,32 +16,32 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         private RectTransform mainHand;
 
         [SerializeField] private RectTransform secondHandHand;
-        
+
         private Injector _injector;
 
         private IInventoryUIHandler _uiHandler;
 
-        private RectTransform[] panels;
-        public RectTransform[] Panels => panels;
+        public RectTransform[] Panels { get; private set; }
 
         private void Awake()
         {
             _injector = GameObject.FindGameObjectWithTag("Injector").GetComponent<Injector>();
-            panels = new RectTransform[inventory.AmountOfSlots];
+            Panels = new RectTransform[inventory.AmountOfSlots];
             for (var i = 0; i < inventory.AmountOfSlots; i++)
             {
-                panels[i] = Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
+                Panels[i] = Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
                     .GetComponent<RectTransform>();
-                panels[i].GetComponent<ItemPanel>().PanelIndex = i;
-                _injector.InjectToPanel(panels[i].GetComponent<ItemPanel>());
+                Panels[i].GetComponent<ItemPanel>().PanelIndex = i;
+                _injector.InjectToPanel(Panels[i].GetComponent<ItemPanel>());
             }
+
             _injector.InjectToPanel(mainHand.GetComponent<MainHandPanel>());
             _injector.InjectToPanel(secondHandHand.GetComponent<SecondHandPanel>());
         }
 
         private void OnEnable()
         {
-            _uiHandler.UpdateUI(inventory, panels);
+            _uiHandler.UpdateUI(inventory, Panels);
         }
 
         public void Inject(IInventoryUIHandler uiHandler)

@@ -58,11 +58,10 @@ namespace Services.CharacterServices.InventoryScripts
             Debug.LogError("Inventory is full"); //TODO create UI warning
             return false;
         }
-        
+
         public int PutToInventory(ItemData itemToInventory, Inventory inventory)
         {
-            for (int i = 0; i < inventory.Items.Length; i++)
-            {
+            for (var i = 0; i < inventory.Items.Length; i++)
                 if (inventory.Items[i] != null)
                 {
                     if (inventory.Items[i].Name == itemToInventory.Name &&
@@ -93,8 +92,7 @@ namespace Services.CharacterServices.InventoryScripts
                         return -1;
                     }
                 }
-            }
-                
+
 
             Debug.Log("Creating new field");
             var index = GetEmptySlot(inventory);
@@ -112,7 +110,7 @@ namespace Services.CharacterServices.InventoryScripts
         private void DebugInventoryState(Inventory inventory)
         {
             Debug.Log("Inventory: ");
-            for (int i = 0; i < inventory.Items.Length; i++)
+            for (var i = 0; i < inventory.Items.Length; i++)
                 if (inventory.Items[i] != null)
                     Debug.Log(
                         $"Name: {inventory.Items[i].Name}, Amount: {inventory.Items[i].Amount}, maxAmount: " +

@@ -37,7 +37,7 @@ namespace Services.CharacterServices.InventoryScripts
                 Instantiate(_itemsSpawner.GetItemPrefab(newItem), characterPosition, Quaternion.identity, _itemsParent)
                     .GetComponent<Item>();
             spawnedItem.Amount = newItem.Amount;
-            if(!(spawnedItem is Weapon) && !(spawnedItem is Tool))
+            if (!(spawnedItem is Weapon) && !(spawnedItem is Tool))
                 spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = newItem.Amount.ToString();
         }
     }

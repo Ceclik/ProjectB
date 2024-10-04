@@ -6,8 +6,8 @@ namespace ComponentScripts.Entities.ResourceObjectScripts
 {
     public class ObjectDestroyer : MonoBehaviour
     {
-        private ResourceObject _resource;
         private IItemsDropper _itemsDropper;
+        private ResourceObject _resource;
 
         private void Start()
         {
@@ -21,13 +21,10 @@ namespace ComponentScripts.Entities.ResourceObjectScripts
             if (_resource.ActualHealth <= 0)
                 DropResource();
         }
-        
+
         private void DropResource()
         {
-            foreach (var item in _resource.DroppingItems)
-            {
-                _itemsDropper.DropItem(item, transform.position);
-            }
+            foreach (var item in _resource.DroppingItems) _itemsDropper.DropItem(item, transform.position);
 
             Destroy(gameObject);
         }

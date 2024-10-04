@@ -8,7 +8,7 @@ namespace DataClasses
         {
             AdditionalDamage = otherWeapon.AdditionalDamage;
         }
-        
+
         public int AdditionalDamage { get; private set; }
     }
 }

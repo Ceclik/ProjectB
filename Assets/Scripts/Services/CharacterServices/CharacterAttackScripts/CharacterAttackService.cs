@@ -1,5 +1,6 @@
 using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
+using ComponentScripts.Entities.ResourceObjects;
 using UnityEngine;
 
 namespace Services.CharacterServices.CharacterAttackScripts
@@ -13,7 +14,12 @@ namespace Services.CharacterServices.CharacterAttackScripts
                 if (hit.collider.TryGetComponent(out EntityHealthHandler enemy) &&
                     DistanceCounter(enemy.transform.position, attackCharacter.transform.position) <
                     maxDistanceForAttack)
+                {
+                    if (enemy.TryGetComponent(out ResourceObject ro))
+                        return;
+
                     enemy.ReceiveCharacterAttack(attackCharacter);
+                }
         }
 
         public float DistanceCounter(Vector3 characterPosition, Vector3 enemyPosition)

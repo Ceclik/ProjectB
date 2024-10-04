@@ -1,5 +1,4 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
-using DataClasses;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;
@@ -9,9 +8,9 @@ namespace ComponentScripts.Items
 {
     public class MainHandPanel : ItemPanel
     {
-        private IPutterToInventory _putterToInventory;
         private InventoryUI _panelsHandler;
-        
+        private IPutterToInventory _putterToInventory;
+
         private void Start()
         {
             _panelsHandler = GetComponentInParent<InventoryUI>();
@@ -26,10 +25,10 @@ namespace ComponentScripts.Items
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
                 HandleDropping();
-            if(Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
+            if (Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
                 PutToInventory();
         }
-        
+
         private void HandleDropping()
         {
             if (Inventory.MainHand != null)
@@ -43,7 +42,7 @@ namespace ComponentScripts.Items
 
         private void PutToInventory()
         {
-            int itemIndex = _putterToInventory.PutToInventory(Inventory.MainHand, Inventory);
+            var itemIndex = _putterToInventory.PutToInventory(Inventory.MainHand, Inventory);
             _panelsHandler.Panels[itemIndex].GetComponentInChildren<Image>().sprite = Inventory.MainHand.ItemIcon;
             _panelsHandler.Panels[itemIndex].GetComponentInChildren<TextMeshProUGUI>().text =
                 Inventory.MainHand.Amount.ToString();
@@ -51,6 +50,5 @@ namespace ComponentScripts.Items
             PanelIndex = -1;
             Inventory.MainHand = null;
         }
-        
     }
 }

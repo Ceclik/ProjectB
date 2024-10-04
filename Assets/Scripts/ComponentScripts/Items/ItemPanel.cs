@@ -1,4 +1,3 @@
-using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
 using Services.CharacterServices.InventoryScripts;
@@ -11,15 +10,15 @@ namespace ComponentScripts.Items
 {
     public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        private MainHandPanel _mainHandPanel;
+
+        private SecondHandPanel _secondHandPanel;
         protected TextMeshProUGUI AmountText;
         protected Inventory Inventory;
         protected bool IsPointerOnPanel;
         protected Image ItemIcon;
 
         protected IItemsDropper ItemsDropper;
-
-        private SecondHandPanel _secondHandPanel;
-        private MainHandPanel _mainHandPanel;
 
         public int PanelIndex { get; set; }
 
@@ -31,6 +30,32 @@ namespace ComponentScripts.Items
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             ItemIcon = GetComponentInChildren<Image>();
             AmountText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
+                HandleDropping();
+            if (Input.GetKeyDown(KeyCode.Mouse0) && IsPointerOnPanel)
+                PutToMainHand();
+            if (Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
+                PutToSecondHand();
+        }
+
+        private void OnDisable()
+        {
+            IsPointerOnPanel = false;
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            IsPointerOnPanel = true;
+            Debug.Log($"Pointer is on {PanelIndex} panel");
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            IsPointerOnPanel = false;
         }
 
         private void HandleDropping()
@@ -82,32 +107,6 @@ namespace ComponentScripts.Items
                 Inventory.SecondHand = Inventory.Items[PanelIndex];
                 Inventory.Items[PanelIndex] = null;
             }
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
-                HandleDropping();
-            if(Input.GetKeyDown(KeyCode.Mouse0) && IsPointerOnPanel)
-                PutToMainHand();
-            if(Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
-                PutToSecondHand();
-        }
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            IsPointerOnPanel = true;
-            Debug.Log($"Pointer is on {PanelIndex} panel");
-        }
-
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            IsPointerOnPanel = false;
-        }
-
-        private void OnDisable()
-        {
-            IsPointerOnPanel = false;
         }
 
         public void Inject(IItemsDropper dropper)
