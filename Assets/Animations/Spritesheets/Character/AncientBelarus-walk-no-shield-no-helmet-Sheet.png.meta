@@ -1,0 +1,427 @@
+fileFormatVersion: 2
+guid: 57576e97cc0b9f06492c59beb26275a5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2426652812288650922
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_0
+  - first:
+      213: -6795048053241012072
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_1
+  - first:
+      213: -1669964398714399866
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_2
+  - first:
+      213: 4266731359428933355
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_3
+  - first:
+      213: 1036394051729160127
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_4
+  - first:
+      213: -873470871042118067
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_5
+  - first:
+      213: -6415707270760094416
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_6
+  - first:
+      213: 3465452430815986235
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_7
+  - first:
+      213: 7388760530646311378
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_8
+  - first:
+      213: -7287082237595026408
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_9
+  - first:
+      213: 3455763763017330568
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_10
+  - first:
+      213: -1773076951568106668
+    second: AncientBelarus-walk-no-shield-no-helmet-Sheet_11
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 22
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 16
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaeeaa530e33da120800000000000000
+      internalID: 2426652812288650922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 16
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8902cda1cc323b1a0800000000000000
+      internalID: -6795048053241012072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 16
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 683541b2a3813d8e0800000000000000
+      internalID: -1669964398714399866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 16
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6f7c6b099763b30800000000000000
+      internalID: 4266731359428933355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 16
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb7f4a426e2026e00800000000000000
+      internalID: 1036394051729160127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 16
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4e22e1eedec0e3f0800000000000000
+      internalID: -873470871042118067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 16
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0352477aa34d6f6a0800000000000000
+      internalID: -6415707270760094416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 16
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b320dc400a2c71030800000000000000
+      internalID: 3465452430815986235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 16
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1a9972e862a8660800000000000000
+      internalID: 7388760530646311378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 16
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81cf61340551fda90800000000000000
+      internalID: -7287082237595026408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 16
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88fa05245d655ff20800000000000000
+      internalID: 3455763763017330568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-walk-no-shield-no-helmet-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 16
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45bb95e18e3c467e0800000000000000
+      internalID: -1773076951568106668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_0: 2426652812288650922
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_1: -6795048053241012072
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_10: 3455763763017330568
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_11: -1773076951568106668
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_2: -1669964398714399866
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_3: 4266731359428933355
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_4: 1036394051729160127
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_5: -873470871042118067
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_6: -6415707270760094416
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_7: 3465452430815986235
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_8: 7388760530646311378
+      AncientBelarus-walk-no-shield-no-helmet-Sheet_9: -7287082237595026408
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
