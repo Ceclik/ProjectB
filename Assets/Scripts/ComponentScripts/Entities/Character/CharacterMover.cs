@@ -26,7 +26,9 @@ namespace ComponentScripts.Entities.Character
 
         public delegate void SwitchAnimatorTrigger();
 
-        public event SwitchAnimatorTrigger OnWalkStart;
+        public event SwitchAnimatorTrigger OnSideWalkStart;
+
+        private event SwitchAnimatorTrigger OnFrontWalkStart;
         //public event SwitchAnimatorTrigger OnRunStart;
         public event SwitchAnimatorTrigger OnStop;
 
@@ -129,7 +131,7 @@ namespace ComponentScripts.Entities.Character
                             _isCharacterFlipped = true;
                         }
                         
-                        OnWalkStart?.Invoke();
+                        OnSideWalkStart?.Invoke();
                     }
                 }
                 
@@ -148,7 +150,7 @@ namespace ComponentScripts.Entities.Character
                             _isCharacterFlipped = true;
                         }
 
-                        OnWalkStart?.Invoke();
+                        OnSideWalkStart?.Invoke();
                     }
                 }
                 
@@ -160,7 +162,7 @@ namespace ComponentScripts.Entities.Character
                     {
                         _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed,
                             runStaminaDecreasingValuePerFrame);
-                        OnWalkStart?.Invoke();
+                        OnSideWalkStart?.Invoke();
                     }
                 }
 
@@ -172,7 +174,7 @@ namespace ComponentScripts.Entities.Character
                     {
                         _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed,
                             runStaminaDecreasingValuePerFrame);
-                        OnWalkStart?.Invoke();
+                        OnSideWalkStart?.Invoke();
                     }
                 }
 
@@ -191,7 +193,7 @@ namespace ComponentScripts.Entities.Character
                             _isCharacterFlipped = true;
                         }
 
-                        OnWalkStart?.Invoke();
+                        OnSideWalkStart?.Invoke();
                     }
                 }
 
@@ -203,7 +205,7 @@ namespace ComponentScripts.Entities.Character
                     else
                     {
                         _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        OnWalkStart?.Invoke();
+                        OnFrontWalkStart?.Invoke();
                     }
                 }
 
@@ -215,7 +217,7 @@ namespace ComponentScripts.Entities.Character
                     else
                     {
                         _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        OnWalkStart?.Invoke();
+                        OnFrontWalkStart?.Invoke();
                     }
                 }
 
@@ -227,7 +229,7 @@ namespace ComponentScripts.Entities.Character
                     else
                     {
                         _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        OnWalkStart?.Invoke();
+                        OnSideWalkStart?.Invoke();
                     }
                 }
             }

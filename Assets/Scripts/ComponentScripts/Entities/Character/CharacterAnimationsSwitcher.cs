@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Character
@@ -14,28 +13,38 @@ namespace ComponentScripts.Entities.Character
             _mover = GetComponent<CharacterMover>();
 
             _mover.OnStop += SetIdleAnimation;
-            _mover.OnWalkStart += SetWalkAnimation;
+            _mover.OnSideWalkStart += SetSideWalkAnimation;
         }
 
-        private void SetWalkAnimation()
+        private void SetSideWalkAnimation()
         {
             //_animator.ResetTrigger("Run");
             _animator.ResetTrigger("Idle");
-            _animator.SetTrigger("Walk");
+            _animator.ResetTrigger("FrontWalk");
+            _animator.SetTrigger("SideWalk");
+        }
+
+        private void SetFrontWalkAnimation()
+        {
+            //_animator.ResetTrigger("Run");
+            _animator.ResetTrigger("Idle");
+            _animator.ResetTrigger("SideWalk");
+            _animator.SetTrigger("FrontWalk");
         }
 
         private void SetIdleAnimation()
         {
             Debug.Log("In set idle animation");
-            _animator.ResetTrigger("Walk");
+            _animator.ResetTrigger("SideWalk");
             //_animator.ResetTrigger("Run");
+            _animator.ResetTrigger("FrontWalk");
             _animator.SetTrigger("Idle");
         }
 
         private void OnDestroy()
         {
             _mover.OnStop -= SetIdleAnimation;
-            _mover.OnWalkStart -= SetWalkAnimation;
+            _mover.OnSideWalkStart -= SetSideWalkAnimation;
         }
     }
 }
