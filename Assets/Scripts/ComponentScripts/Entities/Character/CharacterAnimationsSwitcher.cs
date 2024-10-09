@@ -14,6 +14,7 @@ namespace ComponentScripts.Entities.Character
 
             _mover.OnStop += SetIdleAnimation;
             _mover.OnSideWalkStart += SetSideWalkAnimation;
+            _mover.OnFrontWalkStart += SetFrontWalkAnimation;
         }
 
         private void SetSideWalkAnimation()
@@ -45,6 +46,7 @@ namespace ComponentScripts.Entities.Character
         {
             _mover.OnStop -= SetIdleAnimation;
             _mover.OnSideWalkStart -= SetSideWalkAnimation;
+            _mover.OnFrontWalkStart -= SetFrontWalkAnimation;
         }
     }
 }

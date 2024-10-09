@@ -28,7 +28,7 @@ namespace ComponentScripts.Entities.Character
 
         public event SwitchAnimatorTrigger OnSideWalkStart;
 
-        private event SwitchAnimatorTrigger OnFrontWalkStart;
+        public event SwitchAnimatorTrigger OnFrontWalkStart;
         //public event SwitchAnimatorTrigger OnRunStart;
         public event SwitchAnimatorTrigger OnStop;
 
