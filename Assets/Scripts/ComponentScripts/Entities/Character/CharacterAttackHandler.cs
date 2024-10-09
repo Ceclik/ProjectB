@@ -1,3 +1,5 @@
+using System;
+using ComponentScripts.Entities.Character.InventoryScripts;
 using Services.CharacterServices.CharacterAttackScripts;
 using UnityEngine;
 
@@ -9,13 +11,22 @@ namespace ComponentScripts.Entities.Character
         [SerializeField] private float maxDistanceForAttack;
 
         private ICharacterAttackHandler _attackHandler;
+        private InventoryOpener _inventoryOpener;
+
+        private void Start()
+        {
+            _inventoryOpener = GetComponent<InventoryOpener>();
+        }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-                _attackHandler.Attack(mousePosition, maxDistanceForAttack, GetComponent<Character>());
+                if (!_inventoryOpener.Inventory.activeSelf)
+                {
+                    var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
+                    _attackHandler.Attack(mousePosition, maxDistanceForAttack, GetComponent<Character>());
+                }
             }
         }
 
