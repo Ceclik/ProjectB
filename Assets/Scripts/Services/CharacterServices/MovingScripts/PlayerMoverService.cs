@@ -85,6 +85,7 @@ namespace Services.CharacterServices.MovingScripts
                     {
                         movement = new Vector3(0.0f, Time.fixedDeltaTime * movingSpeed, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
+                        //_rigidbody.velocity = movement * 50;
                     }
 
                     break;
@@ -158,15 +159,15 @@ namespace Services.CharacterServices.MovingScripts
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    movement = new Vector3(-Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
+                    movement = new Vector3(-Time.fixedDeltaTime * runSpeed, -Time.fixedDeltaTime * runSpeed,
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
                 {
-                    movement = new Vector3(-Time.deltaTime * movingSpeed,
-                        -Time.deltaTime * movingSpeed,
+                    movement = new Vector3(-Time.fixedDeltaTime * movingSpeed,
+                        -Time.fixedDeltaTime * movingSpeed,
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                 }
@@ -175,14 +176,14 @@ namespace Services.CharacterServices.MovingScripts
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    movement = new Vector3(Time.deltaTime * runSpeed, Time.deltaTime * runSpeed,
+                    movement = new Vector3(Time.fixedDeltaTime * runSpeed, Time.fixedDeltaTime * runSpeed,
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
                 {
-                    movement = new Vector3(Time.deltaTime * movingSpeed, Time.deltaTime * movingSpeed,
+                    movement = new Vector3(Time.fixedDeltaTime * movingSpeed, Time.fixedDeltaTime * movingSpeed,
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                 }
@@ -191,15 +192,15 @@ namespace Services.CharacterServices.MovingScripts
             {
                 if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
                 {
-                    movement = new Vector3(Time.deltaTime * runSpeed, -Time.deltaTime * runSpeed,
+                    movement = new Vector3(Time.fixedDeltaTime * runSpeed, -Time.fixedDeltaTime * runSpeed,
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                     _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 }
                 else
                 {
-                    movement = new Vector3(Time.deltaTime * movingSpeed,
-                        -Time.deltaTime * movingSpeed,
+                    movement = new Vector3(Time.fixedDeltaTime * movingSpeed,
+                        -Time.fixedDeltaTime * movingSpeed,
                         0.0f);
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                 }
@@ -247,7 +248,7 @@ namespace Services.CharacterServices.MovingScripts
             {
                 yield return new WaitForEndOfFrame();
                 characterTransform.position =
-                    Vector3.MoveTowards(characterTransform.position, targetPosition, Time.deltaTime * tugSpeed);
+                    Vector3.MoveTowards(characterTransform.position, targetPosition, Time.fixedDeltaTime * tugSpeed);
             }
 
             _camera.EndDash();
