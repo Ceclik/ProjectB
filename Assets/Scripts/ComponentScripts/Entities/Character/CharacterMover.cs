@@ -20,7 +20,6 @@ namespace ComponentScripts.Entities.Character
         private InventoryOpener _inventory;
         private IPlayerMover _mover;
         private float _movingSpeed;
-        private CharacterStaminaHandler _staminaHandler;
 
         private bool _isCharacterFlipped;
 
@@ -29,13 +28,12 @@ namespace ComponentScripts.Entities.Character
         public event SwitchAnimatorTrigger OnSideWalkStart;
 
         public event SwitchAnimatorTrigger OnFrontWalkStart;
-        //public event SwitchAnimatorTrigger OnRunStart;
+        public event SwitchAnimatorTrigger OnStopBackIdle;
         public event SwitchAnimatorTrigger OnStop;
 
         private void Start()
         {
             _character = GetComponent<Character>();
-            _staminaHandler = GetComponent<CharacterStaminaHandler>();
             _movingSpeed = _character.BaseMovingSpeed; //TODO speed counting before invocation move method
             _inventory = GetComponent<InventoryOpener>();
         }
@@ -51,7 +49,7 @@ namespace ComponentScripts.Entities.Character
                     _isCharacterFlipped = false;
                 }
 
-                OnStop?.Invoke();
+                OnStopBackIdle?.Invoke();
             }
             
             else if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.S))
@@ -66,7 +64,7 @@ namespace ComponentScripts.Entities.Character
             
             else if (Input.GetKeyUp(KeyCode.W) && Input.GetKeyUp(KeyCode.D))
             {
-                OnStop?.Invoke();
+                OnStopBackIdle?.Invoke();
             }
             
             else if (Input.GetKeyUp(KeyCode.D) && Input.GetKeyUp(KeyCode.S))
@@ -86,7 +84,7 @@ namespace ComponentScripts.Entities.Character
             
             else if (Input.GetKeyUp(KeyCode.W))
             {
-                OnStop?.Invoke();
+                OnStopBackIdle?.Invoke();
             }
             
             else if (Input.GetKeyUp(KeyCode.S))

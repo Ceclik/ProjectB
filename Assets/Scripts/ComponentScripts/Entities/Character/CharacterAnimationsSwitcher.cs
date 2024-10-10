@@ -12,39 +12,48 @@ namespace ComponentScripts.Entities.Character
             _animator = GetComponent<Animator>();
             _mover = GetComponent<CharacterMover>();
 
-            _mover.OnStop += SetIdleAnimation;
+            _mover.OnStop += SetFrontIdleAnimation;
             _mover.OnSideWalkStart += SetSideWalkAnimation;
             _mover.OnFrontWalkStart += SetFrontWalkAnimation;
+            _mover.OnStopBackIdle += SetBackIdleAnimation;
+        }
+
+        private void SetBackIdleAnimation()
+        {
+            ResetAllTriggers();
+            _animator.SetTrigger("BackIdle");
         }
 
         private void SetSideWalkAnimation()
         {
-            //_animator.ResetTrigger("Run");
-            _animator.ResetTrigger("Idle");
-            _animator.ResetTrigger("FrontWalk");
+            ResetAllTriggers();
             _animator.SetTrigger("SideWalk");
         }
 
         private void SetFrontWalkAnimation()
         {
-            //_animator.ResetTrigger("Run");
-            _animator.ResetTrigger("Idle");
-            _animator.ResetTrigger("SideWalk");
+            ResetAllTriggers();
             _animator.SetTrigger("FrontWalk");
         }
 
-        private void SetIdleAnimation()
+        private void SetFrontIdleAnimation()
         {
-            Debug.Log("In set idle animation");
-            _animator.ResetTrigger("SideWalk");
-            //_animator.ResetTrigger("Run");
+            ResetAllTriggers();
+            _animator.SetTrigger("FrontIdle");
+        }
+
+        private void ResetAllTriggers()
+        {
+            _animator.ResetTrigger("FrontIdle");
             _animator.ResetTrigger("FrontWalk");
-            _animator.SetTrigger("Idle");
+            _animator.ResetTrigger("SideWalk");
+            _animator.ResetTrigger("BackIdle");
         }
 
         private void OnDestroy()
         {
-            _mover.OnStop -= SetIdleAnimation;
+            _mover.OnStopBackIdle -= SetBackIdleAnimation;
+            _mover.OnStop -= SetFrontIdleAnimation;
             _mover.OnSideWalkStart -= SetSideWalkAnimation;
             _mover.OnFrontWalkStart -= SetFrontWalkAnimation;
         }

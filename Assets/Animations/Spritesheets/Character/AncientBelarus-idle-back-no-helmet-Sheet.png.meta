@@ -1,0 +1,527 @@
+fileFormatVersion: 2
+guid: 0276277930e15fda4bd815f93b50d5df
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9138530610292602175
+    second: AncientBelarus-idle-back-no-helmet-Sheet_0
+  - first:
+      213: 5637131416236032114
+    second: AncientBelarus-idle-back-no-helmet-Sheet_1
+  - first:
+      213: -874281593403386922
+    second: AncientBelarus-idle-back-no-helmet-Sheet_2
+  - first:
+      213: -6395342154995579210
+    second: AncientBelarus-idle-back-no-helmet-Sheet_3
+  - first:
+      213: -5882529905268670332
+    second: AncientBelarus-idle-back-no-helmet-Sheet_4
+  - first:
+      213: -3413797111116483944
+    second: AncientBelarus-idle-back-no-helmet-Sheet_5
+  - first:
+      213: -7195452678279655651
+    second: AncientBelarus-idle-back-no-helmet-Sheet_6
+  - first:
+      213: -8655944853667494593
+    second: AncientBelarus-idle-back-no-helmet-Sheet_7
+  - first:
+      213: 6849439043826616276
+    second: AncientBelarus-idle-back-no-helmet-Sheet_8
+  - first:
+      213: 4879803848159891795
+    second: AncientBelarus-idle-back-no-helmet-Sheet_9
+  - first:
+      213: 3048452308549062731
+    second: AncientBelarus-idle-back-no-helmet-Sheet_10
+  - first:
+      213: 8206534542511031038
+    second: AncientBelarus-idle-back-no-helmet-Sheet_11
+  - first:
+      213: 5856703345949961168
+    second: AncientBelarus-idle-back-no-helmet-Sheet_12
+  - first:
+      213: 4381889498942077234
+    second: AncientBelarus-idle-back-no-helmet-Sheet_13
+  - first:
+      213: 3973151887889996514
+    second: AncientBelarus-idle-back-no-helmet-Sheet_14
+  - first:
+      213: -5925152530991997217
+    second: AncientBelarus-idle-back-no-helmet-Sheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 22
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 11
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cac974f3da6d2180800000000000000
+      internalID: -9138530610292602175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27081f0082d1b3e40800000000000000
+      internalID: 5637131416236032114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d3578fd58dedd3f0800000000000000
+      internalID: -874281593403386922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 11
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b6486aa13e2f37a0800000000000000
+      internalID: -6395342154995579210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 11
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48049d7d73e0d5ea0800000000000000
+      internalID: -5882529905268670332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 892b5a05d91cf90d0800000000000000
+      internalID: -3413797111116483944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1f020989ed942c90800000000000000
+      internalID: -7195452678279655651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 11
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3547c94408efd780800000000000000
+      internalID: -8655944853667494593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 11
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d70afd35881e0f50800000000000000
+      internalID: 6849439043826616276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 351972fdebb88b340800000000000000
+      internalID: 4879803848159891795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4059c529374e4a20800000000000000
+      internalID: 3048452308549062731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 11
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef2c753bfa773e170800000000000000
+      internalID: 8206534542511031038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 11
+        width: 22
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0db603ab9a0374150800000000000000
+      internalID: 5856703345949961168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 239f47578499fcc30800000000000000
+      internalID: 4381889498942077234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 11
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea1b546798732730800000000000000
+      internalID: 3973151887889996514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AncientBelarus-idle-back-no-helmet-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 11
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fde17367a21a5cda0800000000000000
+      internalID: -5925152530991997217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      AncientBelarus-idle-back-no-helmet-Sheet_0: -9138530610292602175
+      AncientBelarus-idle-back-no-helmet-Sheet_1: 5637131416236032114
+      AncientBelarus-idle-back-no-helmet-Sheet_10: 3048452308549062731
+      AncientBelarus-idle-back-no-helmet-Sheet_11: 8206534542511031038
+      AncientBelarus-idle-back-no-helmet-Sheet_12: 5856703345949961168
+      AncientBelarus-idle-back-no-helmet-Sheet_13: 4381889498942077234
+      AncientBelarus-idle-back-no-helmet-Sheet_14: 3973151887889996514
+      AncientBelarus-idle-back-no-helmet-Sheet_15: -5925152530991997217
+      AncientBelarus-idle-back-no-helmet-Sheet_2: -874281593403386922
+      AncientBelarus-idle-back-no-helmet-Sheet_3: -6395342154995579210
+      AncientBelarus-idle-back-no-helmet-Sheet_4: -5882529905268670332
+      AncientBelarus-idle-back-no-helmet-Sheet_5: -3413797111116483944
+      AncientBelarus-idle-back-no-helmet-Sheet_6: -7195452678279655651
+      AncientBelarus-idle-back-no-helmet-Sheet_7: -8655944853667494593
+      AncientBelarus-idle-back-no-helmet-Sheet_8: 6849439043826616276
+      AncientBelarus-idle-back-no-helmet-Sheet_9: 4879803848159891795
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

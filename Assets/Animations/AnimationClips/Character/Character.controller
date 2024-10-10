@@ -34,7 +34,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Idle
+    m_ConditionEvent: FrontIdle
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5258180473602508433}
@@ -64,10 +64,13 @@ AnimatorStateMachine:
     m_Position: {x: 350, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7710823207546837669}
-    m_Position: {x: 350, y: -120, z: 0}
+    m_Position: {x: 90, y: -290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 495183867631853464}
-    m_Position: {x: 650, y: -20, z: 0}
+    m_Position: {x: 960, y: 130, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3011191750144358530}
+    m_Position: {x: 750, y: -310, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -75,7 +78,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 60, y: 120, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ExitPosition: {x: 370, y: 260, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -5258180473602508433}
 --- !u!1102 &-5258180473602508433
@@ -101,6 +104,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 51b333459a98e3af19dcc3bc2e4066a6, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &-3011191750144358530
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Character-idle-back-no-helmet
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 7cb17fc63c69396f5be8ad9f9ed1e02d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -140,19 +169,25 @@ AnimatorController:
   m_Name: Character
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: SideWalk
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: Idle
+  - m_Name: FrontIdle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: FrontWalk
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: BackIdle
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: SideWalk
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -233,7 +268,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Idle
+    m_ConditionEvent: FrontIdle
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -5258180473602508433}
