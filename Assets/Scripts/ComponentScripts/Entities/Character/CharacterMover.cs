@@ -20,25 +20,19 @@ namespace ComponentScripts.Entities.Character
         private InventoryOpener _inventory;
         private IPlayerMover _mover;
         private float _movingSpeed;
-
+        private CharacterAnimationsSwitcher _animationSwitcher;
+        
         private bool _isCharacterFlipped;
-
-        public delegate void SwitchAnimatorTrigger();
-
-        public event SwitchAnimatorTrigger OnSideWalkStart;
-
-        public event SwitchAnimatorTrigger OnFrontWalkStart;
-        public event SwitchAnimatorTrigger OnStopBackIdle;
-        public event SwitchAnimatorTrigger OnStop;
 
         private void Start()
         {
+            _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();
             _character = GetComponent<Character>();
             _movingSpeed = _character.BaseMovingSpeed; //TODO speed counting before invocation move method
             _inventory = GetComponent<InventoryOpener>();
         }
 
-        private void InvokeIdleEvent()
+        private void SetIdleAnimation()
         {
             if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.W))
             {
@@ -49,7 +43,7 @@ namespace ComponentScripts.Entities.Character
                     _isCharacterFlipped = false;
                 }
 
-                OnStopBackIdle?.Invoke();
+                _animationSwitcher.SetBackIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.S))
@@ -59,17 +53,17 @@ namespace ComponentScripts.Entities.Character
                     FlipCharacterHorizontal();
                     _isCharacterFlipped = false;
                 }
-                OnStop?.Invoke();
+                _animationSwitcher.SetFrontIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.W) && Input.GetKeyUp(KeyCode.D))
             {
-                OnStopBackIdle?.Invoke();
+                _animationSwitcher.SetBackIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.D) && Input.GetKeyUp(KeyCode.S))
             {
-                OnStop?.Invoke();
+                _animationSwitcher.SetFrontIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.A))
@@ -79,22 +73,22 @@ namespace ComponentScripts.Entities.Character
                     FlipCharacterHorizontal();
                     _isCharacterFlipped = false;
                 }
-                OnStop?.Invoke();
+                _animationSwitcher.SetFrontIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.W))
             {
-                OnStopBackIdle?.Invoke();
+                _animationSwitcher.SetBackIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.S))
             {
-                OnStop?.Invoke();
+                _animationSwitcher.SetFrontIdleAnimation();
             }
             
             else if (Input.GetKeyUp(KeyCode.D))
             {
-                OnStop?.Invoke();
+                _animationSwitcher.SetFrontIdleAnimation();
             }
         }
 
@@ -105,7 +99,7 @@ namespace ComponentScripts.Entities.Character
 
         private void Update()
         {
-            InvokeIdleEvent();
+            SetIdleAnimation();
         }
 
         private void FixedUpdate()
@@ -129,7 +123,7 @@ namespace ComponentScripts.Entities.Character
                             _isCharacterFlipped = true;
                         }
                         
-                        OnSideWalkStart?.Invoke();
+                        _animationSwitcher.SetSideWalkAnimation();
                     }
                 }
                 
@@ -148,7 +142,7 @@ namespace ComponentScripts.Entities.Character
                             _isCharacterFlipped = true;
                         }
 
-                        OnSideWalkStart?.Invoke();
+                        _animationSwitcher.SetSideWalkAnimation();
                     }
                 }
                 
@@ -160,7 +154,7 @@ namespace ComponentScripts.Entities.Character
                     {
                         _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed,
                             runStaminaDecreasingValuePerFrame);
-                        OnSideWalkStart?.Invoke();
+                        _animationSwitcher.SetSideWalkAnimation();
                     }
                 }
 
@@ -172,7 +166,7 @@ namespace ComponentScripts.Entities.Character
                     {
                         _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed,
                             runStaminaDecreasingValuePerFrame);
-                        OnSideWalkStart?.Invoke();
+                        _animationSwitcher.SetSideWalkAnimation();
                     }
                 }
 
@@ -191,7 +185,7 @@ namespace ComponentScripts.Entities.Character
                             _isCharacterFlipped = true;
                         }
 
-                        OnSideWalkStart?.Invoke();
+                        _animationSwitcher.SetSideWalkAnimation();
                     }
                 }
 
@@ -203,7 +197,7 @@ namespace ComponentScripts.Entities.Character
                     else
                     {
                         _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        OnFrontWalkStart?.Invoke();
+                        _animationSwitcher.SetBackWalkAnimation();
                     }
                 }
 
@@ -215,7 +209,7 @@ namespace ComponentScripts.Entities.Character
                     else
                     {
                         _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        OnFrontWalkStart?.Invoke();
+                        _animationSwitcher.SetFrontWalkAnimation();
                     }
                 }
 
@@ -227,7 +221,7 @@ namespace ComponentScripts.Entities.Character
                     else
                     {
                         _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        OnSideWalkStart?.Invoke();
+                        _animationSwitcher.SetSideWalkAnimation();
                     }
                 }
             }
