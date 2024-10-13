@@ -21,15 +21,19 @@ namespace ComponentScripts.Entities.Character
         private IPlayerMover _mover;
         private float _movingSpeed;
         private CharacterAnimationsSwitcher _animationSwitcher;
+        private Rigidbody2D _rigidbody;
+        private ShelterHider _shelterHider;
         
         private bool _isCharacterFlipped;
 
         private void Start()
         {
+            _rigidbody = GetComponent<Rigidbody2D>();
             _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();
             _character = GetComponent<Character>();
             _movingSpeed = _character.BaseMovingSpeed; //TODO speed counting before invocation move method
             _inventory = GetComponent<InventoryOpener>();
+            _shelterHider = GetComponent<ShelterHider>();
         }
 
         private void SetIdleAnimation()
@@ -82,7 +86,7 @@ namespace ComponentScripts.Entities.Character
             }
             
             else if (Input.GetKeyUp(KeyCode.S))
-            {
+            {   
                 _animationSwitcher.SetFrontIdleAnimation();
             }
             
@@ -90,6 +94,8 @@ namespace ComponentScripts.Entities.Character
             {
                 _animationSwitcher.SetFrontIdleAnimation();
             }
+
+            _rigidbody.velocity = Vector2.zero;
         }
 
         private void FlipCharacterHorizontal()
@@ -97,131 +103,138 @@ namespace ComponentScripts.Entities.Character
             transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1); 
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             SetIdleAnimation();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
-            if (Input.anyKey && !_inventory.Inventory.activeSelf)
+            if (!_shelterHider.IsInShelter)
             {
-                KeyCode keyCode;
-
-                if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
+                if (Input.anyKey && !_inventory.Inventory.activeSelf)
                 {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
+                    KeyCode keyCode;
+
+                    if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
                     {
-                        _mover.Move(KeyCode.A, KeyCode.W, _movingSpeed, transform, runSpeed,
-                            runStaminaDecreasingValuePerFrame);
-                        
-                        if (!_isCharacterFlipped)
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed, tugDelay,
+                                tugStaminaDecreaseValue);
+                        else
                         {
-                            FlipCharacterHorizontal();
-                            _isCharacterFlipped = true;
+                            _mover.Move(KeyCode.A, KeyCode.W, _movingSpeed, transform, runSpeed,
+                                runStaminaDecreasingValuePerFrame);
+
+                            if (!_isCharacterFlipped)
+                            {
+                                FlipCharacterHorizontal();
+                                _isCharacterFlipped = true;
+                            }
+
+                            _animationSwitcher.SetSideWalkAnimation();
                         }
-                        
-                        _animationSwitcher.SetSideWalkAnimation();
                     }
-                }
-                
-                else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
-                {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
+
+                    else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
                     {
-                        _mover.Move(KeyCode.A, KeyCode.S, _movingSpeed, transform, runSpeed,
-                            runStaminaDecreasingValuePerFrame);
-                        
-                        if (!_isCharacterFlipped)
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed, tugDelay,
+                                tugStaminaDecreaseValue);
+                        else
                         {
-                            FlipCharacterHorizontal();
-                            _isCharacterFlipped = true;
+                            _mover.Move(KeyCode.A, KeyCode.S, _movingSpeed, transform, runSpeed,
+                                runStaminaDecreasingValuePerFrame);
+
+                            if (!_isCharacterFlipped)
+                            {
+                                FlipCharacterHorizontal();
+                                _isCharacterFlipped = true;
+                            }
+
+                            _animationSwitcher.SetSideWalkAnimation();
                         }
-
-                        _animationSwitcher.SetSideWalkAnimation();
                     }
-                }
-                
-                else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-                {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
-                    {
-                        _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed,
-                            runStaminaDecreasingValuePerFrame);
-                        _animationSwitcher.SetSideWalkAnimation();
-                    }
-                }
 
-                else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
-                {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
+                    else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
                     {
-                        _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed,
-                            runStaminaDecreasingValuePerFrame);
-                        _animationSwitcher.SetSideWalkAnimation();
-                    }
-                }
-
-                else if (Input.GetKey(KeyCode.A))
-                {
-                    keyCode = KeyCode.A;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
-                    {
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        
-                        if (!_isCharacterFlipped)
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed, tugDelay,
+                                tugStaminaDecreaseValue);
+                        else
                         {
-                            FlipCharacterHorizontal();
-                            _isCharacterFlipped = true;
+                            _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed,
+                                runStaminaDecreasingValuePerFrame);
+                            _animationSwitcher.SetSideWalkAnimation();
                         }
-
-                        _animationSwitcher.SetSideWalkAnimation();
                     }
-                }
 
-                else if (Input.GetKey(KeyCode.W))
-                {
-                    keyCode = KeyCode.W;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
+                    else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
                     {
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        _animationSwitcher.SetBackWalkAnimation();
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed, tugDelay,
+                                tugStaminaDecreaseValue);
+                        else
+                        {
+                            _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed,
+                                runStaminaDecreasingValuePerFrame);
+                            _animationSwitcher.SetSideWalkAnimation();
+                        }
                     }
-                }
 
-                else if (Input.GetKey(KeyCode.S))
-                {
-                    keyCode = KeyCode.S;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
+                    else if (Input.GetKey(KeyCode.A))
                     {
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        _animationSwitcher.SetFrontWalkAnimation();
+                        keyCode = KeyCode.A;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        else
+                        {
+                            _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
+
+                            if (!_isCharacterFlipped)
+                            {
+                                FlipCharacterHorizontal();
+                                _isCharacterFlipped = true;
+                            }
+
+                            _animationSwitcher.SetSideWalkAnimation();
+                        }
                     }
-                }
 
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    keyCode = KeyCode.D;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
-                    else
+                    else if (Input.GetKey(KeyCode.W))
                     {
-                        _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                        _animationSwitcher.SetSideWalkAnimation();
+                        keyCode = KeyCode.W;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        else
+                        {
+                            _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
+                            _animationSwitcher.SetBackWalkAnimation();
+                        }
+                    }
+
+                    else if (Input.GetKey(KeyCode.S))
+                    {
+                        keyCode = KeyCode.S;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        else
+                        {
+                            _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
+                            _animationSwitcher.SetFrontWalkAnimation();
+                        }
+                    }
+
+                    else if (Input.GetKey(KeyCode.D))
+                    {
+                        keyCode = KeyCode.D;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                            _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        else
+                        {
+                            _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
+                            _animationSwitcher.SetSideWalkAnimation();
+                        }
                     }
                 }
             }
