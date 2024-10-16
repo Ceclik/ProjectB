@@ -7,9 +7,39 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     {
         [SerializeField] private int amountOfSlots;
         public ItemData[] Items { get; private set; }
+        
+        public delegate void UpdateHandsUI(ItemData item);
 
-        public ItemData MainHand { get; set; }
-        public ItemData SecondHand { get; set; }
+        public event UpdateHandsUI OnMainHandUpdate;
+        public event UpdateHandsUI OnSecondHandUpdate;
+
+        private ItemData _mainHand;
+        private ItemData _secondHand;
+        public ItemData MainHand
+        {
+            get => _mainHand;
+            set
+            {
+                if (_mainHand != value)
+                {
+                    _mainHand = value; 
+                    OnMainHandUpdate?.Invoke(value);
+                }
+            }
+        }
+
+        public ItemData SecondHand
+        {
+            get => _secondHand;
+            set
+            {
+                if (_secondHand != value)
+                {
+                    _secondHand = value;
+                    OnSecondHandUpdate?.Invoke(value);
+                }
+            }
+        }
 
         public int AmountOfSlots => amountOfSlots;
 
