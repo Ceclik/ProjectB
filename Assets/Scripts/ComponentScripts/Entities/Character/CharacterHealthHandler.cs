@@ -1,3 +1,4 @@
+using ComponentScripts.Entities.Character.InventoryScripts;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
 using UnityEngine.UI;

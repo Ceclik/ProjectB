@@ -1,4 +1,6 @@
 using ComponentScripts;
+using ComponentScripts.Entities.Character;
+using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.Enemies;
 
 namespace Services.CharacterServices.CharacterStatsScripts
@@ -12,10 +14,16 @@ namespace Services.CharacterServices.CharacterStatsScripts
             _characterHealthHandler = characterHealthHandler;
         }
 
-        public void ReceiveDamage(ActiveEntity hitEntity)
+        public void ReceiveDamage(ActiveEntity hitEntity, ArmorHandler armorHandler)
         {
             if (hitEntity is Enemy)
+            {
+                if (armorHandler.IsUsingSchield)
+                {
+                    
+                }
                 _characterHealthHandler.DecreaseHealthValue(hitEntity.BaseDamage);
+            }
         }
     }
 }
