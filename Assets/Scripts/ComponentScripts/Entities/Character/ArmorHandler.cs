@@ -1,5 +1,6 @@
-using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
+using DataClasses;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Character
@@ -7,19 +8,51 @@ namespace ComponentScripts.Entities.Character
     public class ArmorHandler : MonoBehaviour
     {
         private Inventory _inventory;
-        public bool IsUsingSchield { get; private set; }
+        private InventoryOpener _inventoryOpener;
+        public bool IsUsingShield { get; private set; }
+
+        public float PercentOfBlockingDamage { get; private set; }
+        
+        public ShieldData ActualShield { get; private set; }
 
         private void Start()
         {
             _inventory = GetComponent<Inventory>();
+            _inventory.OnSecondHandUpdate += SetActualShield;
+            _inventoryOpener = GetComponent<InventoryOpener>();
+        }
+
+        private void SetActualShield(ItemData item)
+        {
+            if (_inventory.SecondHand is ShieldData)
+            {
+                ActualShield = (ShieldData)_inventory.SecondHand;
+                PercentOfBlockingDamage = ActualShield.PercentOfBlockingDamage;
+            }
+                
         }
 
         private void Update()
         {
-            if (!IsUsingSchield && _inventory.SecondHand.Name == "Shield" && Input.GetKeyDown(KeyCode.Mouse1))
+            if (_inventory.SecondHand != null && !_inventoryOpener.Inventory.activeSelf)
             {
-                IsUsingSchield = true;
+                if (!IsUsingShield && _inventory.SecondHand.Name == "Shield" && Input.GetKeyDown(KeyCode.Mouse1))
+                {
+                    IsUsingShield = true;
+                    Debug.Log("Shield On!");
+                }
+
+                if (IsUsingShield && Input.GetKeyUp(KeyCode.Mouse1))
+                {
+                    IsUsingShield = false;
+                    Debug.Log("Shield off");
+                }
             }
+        }
+
+        private void OnDestroy()
+        {
+            _inventory.OnSecondHandUpdate -= SetActualShield;
         }
     }
 }

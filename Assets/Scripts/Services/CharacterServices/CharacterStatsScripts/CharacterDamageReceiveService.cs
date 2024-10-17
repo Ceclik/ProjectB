@@ -2,6 +2,7 @@ using ComponentScripts;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.Enemies;
+using UnityEngine;
 
 namespace Services.CharacterServices.CharacterStatsScripts
 {
@@ -16,13 +17,19 @@ namespace Services.CharacterServices.CharacterStatsScripts
 
         public void ReceiveDamage(ActiveEntity hitEntity, ArmorHandler armorHandler)
         {
+            int receivedDamage = 0;
             if (hitEntity is Enemy)
             {
-                if (armorHandler.IsUsingSchield)
+                if (armorHandler.IsUsingShield)
                 {
-                    
+                    receivedDamage = (int)(hitEntity.BaseDamage * (armorHandler.PercentOfBlockingDamage / 100));
+                    _characterHealthHandler.DecreaseHealthValue(receivedDamage);
+                    Debug.Log($"Received damage is: {receivedDamage}");
+                    return;
                 }
-                _characterHealthHandler.DecreaseHealthValue(hitEntity.BaseDamage);
+                receivedDamage = hitEntity.BaseDamage;
+                _characterHealthHandler.DecreaseHealthValue(receivedDamage);
+                Debug.Log($"Received damage is: {receivedDamage}");
             }
         }
     }

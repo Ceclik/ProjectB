@@ -21,6 +21,7 @@ namespace ComponentScripts.Items
         protected IItemsDropper ItemsDropper;
 
         public int PanelIndex { get; set; }
+        
 
         private void Start()
         {
