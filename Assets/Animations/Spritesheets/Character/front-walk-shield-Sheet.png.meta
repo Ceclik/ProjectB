@@ -1,0 +1,527 @@
+fileFormatVersion: 2
+guid: b4519caade662531a9eb521deb52d586
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2183763579848952244
+    second: front-walk-shield-Sheet_0
+  - first:
+      213: -6990079500020095383
+    second: front-walk-shield-Sheet_1
+  - first:
+      213: 3805224367704689624
+    second: front-walk-shield-Sheet_2
+  - first:
+      213: 5329525703295893519
+    second: front-walk-shield-Sheet_3
+  - first:
+      213: -4755279639131959155
+    second: front-walk-shield-Sheet_4
+  - first:
+      213: -7367881199370537636
+    second: front-walk-shield-Sheet_5
+  - first:
+      213: -1884049885211323342
+    second: front-walk-shield-Sheet_6
+  - first:
+      213: 7946459200033755355
+    second: front-walk-shield-Sheet_7
+  - first:
+      213: 1961202488553016006
+    second: front-walk-shield-Sheet_8
+  - first:
+      213: -6009040648828253302
+    second: front-walk-shield-Sheet_9
+  - first:
+      213: 8063110380979031091
+    second: front-walk-shield-Sheet_10
+  - first:
+      213: -7701372362620976040
+    second: front-walk-shield-Sheet_11
+  - first:
+      213: -3097246701291432871
+    second: front-walk-shield-Sheet_12
+  - first:
+      213: 8090510352169574026
+    second: front-walk-shield-Sheet_13
+  - first:
+      213: 6969824978040903586
+    second: front-walk-shield-Sheet_14
+  - first:
+      213: 5701708665765794699
+    second: front-walk-shield-Sheet_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 22
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c46faad1896b1b1e0800000000000000
+      internalID: -2183763579848952244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 966ef81dabf3efe90800000000000000
+      internalID: -6990079500020095383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dbc2b7c66fdec430800000000000000
+      internalID: 3805224367704689624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f00044ed36746f940800000000000000
+      internalID: 5329525703295893519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8054eddc5ad10eb0800000000000000
+      internalID: -4755279639131959155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c557d3cf51700c990800000000000000
+      internalID: -7367881199370537636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2341ddc8c928ad5e0800000000000000
+      internalID: -1884049885211323342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd095205a8e774e60800000000000000
+      internalID: 7946459200033755355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 533
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ca80deb547973b10800000000000000
+      internalID: 1961202488553016006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8b85bdfd599b9ca0800000000000000
+      internalID: -6009040648828253302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33c050bdb2ce5ef60800000000000000
+      internalID: 8063110380979031091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 11
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85447fac3aa3f1590800000000000000
+      internalID: -7701372362620976040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 11
+        width: 26
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95416cbf88e5405d0800000000000000
+      internalID: -3097246701291432871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 853
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8e10b8cc44474070800000000000000
+      internalID: 8090510352169574026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 917
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a7d5cac3eac9b060800000000000000
+      internalID: 6969824978040903586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: front-walk-shield-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 981
+        y: 11
+        width: 24
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b839cb392d9802f40800000000000000
+      internalID: 5701708665765794699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 0c66b68d0ae03e783944d8fd707e44ca
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      front-walk-shield-Sheet_0: -2183763579848952244
+      front-walk-shield-Sheet_1: -6990079500020095383
+      front-walk-shield-Sheet_10: 8063110380979031091
+      front-walk-shield-Sheet_11: -7701372362620976040
+      front-walk-shield-Sheet_12: -3097246701291432871
+      front-walk-shield-Sheet_13: 8090510352169574026
+      front-walk-shield-Sheet_14: 6969824978040903586
+      front-walk-shield-Sheet_15: 5701708665765794699
+      front-walk-shield-Sheet_2: 3805224367704689624
+      front-walk-shield-Sheet_3: 5329525703295893519
+      front-walk-shield-Sheet_4: -4755279639131959155
+      front-walk-shield-Sheet_5: -7367881199370537636
+      front-walk-shield-Sheet_6: -1884049885211323342
+      front-walk-shield-Sheet_7: 7946459200033755355
+      front-walk-shield-Sheet_8: 1961202488553016006
+      front-walk-shield-Sheet_9: -6009040648828253302
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

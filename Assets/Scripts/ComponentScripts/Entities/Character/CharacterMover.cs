@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
+using DataClasses;
 using Services.CharacterServices.MovingScripts;
 using UnityEngine;
 
@@ -17,7 +18,8 @@ namespace ComponentScripts.Entities.Character
 
         [SerializeField] private float runStaminaDecreasingValuePerFrame;
         private Character _character;
-        private InventoryOpener _inventory;
+        private InventoryOpener _inventoryOpener;
+        private Inventory _inventory;
         private IPlayerMover _mover;
         private float _movingSpeed;
         private CharacterAnimationsSwitcher _animationSwitcher;
@@ -26,6 +28,7 @@ namespace ComponentScripts.Entities.Character
         private ArmorHandler _armorHandler;
         
         private bool _isCharacterFlipped;
+        public bool IsMoving { get; private set; }
 
         private void Start()
         {
@@ -34,8 +37,9 @@ namespace ComponentScripts.Entities.Character
             _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();
             _character = GetComponent<Character>();
             _movingSpeed = _character.BaseMovingSpeed; //TODO speed counting before invocation move method
-            _inventory = GetComponent<InventoryOpener>();
+            _inventoryOpener = GetComponent<InventoryOpener>();
             _shelterHider = GetComponent<ShelterHider>();
+            _inventory = GetComponent<Inventory>();
         }
 
         private void CountMovingSpeed()
@@ -57,7 +61,7 @@ namespace ComponentScripts.Entities.Character
                     FlipCharacterHorizontal();
                     _isCharacterFlipped = false;
                 }
-
+                
                 _animationSwitcher.SetBackIdleAnimation();
             }
             
@@ -107,6 +111,7 @@ namespace ComponentScripts.Entities.Character
             }
 
             _rigidbody.velocity = Vector2.zero;
+            IsMoving = false;
         }
 
         private void FlipCharacterHorizontal()
@@ -124,7 +129,7 @@ namespace ComponentScripts.Entities.Character
             CountMovingSpeed();
             if (!_shelterHider.IsInShelter)
             {
-                if (Input.anyKey && !_inventory.Inventory.activeSelf)
+                if (Input.anyKey && !_inventoryOpener.Inventory.activeSelf)
                 {
                     KeyCode keyCode;
 
@@ -145,6 +150,7 @@ namespace ComponentScripts.Entities.Character
                             }
 
                             _animationSwitcher.SetSideWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -165,6 +171,7 @@ namespace ComponentScripts.Entities.Character
                             }
 
                             _animationSwitcher.SetSideWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -178,6 +185,7 @@ namespace ComponentScripts.Entities.Character
                             _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed,
                                 runStaminaDecreasingValuePerFrame);
                             _animationSwitcher.SetSideWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -191,6 +199,7 @@ namespace ComponentScripts.Entities.Character
                             _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed,
                                 runStaminaDecreasingValuePerFrame);
                             _animationSwitcher.SetSideWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -210,6 +219,7 @@ namespace ComponentScripts.Entities.Character
                             }
 
                             _animationSwitcher.SetSideWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -222,6 +232,7 @@ namespace ComponentScripts.Entities.Character
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                             _animationSwitcher.SetBackWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -233,7 +244,11 @@ namespace ComponentScripts.Entities.Character
                         else
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                            _animationSwitcher.SetFrontWalkAnimation();
+                            if(Input.GetKey(KeyCode.Mouse1) && _inventory.SecondHand is ShieldData)
+                                _animationSwitcher.SetFrontWalkShieldAnimation();
+                            else
+                                _animationSwitcher.SetFrontWalkAnimation();
+                            IsMoving = true;
                         }
                     }
 
@@ -246,6 +261,7 @@ namespace ComponentScripts.Entities.Character
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
                             _animationSwitcher.SetSideWalkAnimation();
+                            IsMoving = true;
                         }
                     }
                 }

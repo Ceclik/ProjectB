@@ -9,6 +9,7 @@ namespace ComponentScripts.Entities.Character
         private Inventory _inventory;
         private InventoryOpener _inventoryOpener;
         private CharacterAnimationsSwitcher _animationsSwitcher;
+        private CharacterMover _characterMover;
         public bool IsUsingShield { get; private set; }
 
         public float PercentOfBlockingDamage { get; private set; }
@@ -21,6 +22,7 @@ namespace ComponentScripts.Entities.Character
             _inventory.OnSecondHandUpdate += SetActualShield;
             _inventoryOpener = GetComponent<InventoryOpener>();
             _animationsSwitcher = GetComponent<CharacterAnimationsSwitcher>();
+            _characterMover = GetComponent<CharacterMover>();
         }
 
         private void SetActualShield(ItemData item)
@@ -40,14 +42,16 @@ namespace ComponentScripts.Entities.Character
                 if (!IsUsingShield && _inventory.SecondHand.Name == "Shield" && Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     IsUsingShield = true;
-                    _animationsSwitcher.SetIdleShieldAnimation();
+                    if(!_characterMover.IsMoving)
+                        _animationsSwitcher.SetIdleShieldAnimation();
                     Debug.Log("Shield On!");
                 }
 
                 if (IsUsingShield && Input.GetKeyUp(KeyCode.Mouse1))
                 {
                     IsUsingShield = false;
-                    _animationsSwitcher.SetFrontIdleAnimation();
+                    if(!_characterMover.IsMoving)
+                        _animationsSwitcher.SetFrontIdleAnimation();
                     Debug.Log("Shield off");
                 }
             }

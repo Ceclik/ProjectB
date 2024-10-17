@@ -47,6 +47,12 @@ namespace ComponentScripts.Entities.Character
             _animator.SetTrigger("IdleShield");
         }
 
+        public void SetFrontWalkShieldAnimation()
+        {
+            ResetAllTriggers();
+            _animator.SetTrigger("FrontWalkShield");
+        }
+
         private void ResetAllTriggers()
         {
             _animator.ResetTrigger("BackWalk");
@@ -55,6 +61,7 @@ namespace ComponentScripts.Entities.Character
             _animator.ResetTrigger("SideWalk");
             _animator.ResetTrigger("BackIdle");
             _animator.ResetTrigger("IdleShield");
+            _animator.ResetTrigger("FrontWalkShield");
         }
     }
 }
