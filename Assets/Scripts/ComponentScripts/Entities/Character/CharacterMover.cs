@@ -23,17 +23,28 @@ namespace ComponentScripts.Entities.Character
         private CharacterAnimationsSwitcher _animationSwitcher;
         private Rigidbody2D _rigidbody;
         private ShelterHider _shelterHider;
+        private ArmorHandler _armorHandler;
         
         private bool _isCharacterFlipped;
 
         private void Start()
         {
+            _armorHandler = GetComponent<ArmorHandler>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();
             _character = GetComponent<Character>();
             _movingSpeed = _character.BaseMovingSpeed; //TODO speed counting before invocation move method
             _inventory = GetComponent<InventoryOpener>();
             _shelterHider = GetComponent<ShelterHider>();
+        }
+
+        private void CountMovingSpeed()
+        {
+            _movingSpeed = _character.BaseMovingSpeed;
+            if (_armorHandler.IsUsingShield)
+            {
+                _movingSpeed *= (100 - _armorHandler.ActualShield.PercentOfSlowingCharacter) / 100;
+            }
         }
 
         private void SetIdleAnimation()
@@ -110,6 +121,7 @@ namespace ComponentScripts.Entities.Character
 
         private void Update()
         {
+            CountMovingSpeed();
             if (!_shelterHider.IsInShelter)
             {
                 if (Input.anyKey && !_inventory.Inventory.activeSelf)
@@ -118,7 +130,7 @@ namespace ComponentScripts.Entities.Character
 
                     if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
                     {
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
                         else
@@ -138,7 +150,7 @@ namespace ComponentScripts.Entities.Character
 
                     else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
                     {
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
                         else
@@ -158,7 +170,7 @@ namespace ComponentScripts.Entities.Character
 
                     else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
                     {
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
                         else
@@ -171,7 +183,7 @@ namespace ComponentScripts.Entities.Character
 
                     else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
                     {
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
                         else
@@ -185,7 +197,7 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.A))
                     {
                         keyCode = KeyCode.A;
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                         else
                         {
@@ -204,7 +216,7 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.W))
                     {
                         keyCode = KeyCode.W;
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                         else
                         {
@@ -216,7 +228,7 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.S))
                     {
                         keyCode = KeyCode.S;
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                         else
                         {
@@ -228,7 +240,7 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.D))
                     {
                         keyCode = KeyCode.D;
-                        if (Input.GetKeyDown(KeyCode.Space))
+                        if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
                         else
                         {

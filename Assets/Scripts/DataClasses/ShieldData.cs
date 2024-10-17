@@ -5,15 +5,12 @@ namespace DataClasses
     public class ShieldData : ToolData
     {
         private float _percentOfBlockingDamage;
-
-        public ShieldData(Tool otherTool, float percentOfBlockingDamage) : base(otherTool)
-        {
-            _percentOfBlockingDamage = percentOfBlockingDamage;
-        }
+        private float _percentOfSlowingCharacter;
 
         public ShieldData(Shield otherShield) : base(otherShield)
         {
             _percentOfBlockingDamage = otherShield.PercentOfBlockingDamage;
+            _percentOfSlowingCharacter = otherShield.PercentOfSlowingCharacter;
         }
 
         public float PercentOfBlockingDamage
@@ -23,6 +20,16 @@ namespace DataClasses
             {
                 if (value is > 0 and <= 100)
                     _percentOfBlockingDamage = value;
+            }
+        }
+
+        public float PercentOfSlowingCharacter
+        {
+            get => _percentOfSlowingCharacter;
+            set
+            {
+                if (value is > 0 and < 100)
+                    _percentOfSlowingCharacter = value;
             }
         }
     }

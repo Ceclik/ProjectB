@@ -17,12 +17,12 @@ namespace Services.CharacterServices.CharacterStatsScripts
 
         public void ReceiveDamage(ActiveEntity hitEntity, ArmorHandler armorHandler)
         {
-            int receivedDamage = 0;
             if (hitEntity is Enemy)
             {
+                var receivedDamage = 0;
                 if (armorHandler.IsUsingShield)
                 {
-                    receivedDamage = (int)(hitEntity.BaseDamage * (armorHandler.PercentOfBlockingDamage / 100));
+                    receivedDamage = (int)(hitEntity.BaseDamage * ((100 - armorHandler.PercentOfBlockingDamage) / 100));
                     _characterHealthHandler.DecreaseHealthValue(receivedDamage);
                     Debug.Log($"Received damage is: {receivedDamage}");
                     return;

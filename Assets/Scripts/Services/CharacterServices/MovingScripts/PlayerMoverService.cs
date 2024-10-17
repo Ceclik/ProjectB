@@ -15,12 +15,15 @@ namespace Services.CharacterServices.MovingScripts
         private CharacterStaminaHandler _staminaValues;
         private float _tugTimer;
 
+        private ArmorHandler _armorHandler;
+
         private void Start()
         {
             _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraCharacterFollower>();
             _staminaValues =
                 GameObject.FindGameObjectWithTag("Player")
                     .GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
+            _armorHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<ArmorHandler>();
             _rigidbody = _staminaValues.GetComponent<Rigidbody2D>();
         }
 
@@ -75,7 +78,7 @@ namespace Services.CharacterServices.MovingScripts
             switch (key)
             {
                 case KeyCode.W:
-                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                     {
                         movement = new Vector3(0.0f, Time.fixedDeltaTime * runSpeed, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
@@ -90,7 +93,7 @@ namespace Services.CharacterServices.MovingScripts
 
                     break;
                 case KeyCode.A:
-                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                     {
                         movement = new Vector3(-Time.fixedDeltaTime * runSpeed, 0.0f, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
@@ -104,7 +107,7 @@ namespace Services.CharacterServices.MovingScripts
 
                     break;
                 case KeyCode.S:
-                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                     {
                         movement = new Vector3(0.0f, -Time.fixedDeltaTime * runSpeed, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
@@ -118,7 +121,7 @@ namespace Services.CharacterServices.MovingScripts
 
                     break;
                 case KeyCode.D:
-                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield) 
                     {
                         movement = new Vector3(Time.fixedDeltaTime * runSpeed, 0.0f, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
@@ -140,7 +143,7 @@ namespace Services.CharacterServices.MovingScripts
             Vector3 movement;
             if ((key1 == KeyCode.A && key2 == KeyCode.W) || (key1 == KeyCode.W && key2 == KeyCode.A))
             {
-                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                 {
                     movement = new Vector3(-Time.fixedDeltaTime * runSpeed, Time.fixedDeltaTime * runSpeed,
                         0.0f);
@@ -157,7 +160,7 @@ namespace Services.CharacterServices.MovingScripts
             }
             else if ((key1 == KeyCode.A && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.A))
             {
-                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                 {
                     movement = new Vector3(-Time.fixedDeltaTime * runSpeed, -Time.fixedDeltaTime * runSpeed,
                         0.0f);
@@ -174,7 +177,7 @@ namespace Services.CharacterServices.MovingScripts
             }
             else if ((key1 == KeyCode.W && key2 == KeyCode.D) || (key1 == KeyCode.D && key2 == KeyCode.W))
             {
-                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                 {
                     movement = new Vector3(Time.fixedDeltaTime * runSpeed, Time.fixedDeltaTime * runSpeed,
                         0.0f);
@@ -190,7 +193,7 @@ namespace Services.CharacterServices.MovingScripts
             }
             else if ((key1 == KeyCode.D && key2 == KeyCode.S) || (key1 == KeyCode.S && key2 == KeyCode.D))
             {
-                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0)
+                if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                 {
                     movement = new Vector3(Time.fixedDeltaTime * runSpeed, -Time.fixedDeltaTime * runSpeed,
                         0.0f);

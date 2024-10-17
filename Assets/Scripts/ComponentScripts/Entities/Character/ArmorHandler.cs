@@ -1,6 +1,5 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
-using NUnit.Framework;
 using UnityEngine;
 
 namespace ComponentScripts.Entities.Character

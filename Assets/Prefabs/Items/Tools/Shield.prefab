@@ -178,4 +178,5 @@ MonoBehaviour:
   amount: 1
   maxAvailableAmount: 1
   itemName: Shield
-  percentOfBlockingDamage: 56.3
+  percentOfBlockingDamage: 60
+  percentOfSlowingCharacter: 60
