@@ -10,13 +10,10 @@ namespace ComponentScripts.Items
 {
     public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        private MainHandPanel _mainHandPanel;
-
-        private SecondHandPanel _secondHandPanel;
-        protected TextMeshProUGUI AmountText;
-        protected Inventory Inventory;
-        protected bool IsPointerOnPanel;
-        protected Image ItemIcon;
+        public TextMeshProUGUI AmountText { get; protected set; }
+        public Inventory Inventory { get; protected set; }
+        public bool IsPointerOnPanel { get; protected set; }
+        public Image ItemIcon { get; protected set; }
 
         protected IItemsDropper ItemsDropper;
 
@@ -25,8 +22,6 @@ namespace ComponentScripts.Items
 
         private void Start()
         {
-            _secondHandPanel = GameObject.Find("SecondHandPanel").GetComponent<SecondHandPanel>();
-            _mainHandPanel = GameObject.Find("MainHandPanel").GetComponent<MainHandPanel>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             ItemIcon = GetComponentInChildren<Image>();
@@ -37,10 +32,6 @@ namespace ComponentScripts.Items
         {
             if (Input.GetKeyDown(KeyCode.Q) && IsPointerOnPanel)
                 HandleDropping();
-            if (Input.GetKeyDown(KeyCode.Mouse0) && IsPointerOnPanel)
-                PutToMainHand();
-            if (Input.GetKeyDown(KeyCode.Mouse1) && IsPointerOnPanel)
-                PutToSecondHand();
         }
 
         private void OnDisable()
@@ -82,40 +73,13 @@ namespace ComponentScripts.Items
                 }
             }
         }
-
-        private void PutToMainHand()
-        {
-            if ((Inventory.Items[PanelIndex] is ToolData || Inventory.Items[PanelIndex] is WeaponData) &&
-                Inventory.MainHand == null)
-            {
-                _mainHandPanel.PanelIndex = PanelIndex;
-                _mainHandPanel.ItemIcon.sprite = ItemIcon.sprite;
-                _mainHandPanel.AmountText.text = AmountText.text;
-                CleanItemPanel();
-                Inventory.MainHand = Inventory.Items[PanelIndex];
-                Inventory.Items[PanelIndex] = null;
-            }
-        }
-
-        private void PutToSecondHand()
-        {
-            if (Inventory.Items[PanelIndex] is ToolData && Inventory.SecondHand == null)
-            {
-                _secondHandPanel.PanelIndex = PanelIndex;
-                _secondHandPanel.ItemIcon.sprite = ItemIcon.sprite;
-                _secondHandPanel.AmountText.text = AmountText.text;
-                CleanItemPanel();
-                Inventory.SecondHand = Inventory.Items[PanelIndex];
-                Inventory.Items[PanelIndex] = null;
-            }
-        }
-
+        
         public void Inject(IItemsDropper dropper)
         {
             ItemsDropper = dropper;
         }
 
-        protected void CleanItemPanel()
+        public void CleanItemPanel()
         {
             ItemIcon.sprite = null;
             AmountText.enabled = false;
