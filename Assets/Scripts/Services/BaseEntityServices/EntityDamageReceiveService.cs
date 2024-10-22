@@ -1,5 +1,6 @@
 using ComponentScripts;
 using ComponentScripts.Entities.Character;
+using UnityEngine;
 
 namespace Services.BaseEntityServices
 {
@@ -7,6 +8,8 @@ namespace Services.BaseEntityServices
     {
         public void ReceiveDamage(Character character, Entity hittedEnemy)
         {
+            character.CountActualDamage();
+            Debug.Log($"Received damage: {character.ActualDamage}");
             hittedEnemy.ActualHealth -= character.ActualDamage;
         }
     }

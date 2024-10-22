@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.Character;
+using ComponentScripts.Entities.Character.InventoryScripts;
 using UnityEngine;
 
 namespace Services.CharacterServices.CharacterAttackScripts
