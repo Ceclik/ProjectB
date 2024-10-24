@@ -5,10 +5,9 @@ namespace ComponentScripts.Items
 {
     public class FunctionalHandsPutter : MonoBehaviour
     {
+        private ItemPanel _itemPanel;
         private MainHandPanel _mainHandPanel;
         private SecondHandPanel _secondHandPanel;
-
-        private ItemPanel _itemPanel;
 
         private void Start()
         {
@@ -17,9 +16,18 @@ namespace ComponentScripts.Items
             _itemPanel = GetComponent<ItemPanel>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && _itemPanel.IsPointerOnPanel)
+                PutToMainHand();
+            if (Input.GetKeyDown(KeyCode.Mouse1) && _itemPanel.IsPointerOnPanel)
+                PutToSecondHand();
+        }
+
         private void PutToMainHand()
         {
-            if ((_itemPanel.Inventory.Items[_itemPanel.PanelIndex] is ToolData || _itemPanel.Inventory.Items[_itemPanel.PanelIndex] is WeaponData) &&
+            if ((_itemPanel.Inventory.Items[_itemPanel.PanelIndex] is ToolData ||
+                 _itemPanel.Inventory.Items[_itemPanel.PanelIndex] is WeaponData) &&
                 _itemPanel.Inventory.MainHand == null)
             {
                 _mainHandPanel.PanelIndex = _itemPanel.PanelIndex;
@@ -31,17 +39,10 @@ namespace ComponentScripts.Items
             }
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && _itemPanel.IsPointerOnPanel)
-                PutToMainHand();
-            if (Input.GetKeyDown(KeyCode.Mouse1) && _itemPanel.IsPointerOnPanel)
-                PutToSecondHand();
-        }
-
         private void PutToSecondHand()
         {
-            if (_itemPanel.Inventory.Items[_itemPanel.PanelIndex] is ToolData && _itemPanel.Inventory.SecondHand == null)
+            if (_itemPanel.Inventory.Items[_itemPanel.PanelIndex] is ToolData &&
+                _itemPanel.Inventory.SecondHand == null)
             {
                 _secondHandPanel.PanelIndex = _itemPanel.PanelIndex;
                 _secondHandPanel.ItemIcon.sprite = _itemPanel.ItemIcon.sprite;

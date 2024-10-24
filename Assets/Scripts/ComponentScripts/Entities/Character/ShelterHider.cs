@@ -7,12 +7,12 @@ namespace ComponentScripts.Entities.Character
     public class ShelterHider : MonoBehaviour
     {
         [SerializeField] private float nextHidingDelayTime;
-        private SpriteRenderer _spriteRenderer;
-        private Collider2D _collider;
-        private float _nextHidingTimer;
         private ActionTextHandler _actionTextHandler;
-        
+        private Collider2D _collider;
+
         private Shelter _enteredShelter;
+        private float _nextHidingTimer;
+        private SpriteRenderer _spriteRenderer;
         public bool IsInShelter { get; private set; }
 
         private void Start()
@@ -25,21 +25,10 @@ namespace ComponentScripts.Entities.Character
 
         private void Update()
         {
-            if(_nextHidingTimer < nextHidingDelayTime + 1 && !IsInShelter)
+            if (_nextHidingTimer < nextHidingDelayTime + 1 && !IsInShelter)
                 _nextHidingTimer += Time.deltaTime;
-            
-            if (Input.GetKeyDown(KeyCode.F) && _enteredShelter != null)
-            {
-                EnterShelter();
-            }
-        }
 
-        private void EnterShelter()
-        {
-            StartCoroutine(DisableHidedState(_enteredShelter.HidingTime));
-            IsInShelter = true;
-            _spriteRenderer.enabled = false;
-            _collider.enabled = false;
+            if (Input.GetKeyDown(KeyCode.F) && _enteredShelter != null) EnterShelter();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -56,6 +45,14 @@ namespace ComponentScripts.Entities.Character
         {
             _enteredShelter = null;
             _actionTextHandler.ActionText.HideActionText(_actionTextHandler.ActionTextElement);
+        }
+
+        private void EnterShelter()
+        {
+            StartCoroutine(DisableHidedState(_enteredShelter.HidingTime));
+            IsInShelter = true;
+            _spriteRenderer.enabled = false;
+            _collider.enabled = false;
         }
 
         private IEnumerator DisableHidedState(float delay)

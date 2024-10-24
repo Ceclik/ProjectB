@@ -1,5 +1,4 @@
 using ComponentScripts.Items;
-using Injectors;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,36 +16,25 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         [SerializeField] private RectTransform secondHandHand;
 
-        private Injector _injector;
-
         private IInventoryUIHandler _uiHandler;
 
         public RectTransform[] Panels { get; private set; }
 
         private void Awake()
         {
-            _injector = GameObject.FindGameObjectWithTag("Injector").GetComponent<Injector>();
             Panels = new RectTransform[inventory.AmountOfSlots];
             for (var i = 0; i < inventory.AmountOfSlots; i++)
             {
                 Panels[i] = Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
                     .GetComponent<RectTransform>();
                 Panels[i].GetComponent<ItemPanel>().PanelIndex = i;
-                _injector.InjectToPanel(Panels[i].GetComponent<ItemPanel>());
             }
-
-            _injector.InjectToPanel(mainHand.GetComponent<MainHandPanel>());
-            _injector.InjectToPanel(secondHandHand.GetComponent<SecondHandPanel>());
         }
 
         private void OnEnable()
         {
+            _uiHandler = new InventoryUIHandlerService();
             _uiHandler.UpdateUI(inventory, Panels);
-        }
-
-        public void Inject(IInventoryUIHandler uiHandler)
-        {
-            _uiHandler = uiHandler;
         }
     }
 }

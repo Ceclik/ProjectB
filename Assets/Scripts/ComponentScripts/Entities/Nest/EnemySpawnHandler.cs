@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ComponentScripts.Entities.Nest
 {
     [RequireComponent(typeof(Nest))]
-    public class EnemySpawnHandler : EntitySpawnHandler
+    public class EnemySpawnHandler : MonoBehaviour
     {
         [Space(10)] [Header("Spawn enemy info")] [SerializeField]
         private GameObject enemyToSpawn;
@@ -19,12 +19,8 @@ namespace ComponentScripts.Entities.Nest
 
         private void Start()
         {
+            _spawner = gameObject.AddComponent<SpawnerService>();
             StartCoroutine(EnemiesSpawner());
-        }
-
-        public void Inject(ISpawner spawner)
-        {
-            _spawner = spawner;
         }
 
         private IEnumerator EnemiesSpawner()
@@ -32,11 +28,8 @@ namespace ComponentScripts.Entities.Nest
             while (gameObject.activeSelf)
             {
                 yield return new WaitForSeconds(spawnFrequency);
-                var spawnedEnemies =
-                    _spawner.SpawnEntities(enemyToSpawn, amountOfEnemiesToSpawn, enemiesParent, transform.position,
-                        distanceFromNest);
-                foreach (var enemy in spawnedEnemies)
-                    InvokeOnEntitySpawnEvent(enemy);
+                _spawner.SpawnEntities(enemyToSpawn, amountOfEnemiesToSpawn, enemiesParent, transform.position,
+                    distanceFromNest);
             }
         }
     }

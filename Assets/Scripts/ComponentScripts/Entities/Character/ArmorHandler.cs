@@ -6,14 +6,14 @@ namespace ComponentScripts.Entities.Character
 {
     public class ArmorHandler : MonoBehaviour
     {
-        private Inventory _inventory;
-        private InventoryOpener _inventoryOpener;
         private CharacterAnimationsSwitcher _animationsSwitcher;
         private CharacterMover _characterMover;
+        private Inventory _inventory;
+        private InventoryOpener _inventoryOpener;
         public bool IsUsingShield { get; private set; }
 
         public float PercentOfBlockingDamage { get; private set; }
-        
+
         public ShieldData ActualShield { get; private set; }
 
         private void Start()
@@ -25,16 +25,6 @@ namespace ComponentScripts.Entities.Character
             _characterMover = GetComponent<CharacterMover>();
         }
 
-        private void SetActualShield(ItemData item)
-        {
-            if (_inventory.SecondHand is ShieldData)
-            {
-                ActualShield = (ShieldData)_inventory.SecondHand;
-                PercentOfBlockingDamage = ActualShield.PercentOfBlockingDamage;
-            }
-                
-        }
-
         private void Update()
         {
             if (_inventory.SecondHand != null && !_inventoryOpener.Inventory.activeSelf)
@@ -42,7 +32,7 @@ namespace ComponentScripts.Entities.Character
                 if (!IsUsingShield && _inventory.SecondHand.Name == "Shield" && Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     IsUsingShield = true;
-                    if(!_characterMover.IsMoving)
+                    if (!_characterMover.IsMoving)
                         _animationsSwitcher.SetIdleShieldAnimation();
                     Debug.Log("Shield On!");
                 }
@@ -50,7 +40,7 @@ namespace ComponentScripts.Entities.Character
                 if (IsUsingShield && Input.GetKeyUp(KeyCode.Mouse1))
                 {
                     IsUsingShield = false;
-                    if(!_characterMover.IsMoving)
+                    if (!_characterMover.IsMoving)
                         _animationsSwitcher.SetFrontIdleAnimation();
                     Debug.Log("Shield off");
                 }
@@ -60,6 +50,15 @@ namespace ComponentScripts.Entities.Character
         private void OnDestroy()
         {
             _inventory.OnSecondHandUpdate -= SetActualShield;
+        }
+
+        private void SetActualShield(ItemData item)
+        {
+            if (_inventory.SecondHand is ShieldData)
+            {
+                ActualShield = (ShieldData)_inventory.SecondHand;
+                PercentOfBlockingDamage = ActualShield.PercentOfBlockingDamage;
+            }
         }
     }
 }

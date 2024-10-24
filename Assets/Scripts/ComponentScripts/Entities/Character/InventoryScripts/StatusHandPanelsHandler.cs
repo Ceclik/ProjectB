@@ -6,8 +6,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 {
     public class StatusHandPanelsHandler : MonoBehaviour
     {
-        [SerializeField] Image mainHandImage;
-        [SerializeField] Image secondHandImage;
+        [SerializeField] private Image mainHandImage;
+        [SerializeField] private Image secondHandImage;
 
         private Inventory _inventory;
 
@@ -18,6 +18,12 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             _inventory.OnSecondHandUpdate += UpdateSecondHand;
         }
 
+        private void OnDestroy()
+        {
+            _inventory.OnMainHandUpdate -= UpdateMainHand;
+            _inventory.OnSecondHandUpdate -= UpdateSecondHand;
+        }
+
         private void UpdateMainHand(ItemData item)
         {
             mainHandImage.sprite = item?.ItemIcon;
@@ -26,12 +32,6 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         private void UpdateSecondHand(ItemData item)
         {
             secondHandImage.sprite = item?.ItemIcon;
-        }
-
-        private void OnDestroy()
-        {
-            _inventory.OnMainHandUpdate -= UpdateMainHand;
-            _inventory.OnSecondHandUpdate -= UpdateSecondHand;
         }
     }
 }

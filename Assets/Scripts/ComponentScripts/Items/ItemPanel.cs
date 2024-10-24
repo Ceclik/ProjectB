@@ -10,18 +10,18 @@ namespace ComponentScripts.Items
 {
     public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        protected IItemsDropper ItemsDropper;
         public TextMeshProUGUI AmountText { get; protected set; }
         public Inventory Inventory { get; protected set; }
         public bool IsPointerOnPanel { get; protected set; }
         public Image ItemIcon { get; protected set; }
 
-        protected IItemsDropper ItemsDropper;
-
         public int PanelIndex { get; set; }
-        
+
 
         private void Start()
         {
+            ItemsDropper = gameObject.AddComponent<ItemDropperService>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
             ItemIcon = GetComponentInChildren<Image>();
@@ -72,11 +72,6 @@ namespace ComponentScripts.Items
                     ItemsDropper.DropItem(itemToSpawn, Inventory.transform.position);
                 }
             }
-        }
-        
-        public void Inject(IItemsDropper dropper)
-        {
-            ItemsDropper = dropper;
         }
 
         public void CleanItemPanel()

@@ -5,16 +5,14 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 {
     public class Inventory : MonoBehaviour
     {
-        [SerializeField] private int amountOfSlots;
-        public ItemData[] Items { get; private set; }
-        
         public delegate void UpdateHandsUI(ItemData item);
 
-        public event UpdateHandsUI OnMainHandUpdate;
-        public event UpdateHandsUI OnSecondHandUpdate;
+        [SerializeField] private int amountOfSlots;
 
         private ItemData _mainHand;
         private ItemData _secondHand;
+        public ItemData[] Items { get; private set; }
+
         public ItemData MainHand
         {
             get => _mainHand;
@@ -22,7 +20,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             {
                 if (_mainHand != value)
                 {
-                    _mainHand = value; 
+                    _mainHand = value;
                     OnMainHandUpdate?.Invoke(value);
                 }
             }
@@ -55,6 +53,9 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             if (Input.GetKeyDown(KeyCode.B))
                 WatchInventory();
         }
+
+        public event UpdateHandsUI OnMainHandUpdate;
+        public event UpdateHandsUI OnSecondHandUpdate;
 
         private void WatchInventory()
         {

@@ -1,4 +1,3 @@
-using System;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,13 +8,15 @@ namespace ComponentScripts.Entities.Character
     public class CharacterHealthHandler : MonoBehaviour
     {
         [SerializeField] private Image healthBar;
+        private ArmorHandler _armorHandler;
         private Character _character;
         private ICharacterDamageReceiver _characterDamageReceiver;
         private ICharacterHealthHandler _healthService;
-        private ArmorHandler _armorHandler;
 
         private void Start()
         {
+            _healthService = gameObject.AddComponent<CharacterHealthHandlerService>();
+            _characterDamageReceiver = gameObject.AddComponent<CharacterDamageReceiveService>();
             _armorHandler = GetComponent<ArmorHandler>();
         }
 
@@ -23,12 +24,6 @@ namespace ComponentScripts.Entities.Character
         {
             _characterDamageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>(), _armorHandler);
             _healthService.UpdateHealthBar(healthBar);
-        }
-
-        public void Inject(ICharacterHealthHandler healthHandler, ICharacterDamageReceiver characterDamageReceiver)
-        {
-            _healthService = healthHandler;
-            _characterDamageReceiver = characterDamageReceiver;
         }
 
         private void IncreaseHealthForBonusUse()

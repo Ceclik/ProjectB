@@ -1,5 +1,4 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
-using ComponentScripts.Items.Weapons;
 using DataClasses;
 using UnityEngine;
 
@@ -10,17 +9,17 @@ namespace ComponentScripts.Entities.Character
         [Space(10)] [Header("Character's stats")] [SerializeField]
         private int coins;
 
+        private Inventory _inventory;
+
         private int _experienceLevel { get; }
         private int _experienceAmount { get; set; }
         public int ActualMaxHealth { get; private set; }
         public int ActualDamage { get; private set; }
 
-        private Inventory _inventory;
-
         private void Start()
         {
             _inventory = GetComponent<Inventory>();
-            
+
             CountActualMaxHealth();
             CountActualDamage();
             ActualHealth = ActualMaxHealth;
@@ -36,7 +35,7 @@ namespace ComponentScripts.Entities.Character
             ActualDamage = BaseDamage;
             if (_inventory.MainHand is { Name: "Sword" })
             {
-                WeaponData swordData = (WeaponData)_inventory.MainHand;
+                var swordData = (WeaponData)_inventory.MainHand;
                 ActualDamage += swordData.AdditionalDamage;
             }
         }

@@ -1,18 +1,18 @@
+using System;
 using ComponentScripts;
 using ComponentScripts.Entities.Character;
-using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.Enemies;
 using UnityEngine;
 
 namespace Services.CharacterServices.CharacterStatsScripts
 {
-    public class CharacterDamageReceiveService : ICharacterDamageReceiver
+    public class CharacterDamageReceiveService : MonoBehaviour, ICharacterDamageReceiver
     {
         private ICharacterHealthHandler _characterHealthHandler;
 
-        public void Inject(ICharacterHealthHandler characterHealthHandler)
+        private void Start()
         {
-            _characterHealthHandler = characterHealthHandler;
+            _characterHealthHandler = gameObject.AddComponent<CharacterHealthHandlerService>();
         }
 
         public void ReceiveDamage(ActiveEntity hitEntity, ArmorHandler armorHandler)
@@ -27,6 +27,7 @@ namespace Services.CharacterServices.CharacterStatsScripts
                     Debug.Log($"Received damage is: {receivedDamage}");
                     return;
                 }
+
                 receivedDamage = hitEntity.BaseDamage;
                 _characterHealthHandler.DecreaseHealthValue(receivedDamage);
                 Debug.Log($"Received damage is: {receivedDamage}");

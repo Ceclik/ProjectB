@@ -17,21 +17,22 @@ namespace ComponentScripts.Entities.Character
         private float runSpeed;
 
         [SerializeField] private float runStaminaDecreasingValuePerFrame;
+        private CharacterAnimationsSwitcher _animationSwitcher;
+        private ArmorHandler _armorHandler;
         private Character _character;
-        private InventoryOpener _inventoryOpener;
         private Inventory _inventory;
+        private InventoryOpener _inventoryOpener;
+
+        private bool _isCharacterFlipped;
         private IPlayerMover _mover;
         private float _movingSpeed;
-        private CharacterAnimationsSwitcher _animationSwitcher;
         private Rigidbody2D _rigidbody;
         private ShelterHider _shelterHider;
-        private ArmorHandler _armorHandler;
-        
-        private bool _isCharacterFlipped;
         public bool IsMoving { get; private set; }
 
         private void Start()
         {
+            _mover = gameObject.AddComponent<PlayerMoverService>();
             _armorHandler = GetComponent<ArmorHandler>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();
@@ -42,93 +43,10 @@ namespace ComponentScripts.Entities.Character
             _inventory = GetComponent<Inventory>();
         }
 
-        private void CountMovingSpeed()
-        {
-            _movingSpeed = _character.BaseMovingSpeed;
-            if (_armorHandler.IsUsingShield)
-            {
-                _movingSpeed *= (100 - _armorHandler.ActualShield.PercentOfSlowingCharacter) / 100;
-            }
-        }
-
-        private void SetIdleAnimation()
-        {
-            if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.W))
-            {
-                
-                if (_isCharacterFlipped)
-                {
-                    FlipCharacterHorizontal();
-                    _isCharacterFlipped = false;
-                }
-                
-                _animationSwitcher.SetBackIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.S))
-            {
-                if (_isCharacterFlipped)
-                {
-                    FlipCharacterHorizontal();
-                    _isCharacterFlipped = false;
-                }
-                _animationSwitcher.SetFrontIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.W) && Input.GetKeyUp(KeyCode.D))
-            {
-                _animationSwitcher.SetBackIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.D) && Input.GetKeyUp(KeyCode.S))
-            {
-                _animationSwitcher.SetFrontIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.A))
-            {
-                if (_isCharacterFlipped)
-                {
-                    FlipCharacterHorizontal();
-                    _isCharacterFlipped = false;
-                }
-                _animationSwitcher.SetFrontIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.W))
-            {
-                _animationSwitcher.SetBackIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.S))
-            {   
-                _animationSwitcher.SetFrontIdleAnimation();
-            }
-            
-            else if (Input.GetKeyUp(KeyCode.D))
-            {
-                _animationSwitcher.SetFrontIdleAnimation();
-            }
-
-            _rigidbody.velocity = Vector2.zero;
-            IsMoving = false;
-        }
-
-        private void FlipCharacterHorizontal()
-        {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1); 
-        }
-
-        private void LateUpdate()
-        {
-            SetIdleAnimation();
-        }
-
         private void Update()
         {
             CountMovingSpeed();
             if (!_shelterHider.IsInShelter)
-            {
                 if (Input.anyKey && !_inventoryOpener.Inventory.activeSelf)
                 {
                     KeyCode keyCode;
@@ -136,8 +54,10 @@ namespace ComponentScripts.Entities.Character
                     if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
                     {
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, KeyCode.A, KeyCode.W, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(KeyCode.A, KeyCode.W, _movingSpeed, transform, runSpeed,
@@ -157,8 +77,10 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
                     {
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, KeyCode.A, KeyCode.S, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(KeyCode.A, KeyCode.S, _movingSpeed, transform, runSpeed,
@@ -178,8 +100,10 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
                     {
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, KeyCode.W, KeyCode.D, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(KeyCode.W, KeyCode.D, _movingSpeed, transform, runSpeed,
@@ -192,8 +116,10 @@ namespace ComponentScripts.Entities.Character
                     else if (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.S))
                     {
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, KeyCode.D, KeyCode.S, tugSpeed, tugDelay,
                                 tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(KeyCode.D, KeyCode.S, _movingSpeed, transform, runSpeed,
@@ -207,7 +133,9 @@ namespace ComponentScripts.Entities.Character
                     {
                         keyCode = KeyCode.A;
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
@@ -227,7 +155,9 @@ namespace ComponentScripts.Entities.Character
                     {
                         keyCode = KeyCode.W;
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
@@ -240,11 +170,13 @@ namespace ComponentScripts.Entities.Character
                     {
                         keyCode = KeyCode.S;
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                            if(Input.GetKey(KeyCode.Mouse1) && _inventory.SecondHand is ShieldData)
+                            if (Input.GetKey(KeyCode.Mouse1) && _inventory.SecondHand is ShieldData)
                                 _animationSwitcher.SetFrontWalkShieldAnimation();
                             else
                                 _animationSwitcher.SetFrontWalkAnimation();
@@ -256,7 +188,9 @@ namespace ComponentScripts.Entities.Character
                     {
                         keyCode = KeyCode.D;
                         if (Input.GetKeyDown(KeyCode.Space) && !_armorHandler.IsUsingShield)
+                        {
                             _mover.MakeTug(transform, keyCode, tugSpeed, tugDelay, tugStaminaDecreaseValue);
+                        }
                         else
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
@@ -265,12 +199,87 @@ namespace ComponentScripts.Entities.Character
                         }
                     }
                 }
-            }
         }
 
-        public void Inject(IPlayerMover mover)
+        private void LateUpdate()
         {
-            _mover = mover;
+            SetIdleAnimation();
+        }
+
+        private void CountMovingSpeed()
+        {
+            _movingSpeed = _character.BaseMovingSpeed;
+            if (_armorHandler.IsUsingShield)
+                _movingSpeed *= (100 - _armorHandler.ActualShield.PercentOfSlowingCharacter) / 100;
+        }
+
+        private void SetIdleAnimation()
+        {
+            if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.W))
+            {
+                if (_isCharacterFlipped)
+                {
+                    FlipCharacterHorizontal();
+                    _isCharacterFlipped = false;
+                }
+
+                _animationSwitcher.SetBackIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.A) && Input.GetKeyUp(KeyCode.S))
+            {
+                if (_isCharacterFlipped)
+                {
+                    FlipCharacterHorizontal();
+                    _isCharacterFlipped = false;
+                }
+
+                _animationSwitcher.SetFrontIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.W) && Input.GetKeyUp(KeyCode.D))
+            {
+                _animationSwitcher.SetBackIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.D) && Input.GetKeyUp(KeyCode.S))
+            {
+                _animationSwitcher.SetFrontIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.A))
+            {
+                if (_isCharacterFlipped)
+                {
+                    FlipCharacterHorizontal();
+                    _isCharacterFlipped = false;
+                }
+
+                _animationSwitcher.SetFrontIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                _animationSwitcher.SetBackIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.S))
+            {
+                _animationSwitcher.SetFrontIdleAnimation();
+            }
+
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                _animationSwitcher.SetFrontIdleAnimation();
+            }
+
+            _rigidbody.velocity = Vector2.zero;
+            IsMoving = false;
+        }
+
+        private void FlipCharacterHorizontal()
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
         }
     }
 }

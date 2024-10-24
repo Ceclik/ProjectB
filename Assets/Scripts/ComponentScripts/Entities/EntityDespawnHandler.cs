@@ -10,6 +10,7 @@ namespace ComponentScripts.Entities
 
         private void Start()
         {
+            _despawner = gameObject.AddComponent<EntityDespawnerService>();
             _entity = GetComponent<Entity>();
         }
 
@@ -17,11 +18,6 @@ namespace ComponentScripts.Entities
         {
             if (_entity.ActualHealth <= 0)
                 _despawner.Despawn(gameObject);
-        }
-
-        public void Inject(IDespawner despawner)
-        {
-            _despawner = despawner;
         }
     }
 }

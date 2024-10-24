@@ -7,12 +7,13 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
     public class ItemsPicker : MonoBehaviour
     {
         private Item _involvedItem;
+        private bool _isOnItem;
         private IPutterToInventory _putterToInventory;
         private ActionTextHandler _textHandler;
-        private bool _isOnItem;
 
         private void Start()
         {
+            _putterToInventory = new PutterToInventoryService();
             _textHandler = GetComponent<ActionTextHandler>();
         }
 
@@ -44,11 +45,6 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
                 _textHandler.ActionText.HideActionText(_textHandler.ActionTextElement);
                 _isOnItem = false;
             }
-        }
-
-        public void Inject(IPutterToInventory putterToInventory)
-        {
-            _putterToInventory = putterToInventory;
         }
     }
 }

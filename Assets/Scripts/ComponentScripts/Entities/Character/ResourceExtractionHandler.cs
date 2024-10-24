@@ -10,8 +10,8 @@ namespace ComponentScripts.Entities.Character
         [SerializeField] private float maxDistanceForExtract;
         private Character _character;
         private Inventory _inventory;
-        private IResourceExtractor _resourceExtractor;
         private InventoryOpener _inventoryOpener;
+        private IResourceExtractor _resourceExtractor;
 
         private void Start()
         {
@@ -23,7 +23,8 @@ namespace ComponentScripts.Entities.Character
 
         private void Update()
         {
-            if (!_inventoryOpener.Inventory.activeSelf && Input.GetKeyDown(KeyCode.Mouse0) && _inventory.MainHand is ToolData)
+            if (!_inventoryOpener.Inventory.activeSelf && Input.GetKeyDown(KeyCode.Mouse0) &&
+                _inventory.MainHand is ToolData)
             {
                 var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character);

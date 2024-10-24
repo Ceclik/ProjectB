@@ -124,11 +124,9 @@ namespace Services.CharacterServices.InventoryScripts
             if (receivedItem is Weapon)
                 return new WeaponData((Weapon)receivedItem);
             if (receivedItem is Tool)
-            {
                 return (Tool)receivedItem is Shield
                     ? new ShieldData((Shield)receivedItem)
                     : new ToolData((Tool)receivedItem);
-            }
             if (receivedItem is Ingredient)
                 return new IngredientData((Ingredient)receivedItem);
             return null;

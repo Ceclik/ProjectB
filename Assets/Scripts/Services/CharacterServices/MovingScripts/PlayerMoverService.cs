@@ -8,14 +8,13 @@ namespace Services.CharacterServices.MovingScripts
 {
     public class PlayerMoverService : MonoBehaviour, IPlayerMover
     {
+        private ArmorHandler _armorHandler;
         private CameraCharacterFollower _camera;
 
         private Rigidbody2D _rigidbody;
         private IStaminaHandler _staminaHandler;
         private CharacterStaminaHandler _staminaValues;
         private float _tugTimer;
-
-        private ArmorHandler _armorHandler;
 
         private void Start()
         {
@@ -121,7 +120,7 @@ namespace Services.CharacterServices.MovingScripts
 
                     break;
                 case KeyCode.D:
-                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield) 
+                    if (Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 && !_armorHandler.IsUsingShield)
                     {
                         movement = new Vector3(Time.fixedDeltaTime * runSpeed, 0.0f, 0.0f);
                         _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);

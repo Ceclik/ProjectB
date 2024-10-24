@@ -14,11 +14,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         private void Start()
         {
             actionText.gameObject.SetActive(false);
-        }
-
-        public void Inject(IActionTextHandler handler)
-        {
-            ActionText = handler;
+            ActionText = new ActionTextHandlerService();
         }
     }
 }

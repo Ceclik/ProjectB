@@ -17,11 +17,6 @@ namespace ComponentScripts.Entities
             _selfEntity = GetComponent<Entity>();
         }
 
-        public void Inject(IEntityDamageReceiver entityDamageReceiver)
-        {
-            _entityDamageReceiver = entityDamageReceiver;
-        }
-
         public void ReceiveCharacterAttack(Character.Character character)
         {
             _entityDamageReceiver.ReceiveDamage(character, _selfEntity);
