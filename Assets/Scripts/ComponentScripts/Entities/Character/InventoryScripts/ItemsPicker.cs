@@ -31,7 +31,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             if (other.TryGetComponent(out Item droppedItem))
             {
                 _involvedItem = droppedItem;
-                _textHandler.ActionText.ShowActionText("Press 'f' to pick object", _textHandler.ActionTextElement);
+                _textHandler.ActionText.ShowActionText("Націсніце 'f' каб падабраць прадмет",
+                    _textHandler.ActionTextElement);
                 _isOnItem = true;
             }
         }

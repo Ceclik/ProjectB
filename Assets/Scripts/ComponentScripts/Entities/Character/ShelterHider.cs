@@ -35,7 +35,7 @@ namespace ComponentScripts.Entities.Character
         {
             if (_nextHidingTimer > nextHidingDelayTime && other.TryGetComponent(out Shelter shelter))
             {
-                _actionTextHandler.ActionText.ShowActionText("Press 'f' to enter shelter",
+                _actionTextHandler.ActionText.ShowActionText("Націсніце 'f' каб увайсці ў сховішча",
                     _actionTextHandler.ActionTextElement);
                 _enteredShelter = shelter;
             }
