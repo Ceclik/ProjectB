@@ -14,7 +14,10 @@ namespace ComponentScripts.Entities.Character
         private CharacterAttackHandler _attackHandler;
         private ResourceExtractionHandler _resourceExtraction;
         private Character _health;
+        private CharacterHealthHandler _healthHandler;
         private InventoryOpener _inventoryOpener;
+        
+        public bool IsDead { get; private set; }
 
         private void Start()
         {
@@ -23,12 +26,14 @@ namespace ComponentScripts.Entities.Character
             _attackHandler = GetComponent<CharacterAttackHandler>();
             _resourceExtraction = GetComponent<ResourceExtractionHandler>();
             _inventoryOpener = GetComponent<InventoryOpener>();
+            _healthHandler = GetComponent<CharacterHealthHandler>();
         }
 
         private void FixedUpdate()
         {
-            if (_health.ActualHealth <= 0)
+            if (_health.ActualHealth <= 0 && !IsDead)
             {
+                IsDead = true;
                 deathPanel.SetActive(true);
                 mainHandPanel.SetActive(false);
                 secondHandPanel.SetActive(false);
@@ -38,6 +43,23 @@ namespace ComponentScripts.Entities.Character
                 _resourceExtraction.enabled = false;
                 _inventoryOpener.enabled = false;
             }
+        }
+
+        public void Reborn()
+        {
+            IsDead = false;
+            
+            _health.ActualHealth = _health.ActualMaxHealth;
+            _healthHandler.HealthService.UpdateHealthBar(_healthHandler.HealthBar);
+            
+            deathPanel.SetActive(false);
+            mainHandPanel.SetActive(true);
+            secondHandPanel.SetActive(true);
+
+            _mover.enabled = true;
+            _attackHandler.enabled = true;
+            _resourceExtraction.enabled = true;
+            _inventoryOpener.enabled = true;
         }
     }
 }
