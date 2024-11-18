@@ -18,10 +18,11 @@ namespace Services.CharacterServices.MovingScripts
 
         private void Start()
         {
+            _staminaHandler = gameObject.AddComponent<StaminaHandlerService>();
             _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraCharacterFollower>();
             _staminaValues =
                 GameObject.FindGameObjectWithTag("Player")
-                    .GetComponent<CharacterStaminaHandler>(); //TODO remake for multiplayer
+                    .GetComponent<CharacterStaminaHandler>(); 
             _armorHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<ArmorHandler>();
             _rigidbody = _staminaValues.GetComponent<Rigidbody2D>();
         }
@@ -30,12 +31,7 @@ namespace Services.CharacterServices.MovingScripts
         {
             _tugTimer += Time.deltaTime;
         }
-
-        public void Inject(IStaminaHandler staminaHandler)
-        {
-            _staminaHandler = staminaHandler;
-        }
-
+        
         public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay,
             float staminaDecreaseValue)
         {
@@ -207,6 +203,11 @@ namespace Services.CharacterServices.MovingScripts
                     _rigidbody.MovePosition(_rigidbody.position + (Vector2)movement);
                 }
             }
+        }
+
+        public void Inject(IStaminaHandler staminaHandler)
+        {
+            _staminaHandler = staminaHandler;
         }
 
         public void MakeTug(Transform characterTransform, KeyCode key, float tugSpeed, float tugDelay,
