@@ -18255,6 +18255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColoradoBug
       objectReference: {fileID: 0}
+    - target: {fileID: 8042816585482338127, guid: f6ba122e4e60ebc1da1989cc40161f6a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23604,14 +23608,6 @@ PrefabInstance:
     - target: {fileID: 3049767752806522655, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
       propertyPath: m_Name
       value: ColoradoBugNest
-      objectReference: {fileID: 0}
-    - target: {fileID: 3049767752806522655, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5043465847368198257, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
-      propertyPath: m_Constraints
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6119267367958935044, guid: 882e6e721bec604ec99fff96374b2a10, type: 3}
       propertyPath: m_LocalPosition.x

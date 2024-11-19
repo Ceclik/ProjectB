@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Services.BaseEntityServices;
 using UnityEngine;
 
@@ -14,12 +16,15 @@ namespace ComponentScripts.Entities.Nest
         [SerializeField] private int amountOfEnemiesToSpawn;
         [SerializeField] private Transform enemiesParent;
         [SerializeField] private float distanceFromNest;
+        [SerializeField] private int maxNestSpawnedAmount;
 
         private ISpawner _spawner;
+        private List<GameObject> _spawnedEnemies;
 
         private void Start()
         {
             _spawner = gameObject.AddComponent<SpawnerService>();
+            _spawnedEnemies = new List<GameObject>();
             StartCoroutine(EnemiesSpawner());
         }
 
@@ -28,8 +33,27 @@ namespace ComponentScripts.Entities.Nest
             while (gameObject.activeSelf)
             {
                 yield return new WaitForSeconds(spawnFrequency);
-                _spawner.SpawnEntities(enemyToSpawn, amountOfEnemiesToSpawn, enemiesParent, transform.position,
-                    distanceFromNest);
+                
+                foreach (var enemy in _spawnedEnemies.ToList())
+                    if (enemy == null)
+                        _spawnedEnemies.Remove(enemy);
+                
+                if (_spawnedEnemies.Count < maxNestSpawnedAmount)
+                {
+                    int actualAmountToSpawn = maxNestSpawnedAmount - _spawnedEnemies.Count > 3
+                        ? amountOfEnemiesToSpawn
+                        : maxNestSpawnedAmount - _spawnedEnemies.Count;
+                    
+                    foreach (var enemy in _spawner.SpawnEntities(enemyToSpawn, actualAmountToSpawn, enemiesParent,
+                                 transform.position,
+                                 distanceFromNest))
+                    {
+                        if(enemy != null)
+                            _spawnedEnemies.Add(enemy.gameObject);
+                        
+                    }
+                }
+
             }
         }
     }
