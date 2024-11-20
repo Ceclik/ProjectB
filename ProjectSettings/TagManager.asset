@@ -7,6 +7,8 @@ TagManager:
   - ItemsParent
   - ItemsSpawner
   - Injector
+  - Woods
+  - Field
   layers:
   - Default
   - TransparentFX
