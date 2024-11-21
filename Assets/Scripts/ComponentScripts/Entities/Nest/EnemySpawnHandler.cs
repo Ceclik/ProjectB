@@ -18,6 +18,8 @@ namespace ComponentScripts.Entities.Nest
         [SerializeField] private float distanceFromNest;
         [SerializeField] private int maxNestSpawnedAmount;
 
+        [Space(10)] [SerializeField] private bool allowSpawn;
+
         private ISpawner _spawner;
         private List<GameObject> _spawnedEnemies;
 
@@ -38,7 +40,7 @@ namespace ComponentScripts.Entities.Nest
                     if (enemy == null)
                         _spawnedEnemies.Remove(enemy);
                 
-                if (_spawnedEnemies.Count < maxNestSpawnedAmount)
+                if (allowSpawn &&  _spawnedEnemies.Count < maxNestSpawnedAmount)
                 {
                     int actualAmountToSpawn = maxNestSpawnedAmount - _spawnedEnemies.Count > 3
                         ? amountOfEnemiesToSpawn

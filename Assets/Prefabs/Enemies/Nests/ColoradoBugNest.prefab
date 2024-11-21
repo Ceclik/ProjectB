@@ -302,6 +302,7 @@ MonoBehaviour:
   enemiesParent: {fileID: 0}
   distanceFromNest: 2.5
   maxNestSpawnedAmount: 6
+  allowSpawn: 1
 --- !u!50 &5043465847368198257
 Rigidbody2D:
   serializedVersion: 4
