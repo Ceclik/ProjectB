@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace ComponentScripts.Entities.Nest
         [SerializeField] private int maxNestSpawnedAmount;
 
         [Space(10)] [SerializeField] private bool allowSpawn;
+        [SerializeField] private float maxDistanceToSpawn;
+        [SerializeField] private Transform character;
 
         private ISpawner _spawner;
         private List<GameObject> _spawnedEnemies;
@@ -28,6 +31,22 @@ namespace ComponentScripts.Entities.Nest
             _spawner = gameObject.AddComponent<SpawnerService>();
             _spawnedEnemies = new List<GameObject>();
             StartCoroutine(EnemiesSpawner());
+        }
+
+        private float CountDistance(float deltaX, float deltaY)
+        {
+            return Mathf.Sqrt(Mathf.Abs(deltaX * deltaX) + Mathf.Abs(deltaY * deltaY));
+        }
+
+        private void FixedUpdate()
+        {
+            float deltaX = transform.position.x - character.position.x;
+            float deltaY = transform.position.y - character.position.y;
+            if (CountDistance(deltaX, deltaY) > maxDistanceToSpawn)
+            {
+                allowSpawn = false;
+            }
+            else allowSpawn = true;
         }
 
         private IEnumerator EnemiesSpawner()
