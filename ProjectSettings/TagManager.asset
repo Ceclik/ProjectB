@@ -9,6 +9,7 @@ TagManager:
   - Injector
   - Woods
   - Field
+  - SwampBorder
   layers:
   - Default
   - TransparentFX
