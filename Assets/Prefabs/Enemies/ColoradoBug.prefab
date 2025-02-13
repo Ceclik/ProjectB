@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8712582576498004798}
   - component: {fileID: 3997092587664617297}
   - component: {fileID: 6683027269356497774}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 7904817070381058334}
   - component: {fileID: 2860590157906684381}
   - component: {fileID: 4839708092324896924}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 6760743799907473701}
   - component: {fileID: 5863370763674227307}
   - component: {fileID: 2975495117637341430}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -267,10 +267,11 @@ GameObject:
   - component: {fileID: 1587352494559531864}
   - component: {fileID: 2732028049764048191}
   - component: {fileID: -4109572238846228226}
+  - component: {fileID: -1632219399972313034}
   - component: {fileID: 7034512452023582273}
   - component: {fileID: 6725100188526272182}
   - component: {fileID: 3881925276837584921}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ColoradoBug
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealthPoints: 30
-  baseMovingSpeed: 0
+  baseMovingSpeed: 2
   baseDamage: 5
 --- !u!114 &1587352494559531864
 MonoBehaviour:
@@ -402,6 +403,19 @@ MonoBehaviour:
   healthBar: {fileID: 4839708092324896924}
   healthBarFadeDelay: 3
   healthBarFadeDuration: 1
+--- !u!114 &-1632219399972313034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ad1687c452443c927cbaee2e104b3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointStayDelay: 1.5
 --- !u!58 &7034512452023582273
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -464,7 +478,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 0
 --- !u!95 &3881925276837584921
 Animator:
   serializedVersion: 7

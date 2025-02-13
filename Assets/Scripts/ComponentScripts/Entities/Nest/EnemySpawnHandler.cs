@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ComponentScripts.Entities.Enemies;
 using Services.BaseEntityServices;
 using UnityEngine;
 
@@ -21,13 +21,14 @@ namespace ComponentScripts.Entities.Nest
 
         [Space(10)] [SerializeField] private bool allowSpawn;
         [SerializeField] private float maxDistanceToSpawn;
-        [SerializeField] private Transform character;
+        private Transform _character;
 
         private ISpawner _spawner;
         private List<GameObject> _spawnedEnemies;
 
         private void Start()
         {
+            _character = GameObject.FindGameObjectWithTag("Player").transform;
             _spawner = gameObject.AddComponent<SpawnerService>();
             _spawnedEnemies = new List<GameObject>();
             StartCoroutine(EnemiesSpawner());
@@ -40,9 +41,9 @@ namespace ComponentScripts.Entities.Nest
 
         private void FixedUpdate()
         {
-            float deltaX = transform.position.x - character.position.x;
-            float deltaY = transform.position.y - character.position.y;
-            if (CountDistance(deltaX, deltaY) > maxDistanceToSpawn)
+            float deltaX = transform.position.x - _character.position.x;
+            float deltaY = transform.position.y - _character.position.y;
+            if (allowSpawn && CountDistance(deltaX, deltaY) > maxDistanceToSpawn)
             {
                 allowSpawn = false;
             }
@@ -69,9 +70,12 @@ namespace ComponentScripts.Entities.Nest
                                  transform.position,
                                  distanceFromNest))
                     {
-                        if(enemy != null)
+                        if (enemy != null)
+                        {
+                            enemy.GetComponent<Enemy>().Nest = transform;
                             _spawnedEnemies.Add(enemy.gameObject);
-                        
+                        }
+
                     }
                 }
 
