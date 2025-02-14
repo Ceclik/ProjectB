@@ -32,7 +32,6 @@ namespace Services.CharacterServices.CharacterStatsScripts
 
         public void UpdateHealthBar(Image healthBar)
         {
-            Debug.Log($"Actual character's health: {_character.ActualHealth}");
             healthBar.fillAmount = (float)_character.ActualHealth * 100 / _character.ActualMaxHealth / 100;
         }
     }

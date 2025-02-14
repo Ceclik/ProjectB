@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 8097871233249022450}
   - component: {fileID: 2886738183505659719}
   - component: {fileID: 7828425411637811239}
+  - component: {fileID: 7097539620877335113}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -311,6 +312,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -348,7 +350,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!50 &2882690374880320138
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -359,8 +361,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_LinearDamping: 0
+  m_AngularDamping: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -499,3 +501,19 @@ PolygonCollider2D:
       - {x: 0.21679941, y: 0.14422558}
       - {x: 0.22085945, y: 0.16669783}
   m_UseDelaunayMesh: 0
+--- !u!114 &7097539620877335113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148796774931624848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 0.5489853, y: 0.56415063, z: 4}
+  m_Center: {x: -0.011792332, y: 0.030442208, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

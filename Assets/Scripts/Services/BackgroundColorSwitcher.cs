@@ -33,7 +33,6 @@ namespace Services
 
         public void ChangeBackgroundColor(Location location)
         {
-            Debug.Log($"In change color!, location: {location}");
             _newColor = location == Location.Woods ? woodsBackgroundColor : fieldBackgroundColor;
             _isChanging = true;
             _elapsedTime = 0;

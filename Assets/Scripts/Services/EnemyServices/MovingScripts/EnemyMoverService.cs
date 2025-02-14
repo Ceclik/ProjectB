@@ -1,27 +1,45 @@
 ﻿using System.Collections;
 using ComponentScripts.Entities.Enemies;
+using Interfaces.EnemyInterfaces.MovingInterfaces;
 using UnityEngine;
+using UnityEngine.AI;
 
-namespace Services.CharacterServices.MovingScripts
+namespace Services.EnemyServices.MovingScripts
 {
     public class EnemyMoverService : MonoBehaviour, IEnemyMover
     {
-        public void Move(Vector2 targetPosition, Rigidbody2D rigidBody, float movingSpeed, float speedIncrease = 0)
+        private bool _isSpeedIncreased;
+        private float _lastSpeedIncreaseValue;
+        public void Move(Vector2 targetPosition, Rigidbody2D rigidBody, float movingSpeed, NavMeshAgent agent, float speedIncrease = 0)
         {
-            var currentPosition = rigidBody.position;
-            var direction = (targetPosition - currentPosition).normalized;
-            var movement = direction * (movingSpeed + speedIncrease) * Time.fixedDeltaTime;
-            rigidBody.MovePosition(currentPosition + movement);
-
-            if (movement != Vector2.zero)
+            if (!_isSpeedIncreased && speedIncrease > 0)
             {
-                var angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg - 90;
+                _isSpeedIncreased = true;
+                agent.speed += speedIncrease;
+                _lastSpeedIncreaseValue = speedIncrease;
+            }
+            
+            if (_isSpeedIncreased && speedIncrease == 0)
+            {
+                _isSpeedIncreased = false;
+                agent.speed -= _lastSpeedIncreaseValue;
+            }
+            
+            agent.SetDestination(targetPosition);
+           
+            var nextPosition = new Vector2(agent.nextPosition.x, agent.nextPosition.y);
+            rigidBody.MovePosition(nextPosition);
+            
+            Vector2 direction = nextPosition - rigidBody.position;
+            if (direction != Vector2.zero)
+            {
+                var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
                 rigidBody.rotation = angle;
             }
         }
 
         public void HandleMoving(Enemy enemy, Transform selfTransform, Transform[] points, ref int currentPointIndex,
-            Rigidbody2D rigidBody, Animator animator, float onPointStayDelay)
+            Rigidbody2D rigidBody, Animator animator, float onPointStayDelay, NavMeshAgent agent)
         {
             if (!enemy.IsFollowing &&
                 Vector2.Distance(selfTransform.position, points[currentPointIndex].position) < 0.1f) //enter idle state
@@ -29,7 +47,7 @@ namespace Services.CharacterServices.MovingScripts
                 enemy.IsMoving = false;
                 enemy.IsStaying = true;
                 rigidBody.freezeRotation = true;
-                rigidBody.isKinematic = true;
+                rigidBody.bodyType = RigidbodyType2D.Kinematic;
                 animator.ResetTrigger("Move");
                 animator.SetTrigger("Stop");
                 currentPointIndex = CountNextPointIndex(currentPointIndex, points.Length);
@@ -37,7 +55,7 @@ namespace Services.CharacterServices.MovingScripts
             }
 
             if (enemy.IsMoving) //moving action
-                Move(points[currentPointIndex].position, rigidBody, enemy.BaseMovingSpeed);
+                Move(points[currentPointIndex].position, rigidBody, enemy.BaseMovingSpeed, agent);
         }
 
         public int CountNextPointIndex(int currentIndex, int pointsAmount)
@@ -56,7 +74,7 @@ namespace Services.CharacterServices.MovingScripts
         {
             yield return new WaitForSeconds(onPointStayDelay);
             rigidBody.freezeRotation = false;
-            rigidBody.isKinematic = false;
+            rigidBody.bodyType = RigidbodyType2D.Dynamic;
             animator.SetTrigger("Move");
             animator.ResetTrigger("Stop");
             enemy.IsMoving = true;

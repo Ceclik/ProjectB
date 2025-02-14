@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5999805992330579185}
   - component: {fileID: 4355447812030362256}
   - component: {fileID: 1706783011085087407}
+  - component: {fileID: 277807523621852710}
   m_Layer: 0
   m_Name: Fence-right
   m_TagString: Untagged
@@ -52,6 +53,7 @@ SpriteRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -142,3 +144,19 @@ PolygonCollider2D:
       - {x: 0.7293023, y: -0.30163115}
       - {x: 0.72976387, y: 0.4347599}
   m_UseDelaunayMesh: 0
+--- !u!114 &277807523621852710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076738985264331664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa0352a4d56abd42ad2fc69deb72448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 1.4848518, y: 1.0017705, z: 4}
+  m_Center: {x: -0.007715225, y: 0.0008852482, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff

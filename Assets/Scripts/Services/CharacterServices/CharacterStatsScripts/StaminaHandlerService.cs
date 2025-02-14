@@ -46,7 +46,6 @@ namespace Services.CharacterServices.CharacterStatsScripts
             if (!_isDecreasing) _isDecreasing = true;
             _lastStaminaDecreaseTimer = 0;
             _characterStamina.Stamina -= decreasingValue;
-            Debug.Log($"Current stamina value: {_characterStamina.Stamina}");
             UpdateStaminaBar();
         }
 
@@ -56,7 +55,6 @@ namespace Services.CharacterServices.CharacterStatsScripts
             {
                 yield return new WaitForFixedUpdate();
                 _characterStamina.Stamina += increasingValue;
-                Debug.Log($"Current stamina value: {_characterStamina.Stamina}");
                 UpdateStaminaBar();
             }
         }

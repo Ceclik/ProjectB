@@ -36,16 +36,10 @@ namespace ComponentScripts.Entities.Nest
 
         private void FixedUpdate()
         {
-            var deltaX = transform.position.x - _character.position.x;
-            var deltaY = transform.position.y - _character.position.y;
-            if (allowSpawn && CountDistance(deltaX, deltaY) > maxDistanceToSpawn)
+            if (allowSpawn && Vector2.Distance(transform.position, _character.position) > maxDistanceToSpawn)
                 allowSpawn = false;
-            else allowSpawn = true;
-        }
-
-        private float CountDistance(float deltaX, float deltaY)
-        {
-            return Mathf.Sqrt(Mathf.Abs(deltaX * deltaX) + Mathf.Abs(deltaY * deltaY));
+            if (!allowSpawn && Vector2.Distance(transform.position, _character.position) < maxDistanceToSpawn)
+                allowSpawn = true;
         }
 
         private IEnumerator EnemiesSpawner()
