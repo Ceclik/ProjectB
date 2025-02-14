@@ -14,7 +14,6 @@ namespace Injectors
             playerMover.Inject(staminaHandler);
 
             ICharacterHealthHandler characterHealthHandlerI = gameObject.AddComponent<CharacterHealthHandlerService>();
-            
         }
     }
 }

@@ -7,6 +7,11 @@ namespace DataClasses
     {
         private float _actualDurability;
 
+        public ToolData(Tool otherTool) : base(otherTool)
+        {
+            ActualDurability = otherTool.ActualDurability;
+        }
+
         public float ActualDurability
         {
             get => _actualDurability;
@@ -16,11 +21,6 @@ namespace DataClasses
                 if (Mathf.Approximately(value, _actualDurability - 1))
                     _actualDurability = value;
             }
-        }
-
-        public ToolData(Tool otherTool) : base(otherTool)
-        {
-            ActualDurability = otherTool.ActualDurability;
         }
     }
 }

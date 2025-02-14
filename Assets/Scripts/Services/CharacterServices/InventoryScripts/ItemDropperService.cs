@@ -44,10 +44,9 @@ namespace Services.CharacterServices.InventoryScripts
         public void DropAllItems(ItemData[] items, Vector3 characterPosition, float droppingRadius)
         {
             foreach (var item in items)
-            {
                 if (item != null)
                 {
-                    Vector3 spawnedItemPosition = new Vector3(
+                    var spawnedItemPosition = new Vector3(
                         Random.Range(characterPosition.x - droppingRadius, characterPosition.x + droppingRadius),
                         Random.Range(characterPosition.y - droppingRadius, characterPosition.y + droppingRadius),
                         characterPosition.z);
@@ -58,7 +57,6 @@ namespace Services.CharacterServices.InventoryScripts
                     if (!(spawnedItem is Weapon) && !(spawnedItem is Tool))
                         spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = item.Amount.ToString();
                 }
-            }
         }
     }
 }

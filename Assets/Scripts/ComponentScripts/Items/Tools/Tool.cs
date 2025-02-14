@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace ComponentScripts.Items.Tools
@@ -8,6 +7,7 @@ namespace ComponentScripts.Items.Tools
         [SerializeField] private float initialDurability;
 
         private float _actualDurability;
+
         public float ActualDurability
         {
             get => _actualDurability;

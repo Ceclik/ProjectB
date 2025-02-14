@@ -22,7 +22,7 @@ namespace Services.CharacterServices.MovingScripts
             _camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraCharacterFollower>();
             _staminaValues =
                 GameObject.FindGameObjectWithTag("Player")
-                    .GetComponent<CharacterStaminaHandler>(); 
+                    .GetComponent<CharacterStaminaHandler>();
             _armorHandler = GameObject.FindGameObjectWithTag("Player").GetComponent<ArmorHandler>();
             _rigidbody = _staminaValues.GetComponent<Rigidbody2D>();
         }
@@ -31,7 +31,7 @@ namespace Services.CharacterServices.MovingScripts
         {
             _tugTimer += Time.deltaTime;
         }
-        
+
         public void MakeTug(Transform characterTransform, KeyCode key1, KeyCode key2, float tugSpeed, float tugDelay,
             float staminaDecreaseValue)
         {

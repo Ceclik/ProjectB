@@ -11,6 +11,7 @@ namespace ComponentScripts
 
         [Space(15)] [Header("Tools")] [SerializeField]
         private GameObject axe;
+
         [SerializeField] private GameObject pickaxe;
         [SerializeField] private GameObject shield;
 

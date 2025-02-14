@@ -22,9 +22,9 @@ namespace ComponentScripts.Entities.Nest
         [Space(10)] [SerializeField] private bool allowSpawn;
         [SerializeField] private float maxDistanceToSpawn;
         private Transform _character;
+        private List<GameObject> _spawnedEnemies;
 
         private ISpawner _spawner;
-        private List<GameObject> _spawnedEnemies;
 
         private void Start()
         {
@@ -34,20 +34,18 @@ namespace ComponentScripts.Entities.Nest
             StartCoroutine(EnemiesSpawner());
         }
 
+        private void FixedUpdate()
+        {
+            var deltaX = transform.position.x - _character.position.x;
+            var deltaY = transform.position.y - _character.position.y;
+            if (allowSpawn && CountDistance(deltaX, deltaY) > maxDistanceToSpawn)
+                allowSpawn = false;
+            else allowSpawn = true;
+        }
+
         private float CountDistance(float deltaX, float deltaY)
         {
             return Mathf.Sqrt(Mathf.Abs(deltaX * deltaX) + Mathf.Abs(deltaY * deltaY));
-        }
-
-        private void FixedUpdate()
-        {
-            float deltaX = transform.position.x - _character.position.x;
-            float deltaY = transform.position.y - _character.position.y;
-            if (allowSpawn && CountDistance(deltaX, deltaY) > maxDistanceToSpawn)
-            {
-                allowSpawn = false;
-            }
-            else allowSpawn = true;
         }
 
         private IEnumerator EnemiesSpawner()
@@ -55,30 +53,26 @@ namespace ComponentScripts.Entities.Nest
             while (gameObject.activeSelf)
             {
                 yield return new WaitForSeconds(spawnFrequency);
-                
+
                 foreach (var enemy in _spawnedEnemies.ToList())
                     if (enemy == null)
                         _spawnedEnemies.Remove(enemy);
-                
-                if (allowSpawn &&  _spawnedEnemies.Count < maxNestSpawnedAmount)
+
+                if (allowSpawn && _spawnedEnemies.Count < maxNestSpawnedAmount)
                 {
-                    int actualAmountToSpawn = maxNestSpawnedAmount - _spawnedEnemies.Count > 3
+                    var actualAmountToSpawn = maxNestSpawnedAmount - _spawnedEnemies.Count > 3
                         ? amountOfEnemiesToSpawn
                         : maxNestSpawnedAmount - _spawnedEnemies.Count;
-                    
+
                     foreach (var enemy in _spawner.SpawnEntities(enemyToSpawn, actualAmountToSpawn, enemiesParent,
                                  transform.position,
                                  distanceFromNest))
-                    {
                         if (enemy != null)
                         {
                             enemy.GetComponent<Enemy>().Nest = transform;
                             _spawnedEnemies.Add(enemy.gameObject);
                         }
-
-                    }
                 }
-
             }
         }
     }

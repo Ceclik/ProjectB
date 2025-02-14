@@ -1,4 +1,3 @@
-using System;
 using ComponentScripts;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Enemies;

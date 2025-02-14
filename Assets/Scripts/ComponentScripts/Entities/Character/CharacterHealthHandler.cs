@@ -1,6 +1,5 @@
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ComponentScripts.Entities.Character

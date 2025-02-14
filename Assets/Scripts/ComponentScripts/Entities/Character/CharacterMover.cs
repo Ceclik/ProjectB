@@ -273,7 +273,7 @@ namespace ComponentScripts.Entities.Character
                 _animationSwitcher.SetFrontIdleAnimation();
             }
 
-            _rigidbody.velocity = Vector2.zero;
+            _rigidbody.linearVelocity = Vector2.zero;
             IsMoving = false;
         }
 

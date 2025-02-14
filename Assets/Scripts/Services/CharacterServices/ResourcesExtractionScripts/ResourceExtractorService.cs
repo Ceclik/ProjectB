@@ -2,7 +2,6 @@ using ComponentScripts.Entities;
 using ComponentScripts.Entities.Character;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.ResourceObjects;
-using DataClasses;
 using Services.CharacterServices.CharacterAttackScripts;
 using UnityEngine;
 using Tree = ComponentScripts.Entities.ResourceObjects.Tree;
@@ -24,10 +23,8 @@ namespace Services.CharacterServices.ResourcesExtractionScripts
                     if (hit.collider.TryGetComponent(out ResourceObject resourceObject))
                         if ((resourceObject is Tree && characterInventory.MainHand.Name == "Axe") ||
                             (resourceObject is Rock && characterInventory.MainHand.Name == "Pickaxe"))
-                        {
                             //(ToolData)characterInventory.MainHand.
                             extractingObject.ReceiveCharacterAttack(extractingCharacter);
-                        }
         }
     }
 }

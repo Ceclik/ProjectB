@@ -18,10 +18,7 @@ namespace ComponentScripts.Entities.Character
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("SwampBorder"))
-            {
-                actionText.gameObject.SetActive(false);
-            }
+            if (other.gameObject.CompareTag("SwampBorder")) actionText.gameObject.SetActive(false);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Services.CharacterServices
 {
@@ -8,7 +7,7 @@ namespace Services.CharacterServices
         Woods,
         Field
     }
-    
+
     public class LocationsSwitcher : MonoBehaviour
     {
         private BackgroundColorSwitcher _colorSwitcher;
@@ -25,7 +24,7 @@ namespace Services.CharacterServices
                 location = Location.Woods;
             else if (other.CompareTag("Field"))
                 location = Location.Field;
-            
+
             _colorSwitcher.ChangeBackgroundColor(location);
         }
     }
