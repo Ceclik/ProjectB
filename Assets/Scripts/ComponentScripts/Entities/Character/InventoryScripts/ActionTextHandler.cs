@@ -1,3 +1,4 @@
+using System;
 using Services.CharacterServices.UIScripts;
 using TMPro;
 using UnityEngine;

@@ -418,7 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b24f64b96be4f429a396e3c822885c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToFollow: 5
+  distanceToStartFollowing: 5
+  increasedDistanceWhileFollowing: 11
   followingSpeedIncrease: 2.7
 --- !u!114 &-1632219399972313034
 MonoBehaviour:

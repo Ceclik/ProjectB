@@ -2,12 +2,14 @@
 using Services.EnemyServices.MovingScripts;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace ComponentScripts.Entities.Enemies
 {
     public class EnemyFollower : MonoBehaviour
     {
-        [SerializeField] private float distanceToFollow;
+        [SerializeField] private float distanceToStartFollowing;
+        [SerializeField] private float increasedDistanceWhileFollowing;
         [SerializeField] private float followingSpeedIncrease;
         private NavMeshAgent _agent;
         private Transform _character;
@@ -34,7 +36,7 @@ namespace ComponentScripts.Entities.Enemies
 
         private void FixedUpdate()
         {
-            _enemyFollower.HandleFollowing(_enemy, _character, transform, distanceToFollow, _rigidBody,
+            _enemyFollower.HandleFollowing(_enemy, _character, transform, distanceToStartFollowing, increasedDistanceWhileFollowing, _rigidBody,
                 followingSpeedIncrease,
                 _enemyMover.EnemyMoverService, _agent, _enemyMover.IsInCollisionWithPlayer);
         }

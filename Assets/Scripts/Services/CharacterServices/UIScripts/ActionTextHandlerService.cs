@@ -6,13 +6,17 @@ namespace Services.CharacterServices.UIScripts
     {
         public void ShowActionText(string text, TextMeshProUGUI textElement)
         {
-            textElement.gameObject.SetActive(true);
-            textElement.text = text;
+            if (textElement != null)
+            {
+                textElement.gameObject.SetActive(true);
+                textElement.text = text;
+            }
         }
 
         public void HideActionText(TextMeshProUGUI textElement)
         {
-            textElement.gameObject.SetActive(false);
+            if(textElement != null)
+                textElement.gameObject.SetActive(false);
         }
     }
 }
