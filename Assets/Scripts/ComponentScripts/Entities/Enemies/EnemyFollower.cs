@@ -1,5 +1,4 @@
 ﻿using Interfaces.EnemyInterfaces.MovingInterfaces;
-using Services.CharacterServices.MovingScripts;
 using Services.EnemyServices.MovingScripts;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +9,7 @@ namespace ComponentScripts.Entities.Enemies
     {
         [SerializeField] private float distanceToFollow;
         [SerializeField] private float followingSpeedIncrease;
+        private NavMeshAgent _agent;
         private Transform _character;
 
         private Enemy _enemy;
@@ -17,7 +17,6 @@ namespace ComponentScripts.Entities.Enemies
 
         private EnemyMover _enemyMover;
         private Rigidbody2D _rigidBody;
-        private NavMeshAgent _agent;
 
         private void Start()
         {
@@ -27,7 +26,7 @@ namespace ComponentScripts.Entities.Enemies
             _enemy = GetComponent<Enemy>();
             _character = GameObject.FindGameObjectWithTag("Player").transform;
             _rigidBody = GetComponent<Rigidbody2D>();
-            
+
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
             _agent.speed = _enemy.BaseMovingSpeed;
@@ -37,7 +36,7 @@ namespace ComponentScripts.Entities.Enemies
         {
             _enemyFollower.HandleFollowing(_enemy, _character, transform, distanceToFollow, _rigidBody,
                 followingSpeedIncrease,
-                _enemyMover.EnemyMoverService, _agent);
+                _enemyMover.EnemyMoverService, _agent, _enemyMover.IsInCollisionWithPlayer);
         }
     }
 }

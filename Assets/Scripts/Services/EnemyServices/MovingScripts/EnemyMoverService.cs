@@ -10,7 +10,9 @@ namespace Services.EnemyServices.MovingScripts
     {
         private bool _isSpeedIncreased;
         private float _lastSpeedIncreaseValue;
-        public void Move(Vector2 targetPosition, Rigidbody2D rigidBody, float movingSpeed, NavMeshAgent agent, float speedIncrease = 0)
+
+        public void Move(Vector2 targetPosition, Rigidbody2D rigidBody, NavMeshAgent agent, bool collidesWithPlayer,
+            float speedIncrease = 0)
         {
             if (!_isSpeedIncreased && speedIncrease > 0)
             {
@@ -18,19 +20,25 @@ namespace Services.EnemyServices.MovingScripts
                 agent.speed += speedIncrease;
                 _lastSpeedIncreaseValue = speedIncrease;
             }
-            
+
             if (_isSpeedIncreased && speedIncrease == 0)
             {
                 _isSpeedIncreased = false;
                 agent.speed -= _lastSpeedIncreaseValue;
             }
-            
+
+            if (speedIncrease > 0 && collidesWithPlayer)
+            {
+                rigidBody.linearVelocity = Vector2.zero;
+                return;
+            }
+
             agent.SetDestination(targetPosition);
-           
+
             var nextPosition = new Vector2(agent.nextPosition.x, agent.nextPosition.y);
             rigidBody.MovePosition(nextPosition);
-            
-            Vector2 direction = nextPosition - rigidBody.position;
+
+            var direction = nextPosition - rigidBody.position;
             if (direction != Vector2.zero)
             {
                 var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
@@ -39,7 +47,8 @@ namespace Services.EnemyServices.MovingScripts
         }
 
         public void HandleMoving(Enemy enemy, Transform selfTransform, Transform[] points, ref int currentPointIndex,
-            Rigidbody2D rigidBody, Animator animator, float onPointStayDelay, NavMeshAgent agent)
+            Rigidbody2D rigidBody, Animator animator, float onPointStayDelay, NavMeshAgent agent,
+            bool isCollidesWithPlayer)
         {
             if (!enemy.IsFollowing &&
                 Vector2.Distance(selfTransform.position, points[currentPointIndex].position) < 0.1f) //enter idle state
@@ -55,7 +64,7 @@ namespace Services.EnemyServices.MovingScripts
             }
 
             if (enemy.IsMoving) //moving action
-                Move(points[currentPointIndex].position, rigidBody, enemy.BaseMovingSpeed, agent);
+                Move(points[currentPointIndex].position, rigidBody, agent, isCollidesWithPlayer);
         }
 
         public int CountNextPointIndex(int currentIndex, int pointsAmount)

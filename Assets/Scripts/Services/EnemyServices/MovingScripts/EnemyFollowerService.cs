@@ -9,7 +9,7 @@ namespace Services.EnemyServices.MovingScripts
     {
         public void HandleFollowing(Enemy enemy, Transform character, Transform selfTransform, float distanceToFollow,
             Rigidbody2D rigidBody,
-            float followingSpeedIncrease, IEnemyMover enemyMover, NavMeshAgent agent)
+            float followingSpeedIncrease, IEnemyMover enemyMover, NavMeshAgent agent, bool isInCollidesWithPlayer)
         {
             if (!enemy.IsStaying &&
                 Vector2.Distance(character.position, selfTransform.position) <
@@ -22,7 +22,8 @@ namespace Services.EnemyServices.MovingScripts
                 }
 
                 if (enemy.IsFollowing)
-                    enemyMover.Move(character.position, rigidBody, enemy.BaseMovingSpeed, agent, followingSpeedIncrease);
+                    enemyMover.Move(character.position, rigidBody, agent, isInCollidesWithPlayer,
+                        followingSpeedIncrease);
             }
             else if (enemy.IsFollowing &&
                      Vector2.Distance(character.position, selfTransform.position) >

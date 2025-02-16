@@ -8,14 +8,15 @@ namespace ComponentScripts.Entities.Enemies
     public class EnemyMover : MonoBehaviour
     {
         [SerializeField] private float onPointStayDelay;
+        private NavMeshAgent _agent;
         private Animator _animator;
         private int _currentPointIndex;
         private Enemy _enemy;
-        public IEnemyMover EnemyMoverService { get; private set; }
         private Transform[] _points;
-        private NavMeshAgent _agent;
         private Transform _pointsParent;
         private Rigidbody2D _rigidBody;
+        public bool IsInCollisionWithPlayer { get; private set; }
+        public IEnemyMover EnemyMoverService { get; private set; }
 
         private void Start()
         {
@@ -33,7 +34,7 @@ namespace ComponentScripts.Entities.Enemies
             _enemy.IsFollowing = false;
             _enemy.IsStaying = false;
             _animator.SetTrigger("Move");
-            
+
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
             _agent.speed = _enemy.BaseMovingSpeed;
@@ -42,7 +43,19 @@ namespace ComponentScripts.Entities.Enemies
         private void FixedUpdate()
         {
             EnemyMoverService.HandleMoving(_enemy, transform, _points, ref _currentPointIndex, _rigidBody, _animator,
-                onPointStayDelay, _agent);
+                onPointStayDelay, _agent, IsInCollisionWithPlayer);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+                IsInCollisionWithPlayer = true;
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+                IsInCollisionWithPlayer = false;
         }
     }
 }
