@@ -9,7 +9,7 @@ namespace ComponentScripts.Entities.Character
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("SwampBorder"))
+            if (actionText != null && other.gameObject.CompareTag("SwampBorder"))
             {
                 actionText.gameObject.SetActive(true);
                 actionText.text = "Далей ідуць непраходныя палесскія балоты! Праз іх не прабрацца!";
@@ -18,7 +18,7 @@ namespace ComponentScripts.Entities.Character
 
         private void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("SwampBorder")) actionText.gameObject.SetActive(false);
+            if (actionText != null && other.gameObject.CompareTag("SwampBorder")) actionText.gameObject.SetActive(false);
         }
     }
 }
