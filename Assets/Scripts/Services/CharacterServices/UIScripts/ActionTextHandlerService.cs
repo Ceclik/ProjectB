@@ -15,7 +15,7 @@ namespace Services.CharacterServices.UIScripts
 
         public void HideActionText(TextMeshProUGUI textElement)
         {
-            if(textElement != null)
+            if (textElement != null)
                 textElement.gameObject.SetActive(false);
         }
     }

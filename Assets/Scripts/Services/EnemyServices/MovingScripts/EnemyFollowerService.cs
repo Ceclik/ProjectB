@@ -29,7 +29,7 @@ namespace Services.EnemyServices.MovingScripts
                 enemy.IsFollowing = false;
                 enemy.IsMoving = true;
             }
-            
+
             if (enemy.IsFollowing)
                 enemyMover.Move(character.position, rigidBody, agent, isInCollidesWithPlayer,
                     followingSpeedIncrease);

@@ -10,6 +10,7 @@ TagManager:
   - Woods
   - Field
   - SwampBorder
+  - DestroyableNavObject
   layers:
   - Default
   - TransparentFX

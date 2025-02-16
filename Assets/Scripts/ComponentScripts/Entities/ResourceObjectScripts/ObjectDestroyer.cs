@@ -6,6 +6,8 @@ namespace ComponentScripts.Entities.ResourceObjectScripts
 {
     public class ObjectDestroyer : MonoBehaviour
     {
+        public delegate void UpdateNavMesh();
+
         private IItemsDropper _itemsDropper;
         private ResourceObject _resource;
 
@@ -17,10 +19,16 @@ namespace ComponentScripts.Entities.ResourceObjectScripts
 
         private void Update()
         {
-            //Debug.Log($"Tree actual healh: {_resource.ActualHealth}");
             if (_resource.ActualHealth <= 0)
                 DropResource();
         }
+
+        private void OnDestroy()
+        {
+            OnObjectDestroyed?.Invoke();
+        }
+
+        public event UpdateNavMesh OnObjectDestroyed;
 
         private void DropResource()
         {

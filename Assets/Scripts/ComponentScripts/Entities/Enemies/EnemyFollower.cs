@@ -2,7 +2,6 @@
 using Services.EnemyServices.MovingScripts;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace ComponentScripts.Entities.Enemies
 {
@@ -36,7 +35,8 @@ namespace ComponentScripts.Entities.Enemies
 
         private void FixedUpdate()
         {
-            _enemyFollower.HandleFollowing(_enemy, _character, transform, distanceToStartFollowing, increasedDistanceWhileFollowing, _rigidBody,
+            _enemyFollower.HandleFollowing(_enemy, _character, transform, distanceToStartFollowing,
+                increasedDistanceWhileFollowing, _rigidBody,
                 followingSpeedIncrease,
                 _enemyMover.EnemyMoverService, _agent, _enemyMover.IsInCollisionWithPlayer);
         }
