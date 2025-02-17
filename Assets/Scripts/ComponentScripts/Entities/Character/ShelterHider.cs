@@ -1,4 +1,5 @@
 using System.Collections;
+using ComponentScripts.CameraScripts;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using UnityEngine;
 
@@ -13,14 +14,18 @@ namespace ComponentScripts.Entities.Character
         private Shelter _enteredShelter;
         private float _nextHidingTimer;
         private SpriteRenderer _spriteRenderer;
+        private Vector3 _farHidedPosition;
+        private CameraCharacterFollower _mainCamera;
         public bool IsInShelter { get; private set; }
 
         private void Start()
         {
+            _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraCharacterFollower>();
             _actionTextHandler = GetComponent<ActionTextHandler>();
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<Collider2D>();
             _nextHidingTimer = nextHidingDelayTime + 1;
+            _farHidedPosition = new Vector3(30000.0f, 0.0f, 0.0f);
         }
 
         private void Update()
@@ -49,15 +54,20 @@ namespace ComponentScripts.Entities.Character
 
         private void EnterShelter()
         {
-            StartCoroutine(DisableHidedState(_enteredShelter.HidingTime));
+            Vector3 currentPosition = transform.position;
+            _mainCamera.enabled = false;
+            transform.position = _farHidedPosition;
+            StartCoroutine(DisableHidedState(_enteredShelter.HidingTime, currentPosition));
             IsInShelter = true;
             _spriteRenderer.enabled = false;
             _collider.enabled = false;
         }
 
-        private IEnumerator DisableHidedState(float delay)
+        private IEnumerator DisableHidedState(float delay, Vector3 characterPosition)
         {
             yield return new WaitForSeconds(delay);
+            _mainCamera.enabled = true;
+            transform.position = characterPosition;
             _spriteRenderer.enabled = true;
             _collider.enabled = true;
             IsInShelter = false;
