@@ -1,7 +1,7 @@
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
 
-namespace Services.CharacterServices.MovingScripts
+namespace Interfaces.CharacterInterfaces.MovingInterfaces
 {
     public interface IPlayerMover
     {
@@ -18,5 +18,7 @@ namespace Services.CharacterServices.MovingScripts
 
         public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed,
             float staminaDecreaseValue);
+
+        public void ApplyKnockBack(Vector2 direction, float force, float duration);
     }
 }

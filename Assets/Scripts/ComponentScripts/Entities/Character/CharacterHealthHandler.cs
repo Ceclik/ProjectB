@@ -1,3 +1,4 @@
+using ComponentScripts.Entities.Enemies;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,13 +23,17 @@ namespace ComponentScripts.Entities.Character
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            _characterDamageReceiver.ReceiveDamage(other.gameObject.GetComponent<ActiveEntity>(), _armorHandler);
-            HealthService.UpdateHealthBar(HealthBar);
+            if (other.gameObject.TryGetComponent(out Enemy enemy))
+            {
+                _characterDamageReceiver.ReceiveDamage(enemy.gameObject.GetComponent<ActiveEntity>(), _armorHandler);
+                HealthService.UpdateHealthBar(HealthBar);
+            }
         }
 
         private void IncreaseHealthForBonusUse()
         {
             //TODO if player use bonus _healthService.IncreaseHealth(); check in Update();
         }
+
     }
 }

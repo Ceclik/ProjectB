@@ -1,5 +1,7 @@
+using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
+using Interfaces.CharacterInterfaces.MovingInterfaces;
 using Services.CharacterServices.MovingScripts;
 using UnityEngine;
 
@@ -30,9 +32,14 @@ namespace ComponentScripts.Entities.Character
         private ShelterHider _shelterHider;
         public bool IsMoving { get; private set; }
 
-        private void Start()
+        private void Awake()
         {
             _mover = gameObject.AddComponent<PlayerMoverService>();
+        }
+
+        private void Start()
+        {
+            
             _armorHandler = GetComponent<ArmorHandler>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();

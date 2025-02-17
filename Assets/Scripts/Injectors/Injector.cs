@@ -1,3 +1,4 @@
+using Interfaces.CharacterInterfaces.MovingInterfaces;
 using Services.CharacterServices.CharacterStatsScripts;
 using Services.CharacterServices.MovingScripts;
 using UnityEngine;

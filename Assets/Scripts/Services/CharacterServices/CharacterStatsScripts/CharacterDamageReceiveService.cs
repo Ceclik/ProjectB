@@ -23,13 +23,11 @@ namespace Services.CharacterServices.CharacterStatsScripts
                 {
                     receivedDamage = (int)(hitEntity.BaseDamage * ((100 - armorHandler.PercentOfBlockingDamage) / 100));
                     _characterHealthHandler.DecreaseHealthValue(receivedDamage);
-                    Debug.Log($"Received damage is: {receivedDamage}");
                     return;
                 }
 
                 receivedDamage = hitEntity.BaseDamage;
                 _characterHealthHandler.DecreaseHealthValue(receivedDamage);
-                Debug.Log($"Received damage is: {receivedDamage}");
             }
         }
     }
