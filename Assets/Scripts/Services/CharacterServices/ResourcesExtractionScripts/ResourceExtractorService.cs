@@ -14,12 +14,10 @@ namespace Services.CharacterServices.ResourcesExtractionScripts
         {
             var characterInventory = extractingCharacter.GetComponent<Inventory>();
             var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-            var attackService = new CharacterAttackService();
             if (hit.collider != null)
                 if (hit.collider.TryGetComponent(out EntityHealthHandler extractingObject) &&
-                    attackService.DistanceCounter(extractingObject.transform.position,
-                        extractingCharacter.transform.position) <
-                    maxDistanceForAttack)
+                    Vector3.Distance(extractingObject.transform.position,
+                        extractingCharacter.transform.position) < maxDistanceForAttack)
                     if (hit.collider.TryGetComponent(out ResourceObject resourceObject))
                         if ((resourceObject is Tree && characterInventory.MainHand.Name == "Axe") ||
                             (resourceObject is Rock && characterInventory.MainHand.Name == "Pickaxe"))

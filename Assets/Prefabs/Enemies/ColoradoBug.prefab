@@ -273,6 +273,8 @@ GameObject:
   - component: {fileID: 6725100188526272182}
   - component: {fileID: 3881925276837584921}
   - component: {fileID: -6843716837848759815}
+  - component: {fileID: 1126679080992754452}
+  - component: {fileID: -1136078272602871308}
   m_Layer: 6
   m_Name: ColoradoBug
   m_TagString: Untagged
@@ -421,6 +423,7 @@ MonoBehaviour:
   distanceToStartFollowing: 5
   increasedDistanceWhileFollowing: 11
   followingSpeedIncrease: 2.7
+  ifHitStayingDelay: 0.2
 --- !u!114 &-1632219399972313034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,3 +544,30 @@ NavMeshAgent:
   m_BaseOffset: 0.04
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1126679080992754452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b5d8a00415d4f2bbc85621b3a63900a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 2
+  knockBackDuration: 0.1
+  afterKickStayingDelay: 0.27
+--- !u!114 &-1136078272602871308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58efb8438f9a4276861d754ac4bc2585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,6 +14,8 @@ namespace Services.EnemyServices.MovingScripts
         public void Move(Vector2 targetPosition, Rigidbody2D rigidBody, NavMeshAgent agent, bool collidesWithPlayer,
             float speedIncrease = 0)
         {
+            if (!agent.enabled) return;
+            
             if (!_isSpeedIncreased && speedIncrease > 0)
             {
                 _isSpeedIncreased = true;
