@@ -9,21 +9,20 @@ namespace ComponentScripts.Entities.Enemies
         [SerializeField] private float knockBackForce = 1.0f;
         [SerializeField] private float knockBackDuration = 0.3f;
         [SerializeField] private float afterKickStayingDelay = 0.18f;
-
-        private Enemy _enemy;
-        private NavMeshAgent _agent;
+        
+        private EntityColorBlinker _colorBlinker;
         private EnemyMovingDelayer _movingDelayer;
 
         private void Start()
         {
-            _enemy = GetComponent<Enemy>();
-            _agent = GetComponent<NavMeshAgent>();
+            _colorBlinker = GetComponent<EntityColorBlinker>();
             _movingDelayer = GetComponent<EnemyMovingDelayer>();
         }
 
         public void ReceiveKick(Vector3 characterPosition)
         {
             Vector2 knockBackDirection = (transform.position - characterPosition).normalized;
+            StartCoroutine(_colorBlinker.Blink());
             StartCoroutine(KnockBackRoutine(knockBackDirection, knockBackForce, knockBackDuration));
         }
         

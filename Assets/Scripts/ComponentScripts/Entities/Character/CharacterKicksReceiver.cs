@@ -10,10 +10,12 @@ namespace ComponentScripts.Entities.Character
         [SerializeField] private float knockBackForce = 1.0f;
         [SerializeField] private float knockBackDuration = 0.3f;
         private IPlayerMover _mover;
+        private EntityColorBlinker _colorBlinker;
 
         private void Start()
         {
             _mover = GetComponent<PlayerMoverService>();
+            _colorBlinker = GetComponent<EntityColorBlinker>();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -22,6 +24,7 @@ namespace ComponentScripts.Entities.Character
             {
                 Vector2 knockBackDirection = (transform.position - enemy.transform.position).normalized;
                 _mover.ApplyKnockBack(knockBackDirection, knockBackForce, knockBackDuration);
+                StartCoroutine(_colorBlinker.Blink());
                 Debug.DrawLine(transform.position, transform.position + (Vector3)knockBackDirection * 5, Color.red, 2f);
             }
         }
