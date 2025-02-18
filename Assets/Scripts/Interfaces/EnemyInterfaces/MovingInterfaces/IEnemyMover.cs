@@ -10,7 +10,7 @@ namespace Interfaces.EnemyInterfaces.MovingInterfaces
             float speedIncrease = 0);
 
         public void HandleMoving(Enemy enemy, Transform selfTransform, Transform[] points, ref int currentPointIndex,
-            Rigidbody2D rigidBody, Animator animator, float onPointStayDelay, NavMeshAgent agent,
+            Rigidbody2D rigidBody, EnemyAnimationsHandler animator, float onPointStayDelay, NavMeshAgent agent,
             bool isCollidesWithPlayer);
 
         public int CountNextPointIndex(int currentIndex, int pointsAmount);

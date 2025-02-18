@@ -49,7 +49,7 @@ namespace Services.EnemyServices.MovingScripts
         }
 
         public void HandleMoving(Enemy enemy, Transform selfTransform, Transform[] points, ref int currentPointIndex,
-            Rigidbody2D rigidBody, Animator animator, float onPointStayDelay, NavMeshAgent agent,
+            Rigidbody2D rigidBody, EnemyAnimationsHandler animator, float onPointStayDelay, NavMeshAgent agent,
             bool isCollidesWithPlayer)
         {
             if (!enemy.IsFollowing &&
@@ -59,8 +59,7 @@ namespace Services.EnemyServices.MovingScripts
                 enemy.IsStaying = true;
                 rigidBody.freezeRotation = true;
                 rigidBody.bodyType = RigidbodyType2D.Kinematic;
-                animator.ResetTrigger("Move");
-                animator.SetTrigger("Stop");
+                animator.TurnStayAnimation();
                 currentPointIndex = CountNextPointIndex(currentPointIndex, points.Length);
                 StartCoroutine(DelayedMove(onPointStayDelay, enemy, animator, rigidBody));
             }
@@ -81,13 +80,12 @@ namespace Services.EnemyServices.MovingScripts
             return newIndex;
         }
 
-        private IEnumerator DelayedMove(float onPointStayDelay, Enemy enemy, Animator animator, Rigidbody2D rigidBody)
+        private IEnumerator DelayedMove(float onPointStayDelay, Enemy enemy, EnemyAnimationsHandler animator, Rigidbody2D rigidBody)
         {
             yield return new WaitForSeconds(onPointStayDelay);
             rigidBody.freezeRotation = false;
             rigidBody.bodyType = RigidbodyType2D.Dynamic;
-            animator.SetTrigger("Move");
-            animator.ResetTrigger("Stop");
+            animator.TurnMoveAnimation();
             enemy.IsMoving = true;
             enemy.IsStaying = false;
         }

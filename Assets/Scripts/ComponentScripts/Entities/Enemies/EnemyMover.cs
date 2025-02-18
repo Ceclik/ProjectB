@@ -9,7 +9,7 @@ namespace ComponentScripts.Entities.Enemies
     {
         [SerializeField] private float onPointStayDelay;
         private NavMeshAgent _agent;
-        private Animator _animator;
+        private EnemyAnimationsHandler _animator;
         private int _currentPointIndex;
         private Enemy _enemy;
         private Transform[] _points;
@@ -26,14 +26,14 @@ namespace ComponentScripts.Entities.Enemies
             _pointsParent = _enemy.Nest.GetComponentsInChildren<Transform>()[1];
             _points = new Transform[_pointsParent.childCount];
             _rigidBody = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
+            _animator = GetComponent<EnemyAnimationsHandler>();
             for (var i = 0; i < _pointsParent.childCount; i++)
                 _points[i] = _pointsParent.GetChild(i);
             _currentPointIndex = EnemyMoverService.CountNextPointIndex(0, _points.Length);
             _enemy.IsMoving = true;
             _enemy.IsFollowing = false;
             _enemy.IsStaying = false;
-            _animator.SetTrigger("Move");
+            _animator.TurnMoveAnimation();
 
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;

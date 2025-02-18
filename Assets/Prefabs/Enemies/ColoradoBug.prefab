@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: -6843716837848759815}
   - component: {fileID: 1126679080992754452}
   - component: {fileID: -1136078272602871308}
+  - component: {fileID: -2939245817032046932}
   m_Layer: 6
   m_Name: ColoradoBug
   m_TagString: Untagged
@@ -569,5 +570,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58efb8438f9a4276861d754ac4bc2585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2939245817032046932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8042816585482338127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b30ae831889b427ebdc5d262f34e4f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
