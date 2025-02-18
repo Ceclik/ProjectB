@@ -5,6 +5,7 @@ using ComponentScripts.Items.Ingredients;
 using ComponentScripts.Items.Tools;
 using ComponentScripts.Items.Weapons;
 using DataClasses;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using UnityEngine;
 
 namespace Services.CharacterServices.InventoryScripts

@@ -1,5 +1,6 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
+using Interfaces.CharacterInterfaces.ResourceExtractionInterfaces;
 using Services.CharacterServices.ResourcesExtractionScripts;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace ComponentScripts.Entities.Character
     public class ResourceExtractionHandler : MonoBehaviour
     {
         [SerializeField] private float maxDistanceForExtract;
+        [SerializeField] private int durabilityDecreasePerUse;
         private Character _character;
         private Inventory _inventory;
         private InventoryOpener _inventoryOpener;
@@ -27,7 +29,8 @@ namespace ComponentScripts.Entities.Character
                 _inventory.MainHand is ToolData)
             {
                 var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-                _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character);
+                _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character,
+                    durabilityDecreasePerUse);
             }
         }
     }

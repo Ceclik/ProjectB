@@ -1,4 +1,5 @@
 using ComponentScripts.Items;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,8 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         private void Awake()
         {
+            Debug.Log("Before instantiation of the panels");
+            _uiHandler = new InventoryUIHandlerService();
             Panels = new RectTransform[inventory.AmountOfSlots];
             for (var i = 0; i < inventory.AmountOfSlots; i++)
             {
@@ -33,7 +36,7 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
 
         private void OnEnable()
         {
-            _uiHandler = new InventoryUIHandlerService();
+            Debug.Log("Before update of the panels");
             _uiHandler.UpdateUI(inventory, Panels);
         }
     }

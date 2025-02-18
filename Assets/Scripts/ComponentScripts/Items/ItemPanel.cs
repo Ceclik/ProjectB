@@ -15,16 +15,22 @@ namespace ComponentScripts.Items
         public Inventory Inventory { get; protected set; }
         public bool IsPointerOnPanel { get; protected set; }
         public Image ItemIcon { get; protected set; }
+        
+        public Image DurabilityBarBackgroung { get; protected set; }
+        public Image DurabilityBar { get; private set; }
 
         public int PanelIndex { get; set; }
 
 
-        private void Start()
+        private void Awake()
         {
+            var images = GetComponentsInChildren<Image>();
             ItemsDropper = gameObject.AddComponent<ItemDropperService>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-            ItemIcon = GetComponentInChildren<Image>();
+            ItemIcon = images[0];
+            DurabilityBarBackgroung = images[1];
+            DurabilityBar = images[2];
             AmountText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
@@ -78,6 +84,8 @@ namespace ComponentScripts.Items
         {
             ItemIcon.sprite = null;
             AmountText.enabled = false;
+            DurabilityBarBackgroung.enabled = false;
+            DurabilityBar.enabled = false;
         }
     }
 }

@@ -4,23 +4,14 @@ namespace ComponentScripts.Items.Tools
 {
     public class Tool : Item
     {
-        [SerializeField] private float initialDurability;
+        [SerializeField] private int initialDurability;
+        public int InitialDurability => initialDurability;
 
-        private float _actualDurability;
-
-        public float ActualDurability
-        {
-            get => _actualDurability;
-            set
-            {
-                if (Mathf.Approximately(value, value - 1))
-                    _actualDurability = value;
-            }
-        }
+        public int ActualDurability { get; set; }
 
         private void Start()
         {
-            _actualDurability = initialDurability;
+            ActualDurability = InitialDurability;
         }
     }
 }

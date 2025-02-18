@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;

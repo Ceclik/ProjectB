@@ -33,6 +33,9 @@ namespace ComponentScripts.Items
                 _mainHandPanel.PanelIndex = _itemPanel.PanelIndex;
                 _mainHandPanel.ItemIcon.sprite = _itemPanel.ItemIcon.sprite;
                 _mainHandPanel.AmountText.text = _itemPanel.AmountText.text;
+                _mainHandPanel.DurabilityBarBackgroung.enabled = true;
+                _mainHandPanel.DurabilityBar.enabled = true;
+                _mainHandPanel.DurabilityBar.fillAmount = _itemPanel.DurabilityBar.fillAmount;
                 _itemPanel.CleanItemPanel();
                 _itemPanel.Inventory.MainHand = _itemPanel.Inventory.Items[_itemPanel.PanelIndex];
                 _itemPanel.Inventory.Items[_itemPanel.PanelIndex] = null;
@@ -47,6 +50,9 @@ namespace ComponentScripts.Items
                 _secondHandPanel.PanelIndex = _itemPanel.PanelIndex;
                 _secondHandPanel.ItemIcon.sprite = _itemPanel.ItemIcon.sprite;
                 _secondHandPanel.AmountText.text = _itemPanel.AmountText.text;
+                _secondHandPanel.DurabilityBarBackgroung.enabled = true;
+                _secondHandPanel.DurabilityBar.enabled = true;
+                _secondHandPanel.DurabilityBar.fillAmount = _itemPanel.DurabilityBar.fillAmount;
                 _itemPanel.CleanItemPanel();
                 _itemPanel.Inventory.SecondHand = _itemPanel.Inventory.Items[_itemPanel.PanelIndex];
                 _itemPanel.Inventory.Items[_itemPanel.PanelIndex] = null;

@@ -2,7 +2,7 @@ using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
 using DataClasses;
 
-namespace Services.CharacterServices.InventoryScripts
+namespace Interfaces.CharacterInterfaces.InventoryInterfaces
 {
     public interface IPutterToInventory
     {

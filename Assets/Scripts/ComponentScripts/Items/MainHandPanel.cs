@@ -1,4 +1,6 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
+using DataClasses;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;
@@ -43,9 +45,12 @@ namespace ComponentScripts.Items
         private void PutToInventory()
         {
             var itemIndex = _putterToInventory.PutToInventory(Inventory.MainHand, Inventory);
-            _panelsHandler.Panels[itemIndex].GetComponentInChildren<Image>().sprite = Inventory.MainHand.ItemIcon;
-            _panelsHandler.Panels[itemIndex].GetComponentInChildren<TextMeshProUGUI>().text =
-                Inventory.MainHand.Amount.ToString();
+            var targetPanel = _panelsHandler.Panels[itemIndex].GetComponent<ItemPanel>();
+            var itemData = (ToolData)Inventory.MainHand;
+            targetPanel.ItemIcon.sprite = itemData.ItemIcon;
+            targetPanel.AmountText.text = itemData.Amount.ToString();
+            targetPanel.DurabilityBarBackgroung.enabled = true;
+            targetPanel.DurabilityBar.fillAmount = itemData.ActualDurability * 100 / itemData.InitialDurability;
             CleanItemPanel();
             PanelIndex = -1;
             Inventory.MainHand = null;

@@ -1,7 +1,7 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
 using UnityEngine;
 
-namespace Services.CharacterServices.InventoryScripts
+namespace Interfaces.CharacterInterfaces.InventoryInterfaces
 {
     public interface IInventoryUIHandler
     {
