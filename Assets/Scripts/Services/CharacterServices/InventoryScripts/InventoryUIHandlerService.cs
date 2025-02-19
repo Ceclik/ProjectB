@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Items;
 using DataClasses;
@@ -8,35 +9,37 @@ namespace Services.CharacterServices.InventoryScripts
 {
     public class InventoryUIHandlerService : IInventoryUIHandler
     {
-        public void UpdateUI(Inventory inventory, RectTransform[] panels)
+        public void UpdateHandsPanels(Inventory inventory, List<MainHandPanel> mainHand, List<SecondHandPanel> secondHand)
         {
-            for (var i = 0; i < panels.Length; i++)
+            for (int i = 0; i < mainHand.Count; i++)
+            {
+                if (mainHand[i].DurabilityBar == null)
+                {
+                    mainHand[i].InitializeUiElements();
+                    secondHand[i].InitializeUiElements();
+                }
+
+                if (inventory.MainHand != null)
+                {
+                    mainHand[i].UpdateHandPanel((ToolData)inventory.MainHand);
+                }
+
+                if (inventory.SecondHand != null)
+                {
+                    secondHand[i].UpdateHandPanel((ToolData)inventory.SecondHand);
+                }
+            }
+        }
+        
+        public void UpdateUI(Inventory inventory, List<RectTransform> panels)
+        {
+            for (var i = 0; i < panels.Count; i++)
             {
                 var itemPanel = panels[i].GetComponent<ItemPanel>();
-                Debug.Log($"item panel: {itemPanel}");
-                itemPanel.DurabilityBarBackgroung.enabled = false;
-                itemPanel.DurabilityBar.enabled = false;
-                itemPanel.AmountText.enabled = false;
                 
                 if (inventory.Items[i] != null)
                 {
-                    itemPanel.ItemIcon.sprite = inventory.Items[i].ItemIcon;
-                    
-                    if (!(inventory.Items[i] is ToolData) && !itemPanel.AmountText.isActiveAndEnabled)
-                    {
-                        itemPanel.AmountText.enabled = true;
-                        itemPanel.AmountText.text = inventory.Items[i].Amount.ToString();
-                    }
-                    else if (inventory.Items[i] is ToolData && !itemPanel.AmountText.isActiveAndEnabled)
-                    {
-                        itemPanel.DurabilityBarBackgroung.enabled = true;
-                        itemPanel.DurabilityBar.enabled = true;
-                        var currentItem = (ToolData)inventory.Items[i];
-                        itemPanel.DurabilityBar.fillAmount = currentItem.ActualDurability * 100 / currentItem.InitialDurability;
-                        Debug.Log(
-                            $"fill amount: {itemPanel.DurabilityBar.fillAmount}, actual durability: {currentItem.ActualDurability}," +
-                            $" initial durability: {currentItem.InitialDurability}");
-                    }
+                    itemPanel.UpdateHandPanel(inventory.Items[i]);
                 }
             }
         }

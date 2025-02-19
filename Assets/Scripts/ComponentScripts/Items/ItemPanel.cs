@@ -1,3 +1,4 @@
+using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
 using Services.CharacterServices.InventoryScripts;
@@ -14,9 +15,9 @@ namespace ComponentScripts.Items
         public TextMeshProUGUI AmountText { get; protected set; }
         public Inventory Inventory { get; protected set; }
         public bool IsPointerOnPanel { get; protected set; }
-        public Image ItemIcon { get; protected set; }
+        public Image ItemIcon { get; set; }
         
-        public Image DurabilityBarBackgroung { get; protected set; }
+        public Image DurabilityBarBackgroung { get; private set; }
         public Image DurabilityBar { get; private set; }
 
         public int PanelIndex { get; set; }
@@ -24,14 +25,50 @@ namespace ComponentScripts.Items
 
         private void Awake()
         {
-            var images = GetComponentsInChildren<Image>();
+            InitializeUiElements();
+        }
+
+        private void Start()
+        {
             ItemsDropper = gameObject.AddComponent<ItemDropperService>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        }
+
+        public void InitializeUiElements()
+        {
+            var images = GetComponentsInChildren<Image>();
+            AmountText = GetComponentInChildren<TextMeshProUGUI>();
             ItemIcon = images[0];
             DurabilityBarBackgroung = images[1];
             DurabilityBar = images[2];
-            AmountText = GetComponentInChildren<TextMeshProUGUI>();
+        }
+
+        private void DisableElements()
+        {
+            ItemIcon.sprite = null;
+            AmountText.enabled = false;
+            DurabilityBarBackgroung.enabled = false;
+            DurabilityBar.enabled = false;
+        }
+
+        public void UpdateHandPanel(ItemData handItem)
+        {
+            DisableElements();
+            
+            ItemIcon.sprite = handItem.ItemIcon;
+            if (!(handItem is ToolData) && !AmountText.isActiveAndEnabled)
+            {
+                AmountText.enabled = true;
+                AmountText.text = handItem.Amount.ToString();
+            }
+            else if (handItem is ToolData && !AmountText.isActiveAndEnabled)
+            {
+                var toolItem = (ToolData)handItem; 
+                DurabilityBarBackgroung.enabled = true;
+                DurabilityBar.enabled = true;
+                DurabilityBar.fillAmount = (float)toolItem.ActualDurability / toolItem.InitialDurability;
+            }
         }
 
         private void Update()
@@ -48,7 +85,6 @@ namespace ComponentScripts.Items
         public void OnPointerEnter(PointerEventData eventData)
         {
             IsPointerOnPanel = true;
-            Debug.Log($"Pointer is on {PanelIndex} panel");
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -60,7 +96,6 @@ namespace ComponentScripts.Items
         {
             if (Inventory.Items[PanelIndex] != null)
             {
-                Debug.Log($"Panel index of dropping item: {PanelIndex}");
                 if (Inventory.Items[PanelIndex].Amount - 1 == 0)
                 {
                     CleanItemPanel();

@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.Character.InventoryScripts;
+using ComponentScripts.Items;
 using DataClasses;
 using Interfaces.CharacterInterfaces.ResourceExtractionInterfaces;
 using Services.CharacterServices.ResourcesExtractionScripts;
@@ -14,6 +15,9 @@ namespace ComponentScripts.Entities.Character
         private Inventory _inventory;
         private InventoryOpener _inventoryOpener;
         private IResourceExtractor _resourceExtractor;
+        
+        public delegate void UpdateUIHands();
+        public event UpdateUIHands OnToolUse;
 
         private void Start()
         {
@@ -31,6 +35,7 @@ namespace ComponentScripts.Entities.Character
                 var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character,
                     durabilityDecreasePerUse);
+                OnToolUse?.Invoke();
             }
         }
     }

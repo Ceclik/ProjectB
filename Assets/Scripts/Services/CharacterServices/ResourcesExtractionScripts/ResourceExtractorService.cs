@@ -30,7 +30,7 @@ namespace Services.CharacterServices.ResourcesExtractionScripts
                         {
                             var mainHandItem = (ToolData)characterInventory.MainHand;
                             mainHandItem.ActualDurability -= durabilityDecreasePerUse;
-                                extractingObject.ReceiveCharacterAttack(extractingCharacter);
+                            extractingObject.ReceiveCharacterAttack(extractingCharacter);
                         }
                     }
                 }

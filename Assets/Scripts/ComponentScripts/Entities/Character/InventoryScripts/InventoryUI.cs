@@ -1,7 +1,10 @@
+using System;
+using System.Collections.Generic;
 using ComponentScripts.Items;
 using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace ComponentScripts.Entities.Character.InventoryScripts
@@ -11,33 +14,50 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         [SerializeField] private GridLayoutGroup itemsPanel;
         [SerializeField] private Inventory inventory;
         [SerializeField] private GameObject itemPanelPrefab;
-
-        [Space(10)] [Header("Hand panels")] [SerializeField]
-        private RectTransform mainHand;
-
-        [SerializeField] private RectTransform secondHandHand;
+        
+        [Space(10)] [Header("Hand's inventory panels")] [SerializeField]
+        private List<MainHandPanel> mainHands;
+        [SerializeField] private List<SecondHandPanel> secondHands;
 
         private IInventoryUIHandler _uiHandler;
-
-        public RectTransform[] Panels { get; private set; }
+        private ResourceExtractionHandler _resourceExtractionHandler;
+        
+        public List<RectTransform> Panels { get; private set; }
+        
 
         private void Awake()
         {
-            Debug.Log("Before instantiation of the panels");
             _uiHandler = new InventoryUIHandlerService();
-            Panels = new RectTransform[inventory.AmountOfSlots];
+            _resourceExtractionHandler = inventory.GetComponent<ResourceExtractionHandler>();
+            Panels = new List<RectTransform>();
             for (var i = 0; i < inventory.AmountOfSlots; i++)
             {
-                Panels[i] = Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
-                    .GetComponent<RectTransform>();
+                Panels.Add(Instantiate(itemPanelPrefab, itemsPanel.GetComponent<RectTransform>())
+                    .GetComponent<RectTransform>());
                 Panels[i].GetComponent<ItemPanel>().PanelIndex = i;
             }
         }
 
+        private void Start()
+        {
+            _resourceExtractionHandler.OnToolUse += UpdateUIHands;
+            
+        }
+
+        private void UpdateUIHands()
+        {
+            _uiHandler.UpdateHandsPanels(inventory, mainHands, secondHands);
+        }
+
         private void OnEnable()
         {
-            Debug.Log("Before update of the panels");
+            _uiHandler.UpdateHandsPanels(inventory, mainHands, secondHands);
             _uiHandler.UpdateUI(inventory, Panels);
+        }
+
+        private void OnDestroy()
+        {
+            _resourceExtractionHandler.OnToolUse -= UpdateUIHands;
         }
     }
 }

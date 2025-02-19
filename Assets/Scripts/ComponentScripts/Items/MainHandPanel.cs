@@ -2,9 +2,7 @@ using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
 using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace ComponentScripts.Items
 {
@@ -12,15 +10,14 @@ namespace ComponentScripts.Items
     {
         private InventoryUI _panelsHandler;
         private IPutterToInventory _putterToInventory;
-
+        
+        
         private void Start()
         {
             _panelsHandler = GetComponentInParent<InventoryUI>();
             _putterToInventory = new PutterToInventoryService();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-            ItemIcon = GetComponentInChildren<Image>();
-            AmountText = GetComponentInChildren<TextMeshProUGUI>();
         }
 
         private void Update()
@@ -35,7 +32,6 @@ namespace ComponentScripts.Items
         {
             if (Inventory.MainHand != null)
             {
-                Debug.Log("Panel index of dropping item: main hand");
                 ItemsDropper.DropItem(Inventory.MainHand, Inventory.transform.position);
                 Inventory.MainHand = null;
                 CleanItemPanel();
@@ -50,7 +46,8 @@ namespace ComponentScripts.Items
             targetPanel.ItemIcon.sprite = itemData.ItemIcon;
             targetPanel.AmountText.text = itemData.Amount.ToString();
             targetPanel.DurabilityBarBackgroung.enabled = true;
-            targetPanel.DurabilityBar.fillAmount = itemData.ActualDurability * 100 / itemData.InitialDurability;
+            targetPanel.DurabilityBar.enabled = true;
+            targetPanel.DurabilityBar.fillAmount = (float)itemData.ActualDurability / itemData.InitialDurability;
             CleanItemPanel();
             PanelIndex = -1;
             Inventory.MainHand = null;
