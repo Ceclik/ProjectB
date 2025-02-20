@@ -2,7 +2,7 @@ using ComponentScripts.Items.Weapons;
 
 namespace DataClasses
 {
-    public class WeaponData : ItemData
+    public class WeaponData : ToolData
     {
         public WeaponData(Weapon otherWeapon) : base(otherWeapon)
         {

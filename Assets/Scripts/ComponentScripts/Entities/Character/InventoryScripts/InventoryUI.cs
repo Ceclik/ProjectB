@@ -42,20 +42,10 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
             }
         }
 
-        private void Start()
-        {
-            _resourceExtractionHandler.OnToolUse += UpdateUIHands;
-        }
-
         private void OnEnable()
         {
             _uiHandler.UpdateHandsPanels(inventory, _mainHand, _secondHand);
             _uiHandler.UpdateUI(inventory, Panels);
-        }
-
-        private void OnDestroy()
-        {
-            _resourceExtractionHandler.OnToolUse -= UpdateUIHands;
         }
 
         public void UpdateUIHands()

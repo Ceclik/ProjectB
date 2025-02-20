@@ -1,3 +1,4 @@
+using Interfaces.BaseEntityInterfaces;
 using Services.BaseEntityServices;
 using UnityEngine;
 

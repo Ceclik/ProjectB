@@ -54,9 +54,9 @@ namespace ComponentScripts.Entities.Character
 
         private void SetActualShield(ItemData item)
         {
-            if (_inventory.SecondHand.Value is ShieldData)
+            if (_inventory.SecondHand.Value is ShieldData data)
             {
-                ActualShield = (ShieldData)_inventory.SecondHand.Value;
+                ActualShield = data;
                 PercentOfBlockingDamage = ActualShield.PercentOfBlockingDamage;
             }
         }

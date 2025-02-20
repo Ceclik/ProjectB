@@ -1,3 +1,4 @@
+using ComponentScripts.Entities.Character.InventoryScripts;
 using ComponentScripts.Entities.Enemies;
 using Services.CharacterServices.CharacterStatsScripts;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace ComponentScripts.Entities.Character
         private ArmorHandler _armorHandler;
         private Character _character;
         private ICharacterDamageReceiver _characterDamageReceiver;
+        private ToolsDurabilityDecreaser _durabilityDecreaser;
         public ICharacterHealthHandler HealthService { get; private set; }
 
         private void Start()
@@ -19,6 +21,7 @@ namespace ComponentScripts.Entities.Character
             HealthService = gameObject.AddComponent<CharacterHealthHandlerService>();
             _characterDamageReceiver = gameObject.AddComponent<CharacterDamageReceiveService>();
             _armorHandler = GetComponent<ArmorHandler>();
+            _durabilityDecreaser = GetComponent<ToolsDurabilityDecreaser>();
         }
 
         private void OnCollisionEnter2D(Collision2D other)
@@ -27,6 +30,10 @@ namespace ComponentScripts.Entities.Character
             {
                 _characterDamageReceiver.ReceiveDamage(enemy.gameObject.GetComponent<ActiveEntity>(), _armorHandler);
                 HealthService.UpdateHealthBar(HealthBar);
+                if (_armorHandler.IsUsingShield)
+                {
+                    _durabilityDecreaser.DecreaseShieldDurability();
+                }
             }
         }
 

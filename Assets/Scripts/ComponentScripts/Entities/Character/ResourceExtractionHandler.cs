@@ -8,10 +8,7 @@ namespace ComponentScripts.Entities.Character
 {
     public class ResourceExtractionHandler : MonoBehaviour
     {
-        public delegate void UpdateUIHands();
-
         [SerializeField] private float maxDistanceForExtract;
-        [SerializeField] private int durabilityDecreasePerUse;
         private Character _character;
         private Inventory _inventory;
         private InventoryOpener _inventoryOpener;
@@ -30,18 +27,13 @@ namespace ComponentScripts.Entities.Character
         private void Update()
         {
             if (!_inventoryOpener.Inventory.activeSelf && Input.GetKeyDown(KeyCode.Mouse0) &&
-                _inventory.MainHand.Value is ToolData)
+                _inventory.MainHand.Value is ToolData mainHandTool)
             {
                 var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
-                _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character,
-                    durabilityDecreasePerUse);
-                OnToolUse?.Invoke();
+                _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character);
 
-                var mainHandTool = (ToolData)_inventory.MainHand.Value;
                 if (mainHandTool.ActualDurability < 0) _itemsRemover.RemoveFromMainHand(_inventory);
             }
         }
-
-        public event UpdateUIHands OnToolUse;
     }
 }

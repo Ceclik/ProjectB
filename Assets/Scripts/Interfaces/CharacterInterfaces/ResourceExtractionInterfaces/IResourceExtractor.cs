@@ -5,7 +5,6 @@ namespace Interfaces.CharacterInterfaces.ResourceExtractionInterfaces
 {
     public interface IResourceExtractor
     {
-        public void ExtractResource(Vector3 mousePosition, float maxDistanceForAttack, Character extractingCharacter,
-            int durabilityDecreasePerUse);
+        public void ExtractResource(Vector3 mousePosition, float maxDistanceForAttack, Character extractingCharacter);
     }
 }

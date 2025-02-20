@@ -9,7 +9,7 @@ namespace ComponentScripts.Entities.Character
         [Space(10)] [Header("Character's stats")] [SerializeField]
         private int coins;
 
-        private Inventory _inventory;
+        public Inventory Inventory { get; private set; }
 
         private int _experienceLevel { get; }
         private int _experienceAmount { get; set; }
@@ -18,7 +18,7 @@ namespace ComponentScripts.Entities.Character
 
         private void Start()
         {
-            _inventory = GetComponent<Inventory>();
+            Inventory = GetComponent<Inventory>();
 
             CountActualMaxHealth();
             CountActualDamage();
@@ -33,9 +33,9 @@ namespace ComponentScripts.Entities.Character
         public void CountActualDamage()
         {
             ActualDamage = BaseDamage;
-            if (_inventory.MainHand.Value is { Name: "Sword" })
+            if (Inventory.MainHand.Value is { Name: "Sword" })
             {
-                var swordData = (WeaponData)_inventory.MainHand.Value;
+                var swordData = (WeaponData)Inventory.MainHand.Value;
                 ActualDamage += swordData.AdditionalDamage;
             }
         }
