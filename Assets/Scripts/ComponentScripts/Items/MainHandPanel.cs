@@ -4,7 +4,6 @@ using DataClasses;
 using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -74,7 +73,7 @@ namespace ComponentScripts.Items
         private void PutToInventory()
         {
             var itemIndex = _putterToInventory.PutToInventory(Inventory.MainHand.Value, Inventory);
-            if (itemIndex == -1) return;
+            if (itemIndex == -1) return;//////////////////;
             var targetPanel = _panelsHandler.Panels[itemIndex].GetComponent<ItemPanel>();
             var itemData = (ToolData)Inventory.MainHand.Value;
             targetPanel.ItemIcon.sprite = itemData.ItemIcon;

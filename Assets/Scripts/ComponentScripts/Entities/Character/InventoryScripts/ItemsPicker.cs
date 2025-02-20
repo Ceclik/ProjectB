@@ -26,6 +26,11 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
                 {
                     Destroy(_involvedItem.gameObject);
                 }
+                else
+                {
+                    StartCoroutine(_textHandler.ActionText.ShowActionTextForSomeTime(1.5f, "Інвентар запоўнены!",
+                        _textHandler.ActionTextElement));
+                }
             }
         }
 
