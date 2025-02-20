@@ -22,8 +22,10 @@ namespace ComponentScripts.Entities.Character.InventoryScripts
         {
             if (_isOnItem && Input.GetKeyDown(KeyCode.F))
             {
-                _putterToInventory.PutToInventory(_involvedItem, GetComponent<Inventory>());
-                Destroy(_involvedItem.gameObject);
+                if (_putterToInventory.PutToInventory(_involvedItem, GetComponent<Inventory>()))
+                {
+                    Destroy(_involvedItem.gameObject);
+                }
             }
         }
 

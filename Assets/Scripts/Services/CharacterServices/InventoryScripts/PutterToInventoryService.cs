@@ -41,7 +41,7 @@ namespace Services.CharacterServices.InventoryScripts
                 }
             }
 
-            Debug.Log("Creating new field");
+            Debug.Log("Trying to create a new field");
             var index = GetEmptySlot(inventory);
             if (index != -1)
             {
@@ -89,7 +89,7 @@ namespace Services.CharacterServices.InventoryScripts
                 }
 
 
-            Debug.Log("Creating new field");
+            Debug.Log("Trying to create a new field");
             var index = GetEmptySlot(inventory);
             if (index != -1)
             {

@@ -74,6 +74,7 @@ namespace ComponentScripts.Items
         private void PutToInventory()
         {
             var itemIndex = _putterToInventory.PutToInventory(Inventory.SecondHand.Value, Inventory);
+            if(itemIndex == -1) return;
             var targetPanel = _panelsHandler.Panels[itemIndex].GetComponent<ItemPanel>();
             var itemData = (ToolData)Inventory.SecondHand.Value;
             targetPanel.ItemIcon.sprite = itemData.ItemIcon;
