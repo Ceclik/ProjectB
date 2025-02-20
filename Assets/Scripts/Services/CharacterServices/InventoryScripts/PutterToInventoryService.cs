@@ -16,6 +16,7 @@ namespace Services.CharacterServices.InventoryScripts
         {
             var itemToInventory = CreateItemDataObject(item);
             foreach (var inventoryItem in inventory.Items)
+            {
                 if (inventoryItem.Value != null)
                 {
                     if (inventoryItem.Value.Name == itemToInventory.Name &&
@@ -26,6 +27,8 @@ namespace Services.CharacterServices.InventoryScripts
                         DebugInventoryState(inventory);
                         return true;
                     }
+                    
+                    if (inventoryItem.Value.Amount == inventoryItem.Value.MaxAvailableAmount) continue;
 
                     if (inventoryItem.Value.Name == itemToInventory.Name &&
                         inventoryItem.Value.Amount + itemToInventory.Amount > inventoryItem.Value.MaxAvailableAmount)
@@ -34,18 +37,9 @@ namespace Services.CharacterServices.InventoryScripts
                         var delta = inventoryItem.Value.MaxAvailableAmount - inventoryItem.Value.Amount;
                         inventoryItem.Value.Amount += delta;
                         itemToInventory.Amount -= delta;
-                        var indexI = GetEmptySlot(inventory);
-                        if (indexI != -1)
-                        {
-                            inventory.Items[indexI] = itemToInventory;
-                            DebugInventoryState(inventory);
-                            return true;
-                        }
-
-                        Debug.LogError("Inventory is full"); //TODO create UI warning
-                        return false;
                     }
                 }
+            }
 
             Debug.Log("Creating new field");
             var index = GetEmptySlot(inventory);
@@ -120,10 +114,10 @@ namespace Services.CharacterServices.InventoryScripts
 
         private ItemData CreateItemDataObject(Item receivedItem)
         {
-            if (receivedItem is Food)
-                return new FoodData((Food)receivedItem);
-            if (receivedItem is Weapon)
-                return new WeaponData((Weapon)receivedItem);
+            if (receivedItem is Food food)
+                return new FoodData(food);
+            if (receivedItem is Weapon item)
+                return new WeaponData(item);
             if (receivedItem is Tool)
                 return (Tool)receivedItem is Shield
                     ? new ShieldData((Shield)receivedItem)
