@@ -11,11 +11,11 @@ namespace Services.CharacterServices.MovingScripts
     {
         private ArmorHandler _armorHandler;
         private CameraCharacterFollower _camera;
+        private bool _isControllingAllowed;
         private Rigidbody2D _rigidBody;
         private IStaminaHandler _staminaHandler;
         private CharacterStaminaHandler _staminaValues;
         private float _tugTimer;
-        private bool _isControllingAllowed;
 
         private void Start()
         {
@@ -40,10 +40,10 @@ namespace Services.CharacterServices.MovingScripts
                 _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 _tugTimer = 0;
 
-                Vector3 direction = GetDirection(key1, key2);
+                var direction = GetDirection(key1, key2);
                 if (direction != Vector3.zero)
                 {
-                    Vector3 targetPosition = characterTransform.position + direction * 3;
+                    var targetPosition = characterTransform.position + direction * 3;
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
             }
@@ -52,40 +52,34 @@ namespace Services.CharacterServices.MovingScripts
         public void Move(KeyCode key, float movingSpeed, Transform characterTransform, float runSpeed,
             float staminaDecreaseValue)
         {
-            Vector3 direction = GetDirection(key);
+            var direction = GetDirection(key);
             if (_isControllingAllowed && direction != Vector3.zero)
             {
-                bool isRunning = Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 &&
-                                 !_armorHandler.IsUsingShield;
-                float speed = isRunning ? runSpeed : movingSpeed;
+                var isRunning = Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 &&
+                                !_armorHandler.IsUsingShield;
+                var speed = isRunning ? runSpeed : movingSpeed;
 
-                Vector3 movement = direction * (Time.fixedDeltaTime * speed);
+                var movement = direction * (Time.fixedDeltaTime * speed);
                 _rigidBody.MovePosition(_rigidBody.position + (Vector2)movement);
 
-                if (isRunning)
-                {
-                    _staminaHandler.DecreaseStamina(staminaDecreaseValue);
-                }
+                if (isRunning) _staminaHandler.DecreaseStamina(staminaDecreaseValue);
             }
         }
 
         public void Move(KeyCode key1, KeyCode key2, float movingSpeed, Transform characterTransform, float runSpeed,
             float staminaDecreaseValue)
         {
-            Vector3 direction = GetDirection(key1, key2);
+            var direction = GetDirection(key1, key2);
             if (_isControllingAllowed && direction != Vector3.zero)
             {
-                bool isRunning = Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 &&
-                                 !_armorHandler.IsUsingShield;
-                float speed = isRunning ? runSpeed : movingSpeed;
+                var isRunning = Input.GetKey(KeyCode.LeftShift) && _staminaValues.Stamina > 0 &&
+                                !_armorHandler.IsUsingShield;
+                var speed = isRunning ? runSpeed : movingSpeed;
 
-                Vector3 movement = direction * (Time.fixedDeltaTime * speed);
+                var movement = direction * (Time.fixedDeltaTime * speed);
                 _rigidBody.MovePosition(_rigidBody.position + (Vector2)movement);
 
-                if (isRunning)
-                {
-                    _staminaHandler.DecreaseStamina(staminaDecreaseValue);
-                }
+                if (isRunning) _staminaHandler.DecreaseStamina(staminaDecreaseValue);
             }
         }
 
@@ -102,13 +96,18 @@ namespace Services.CharacterServices.MovingScripts
                 _staminaHandler.DecreaseStamina(staminaDecreaseValue);
                 _tugTimer = 0;
 
-                Vector3 direction = GetDirection(key);
+                var direction = GetDirection(key);
                 if (direction != Vector3.zero)
                 {
-                    Vector3 targetPosition = characterTransform.position + direction * 3;
+                    var targetPosition = characterTransform.position + direction * 3;
                     StartCoroutine(TugMaker(targetPosition, characterTransform, tugSpeed));
                 }
             }
+        }
+
+        public void ApplyKnockBack(Vector2 direction, float force, float duration)
+        {
+            StartCoroutine(KnockbackRoutine(direction, force, duration));
         }
 
         private IEnumerator TugMaker(Vector3 targetPosition, Transform characterTransform, float tugSpeed)
@@ -138,16 +137,16 @@ namespace Services.CharacterServices.MovingScripts
 
         private Vector3 GetDirection(KeyCode key1, KeyCode key2)
         {
-            Vector3 dir1 = GetDirection(key1);
-            Vector3 dir2 = GetDirection(key2);
+            var dir1 = GetDirection(key1);
+            var dir2 = GetDirection(key2);
             return (dir1 + dir2).normalized;
         }
 
         private IEnumerator KnockbackRoutine(Vector2 direction, float force, float duration)
         {
-            float elapsedTime = 0f;
+            var elapsedTime = 0f;
             Vector2 startPosition = transform.position;
-            Vector2 targetPosition = startPosition + direction * force;
+            var targetPosition = startPosition + direction * force;
             _isControllingAllowed = false;
             while (elapsedTime < duration)
             {
@@ -155,13 +154,9 @@ namespace Services.CharacterServices.MovingScripts
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
             _isControllingAllowed = true;
             transform.position = targetPosition;
-        }
-
-        public void ApplyKnockBack(Vector2 direction, float force, float duration)
-        {
-            StartCoroutine(KnockbackRoutine(direction, force, duration));
         }
     }
 }

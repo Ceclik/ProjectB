@@ -1,6 +1,7 @@
-using System;
+using System.Collections.Generic;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using TMPro;
 using UnityEngine;
@@ -11,14 +12,21 @@ namespace ComponentScripts.Items
 {
     public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        protected List<TextMeshProUGUI> AmountTexts;
+
+        protected List<Image> DurabilityBarBackgrounds;
+
+        protected List<Image> DurabilityBars;
+
+        protected List<Image> ItemIcons;
         protected IItemsDropper ItemsDropper;
-        public TextMeshProUGUI AmountText { get; protected set; }
+
+        public TextMeshProUGUI AmountText => AmountTexts[0];
         public Inventory Inventory { get; protected set; }
         public bool IsPointerOnPanel { get; protected set; }
-        public Image ItemIcon { get; set; }
-        
-        public Image DurabilityBarBackgroung { get; private set; }
-        public Image DurabilityBar { get; private set; }
+        public Image ItemIcon => ItemIcons[0];
+        public Image DurabilityBarBackgroung => DurabilityBarBackgrounds[0];
+        public Image DurabilityBar => DurabilityBars[0];
 
         public int PanelIndex { get; set; }
 
@@ -33,42 +41,6 @@ namespace ComponentScripts.Items
             ItemsDropper = gameObject.AddComponent<ItemDropperService>();
             IsPointerOnPanel = false;
             Inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        }
-
-        public void InitializeUiElements()
-        {
-            var images = GetComponentsInChildren<Image>();
-            AmountText = GetComponentInChildren<TextMeshProUGUI>();
-            ItemIcon = images[0];
-            DurabilityBarBackgroung = images[1];
-            DurabilityBar = images[2];
-        }
-
-        private void DisableElements()
-        {
-            ItemIcon.sprite = null;
-            AmountText.enabled = false;
-            DurabilityBarBackgroung.enabled = false;
-            DurabilityBar.enabled = false;
-        }
-
-        public void UpdateHandPanel(ItemData handItem)
-        {
-            DisableElements();
-            
-            ItemIcon.sprite = handItem.ItemIcon;
-            if (!(handItem is ToolData) && !AmountText.isActiveAndEnabled)
-            {
-                AmountText.enabled = true;
-                AmountText.text = handItem.Amount.ToString();
-            }
-            else if (handItem is ToolData && !AmountText.isActiveAndEnabled)
-            {
-                var toolItem = (ToolData)handItem; 
-                DurabilityBarBackgroung.enabled = true;
-                DurabilityBar.enabled = true;
-                DurabilityBar.fillAmount = (float)toolItem.ActualDurability / toolItem.InitialDurability;
-            }
         }
 
         private void Update()
@@ -90,6 +62,45 @@ namespace ComponentScripts.Items
         public void OnPointerExit(PointerEventData eventData)
         {
             IsPointerOnPanel = false;
+        }
+
+        public void InitializeUiElements()
+        {
+            var images = GetComponentsInChildren<Image>();
+            AmountTexts = new List<TextMeshProUGUI> { GetComponentInChildren<TextMeshProUGUI>() };
+            ItemIcons = new List<Image> { images[0] };
+            DurabilityBarBackgrounds = new List<Image> { images[1] };
+            DurabilityBars = new List<Image> { images[2] };
+        }
+
+        private void DisableElements(int i)
+        {
+            ItemIcons[i].sprite = null;
+            AmountTexts[i].enabled = false;
+            DurabilityBarBackgrounds[i].enabled = false;
+            DurabilityBars[i].enabled = false;
+        }
+
+        public void UpdateHandPanel(ItemData handItem)
+        {
+            for (var i = 0; i < AmountTexts.Count; i++)
+            {
+                DisableElements(i);
+
+                ItemIcons[i].sprite = handItem.ItemIcon;
+                if (!(handItem is ToolData) && !AmountText.isActiveAndEnabled)
+                {
+                    AmountTexts[i].enabled = true;
+                    AmountTexts[i].text = handItem.Amount.ToString();
+                }
+                else if (handItem is ToolData && !AmountTexts[i].isActiveAndEnabled)
+                {
+                    var toolItem = (ToolData)handItem;
+                    DurabilityBarBackgrounds[i].enabled = true;
+                    DurabilityBars[i].enabled = true;
+                    DurabilityBars[i].fillAmount = (float)toolItem.ActualDurability / toolItem.InitialDurability;
+                }
+            }
         }
 
         private void HandleDropping()
@@ -117,10 +128,13 @@ namespace ComponentScripts.Items
 
         public void CleanItemPanel()
         {
-            ItemIcon.sprite = null;
-            AmountText.enabled = false;
-            DurabilityBarBackgroung.enabled = false;
-            DurabilityBar.enabled = false;
+            for (var i = 0; i < AmountTexts.Count; i++)
+            {
+                ItemIcons[i].sprite = null;
+                AmountTexts[i].enabled = false;
+                DurabilityBarBackgrounds[i].enabled = false;
+                DurabilityBars[i].enabled = false;
+            }
         }
     }
 }

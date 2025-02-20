@@ -7,13 +7,13 @@ namespace ComponentScripts.Items
     public class FunctionalHandsPutter : MonoBehaviour
     {
         private ItemPanel _itemPanel;
-        private MainHandPanel _mainHandPanels;
-        private SecondHandPanel _secondHandPanels;
+        private MainHandPanel _mainHandPanel;
+        private SecondHandPanel _secondHandPanel;
 
         private void Start()
         {
-            _secondHandPanels = GameObject.Find("SecondHandPanel").GetComponent<SecondHandPanel>();
-            _mainHandPanels = GameObject.Find("MainHandPanel").GetComponent<MainHandPanel>();
+            _secondHandPanel = GameObject.Find("SecondHandPanel").GetComponent<SecondHandPanel>();
+            _mainHandPanel = GameObject.Find("MainHandPanel").GetComponent<MainHandPanel>();
             _itemPanel = GetComponent<ItemPanel>();
         }
 
@@ -29,16 +29,13 @@ namespace ComponentScripts.Items
         {
             if ((_itemPanel.Inventory.Items[_itemPanel.PanelIndex] is ToolData ||
                  _itemPanel.Inventory.Items[_itemPanel.PanelIndex] is WeaponData) &&
-                _itemPanel.Inventory.MainHand == null)
+                _itemPanel.Inventory.MainHand.Value == null)
             {
-                _mainHandPanels.PanelIndex = _itemPanel.PanelIndex;
-                _mainHandPanels.ItemIcon.sprite = _itemPanel.ItemIcon.sprite;
-                _mainHandPanels.AmountText.text = _itemPanel.AmountText.text;
-                _mainHandPanels.DurabilityBarBackgroung.enabled = true;
-                _mainHandPanels.DurabilityBar.enabled = true;
-                _mainHandPanels.DurabilityBar.fillAmount = _itemPanel.DurabilityBar.fillAmount;
+                _mainHandPanel.PanelIndex = _itemPanel.PanelIndex;
+                _mainHandPanel.PutToHand(_itemPanel);
                 _itemPanel.CleanItemPanel();
-                _itemPanel.Inventory.MainHand = _itemPanel.Inventory.Items[_itemPanel.PanelIndex];
+                _itemPanel.Inventory.MainHand = new KeyValuePair<int, ItemData>(_itemPanel.PanelIndex,
+                    _itemPanel.Inventory.Items[_itemPanel.PanelIndex]);
                 _itemPanel.Inventory.Items[_itemPanel.PanelIndex] = null;
             }
         }
@@ -46,16 +43,13 @@ namespace ComponentScripts.Items
         private void PutToSecondHand()
         {
             if (_itemPanel.Inventory.Items[_itemPanel.PanelIndex] is ToolData &&
-                _itemPanel.Inventory.SecondHand == null)
+                _itemPanel.Inventory.SecondHand.Value == null)
             {
-                _secondHandPanels.PanelIndex = _itemPanel.PanelIndex;
-                _secondHandPanels.ItemIcon.sprite = _itemPanel.ItemIcon.sprite;
-                _secondHandPanels.AmountText.text = _itemPanel.AmountText.text;
-                _secondHandPanels.DurabilityBarBackgroung.enabled = true;
-                _secondHandPanels.DurabilityBar.enabled = true;
-                _secondHandPanels.DurabilityBar.fillAmount = _itemPanel.DurabilityBar.fillAmount;
+                _secondHandPanel.PanelIndex = _itemPanel.PanelIndex;
+                _secondHandPanel.PutToHand(_itemPanel);
                 _itemPanel.CleanItemPanel();
-                _itemPanel.Inventory.SecondHand = _itemPanel.Inventory.Items[_itemPanel.PanelIndex];
+                _itemPanel.Inventory.SecondHand = new KeyValuePair<int, ItemData>(_itemPanel.PanelIndex,
+                    _itemPanel.Inventory.Items[_itemPanel.PanelIndex]);
                 _itemPanel.Inventory.Items[_itemPanel.PanelIndex] = null;
             }
         }

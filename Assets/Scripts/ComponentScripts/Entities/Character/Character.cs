@@ -33,9 +33,9 @@ namespace ComponentScripts.Entities.Character
         public void CountActualDamage()
         {
             ActualDamage = BaseDamage;
-            if (_inventory.MainHand is { Name: "Sword" })
+            if (_inventory.MainHand.Value is { Name: "Sword" })
             {
-                var swordData = (WeaponData)_inventory.MainHand;
+                var swordData = (WeaponData)_inventory.MainHand.Value;
                 ActualDamage += swordData.AdditionalDamage;
             }
         }

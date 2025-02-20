@@ -16,23 +16,23 @@ namespace Services.CharacterServices.InventoryScripts
         {
             var itemToInventory = CreateItemDataObject(item);
             foreach (var inventoryItem in inventory.Items)
-                if (inventoryItem != null)
+                if (inventoryItem.Value != null)
                 {
-                    if (inventoryItem.Name == itemToInventory.Name &&
-                        inventoryItem.Amount + itemToInventory.Amount <= inventoryItem.MaxAvailableAmount)
+                    if (inventoryItem.Value.Name == itemToInventory.Name &&
+                        inventoryItem.Value.Amount + itemToInventory.Amount <= inventoryItem.Value.MaxAvailableAmount)
                     {
-                        inventoryItem.Amount += itemToInventory.Amount;
+                        inventoryItem.Value.Amount += itemToInventory.Amount;
                         Debug.Log("Just increasing amount");
                         DebugInventoryState(inventory);
                         return true;
                     }
 
-                    if (inventoryItem.Name == itemToInventory.Name &&
-                        inventoryItem.Amount + itemToInventory.Amount > inventoryItem.MaxAvailableAmount)
+                    if (inventoryItem.Value.Name == itemToInventory.Name &&
+                        inventoryItem.Value.Amount + itemToInventory.Amount > inventoryItem.Value.MaxAvailableAmount)
                     {
                         Debug.Log("Increasing amount and creating new field");
-                        var delta = inventoryItem.MaxAvailableAmount - inventoryItem.Amount;
-                        inventoryItem.Amount += delta;
+                        var delta = inventoryItem.Value.MaxAvailableAmount - inventoryItem.Value.Amount;
+                        inventoryItem.Value.Amount += delta;
                         itemToInventory.Amount -= delta;
                         var indexI = GetEmptySlot(inventory);
                         if (indexI != -1)
@@ -62,7 +62,7 @@ namespace Services.CharacterServices.InventoryScripts
 
         public int PutToInventory(ItemData itemToInventory, Inventory inventory)
         {
-            for (var i = 0; i < inventory.Items.Length; i++)
+            for (var i = 0; i < inventory.Items.Count; i++)
                 if (inventory.Items[i] != null)
                 {
                     if (inventory.Items[i].Name == itemToInventory.Name &&
@@ -111,7 +111,7 @@ namespace Services.CharacterServices.InventoryScripts
         private void DebugInventoryState(Inventory inventory)
         {
             Debug.Log("Inventory: ");
-            for (var i = 0; i < inventory.Items.Length; i++)
+            for (var i = 0; i < inventory.Items.Count; i++)
                 if (inventory.Items[i] != null)
                     Debug.Log(
                         $"Name: {inventory.Items[i].Name}, Amount: {inventory.Items[i].Amount}, maxAmount: " +
@@ -135,7 +135,7 @@ namespace Services.CharacterServices.InventoryScripts
 
         private int GetEmptySlot(Inventory inventory)
         {
-            for (var i = 0; i < inventory.Items.Length; i++)
+            for (var i = 0; i < inventory.Items.Count; i++)
                 if (inventory.Items[i] == null)
                     return i;
 

@@ -9,8 +9,8 @@ namespace ComponentScripts.Entities.Character
     {
         [SerializeField] private float knockBackForce = 1.0f;
         [SerializeField] private float knockBackDuration = 0.3f;
-        private IPlayerMover _mover;
         private EntityColorBlinker _colorBlinker;
+        private IPlayerMover _mover;
 
         private void Start()
         {

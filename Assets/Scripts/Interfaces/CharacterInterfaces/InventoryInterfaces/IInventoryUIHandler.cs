@@ -8,7 +8,6 @@ namespace Interfaces.CharacterInterfaces.InventoryInterfaces
     public interface IInventoryUIHandler
     {
         public void UpdateUI(Inventory inventory, List<RectTransform> panels);
-        public void UpdateHandsPanels(Inventory inventory, List<MainHandPanel> mainHand, List<SecondHandPanel> secondHand);
-
+        public void UpdateHandsPanels(Inventory inventory, MainHandPanel mainHand, SecondHandPanel secondHand);
     }
 }

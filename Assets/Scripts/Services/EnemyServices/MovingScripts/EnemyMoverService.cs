@@ -15,7 +15,7 @@ namespace Services.EnemyServices.MovingScripts
             float speedIncrease = 0)
         {
             if (!agent.enabled) return;
-            
+
             if (!_isSpeedIncreased && speedIncrease > 0)
             {
                 _isSpeedIncreased = true;
@@ -80,7 +80,8 @@ namespace Services.EnemyServices.MovingScripts
             return newIndex;
         }
 
-        private IEnumerator DelayedMove(float onPointStayDelay, Enemy enemy, EnemyAnimationsHandler animator, Rigidbody2D rigidBody)
+        private IEnumerator DelayedMove(float onPointStayDelay, Enemy enemy, EnemyAnimationsHandler animator,
+            Rigidbody2D rigidBody)
         {
             yield return new WaitForSeconds(onPointStayDelay);
             rigidBody.freezeRotation = false;

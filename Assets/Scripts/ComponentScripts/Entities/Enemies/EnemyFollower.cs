@@ -1,5 +1,4 @@
-﻿using System;
-using Interfaces.EnemyInterfaces.MovingInterfaces;
+﻿using Interfaces.EnemyInterfaces.MovingInterfaces;
 using Services.EnemyServices.MovingScripts;
 using UnityEngine;
 using UnityEngine.AI;

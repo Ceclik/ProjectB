@@ -1,4 +1,3 @@
-using System;
 using ComponentScripts.Entities.Character.InventoryScripts;
 using DataClasses;
 using Interfaces.CharacterInterfaces.MovingInterfaces;
@@ -39,7 +38,6 @@ namespace ComponentScripts.Entities.Character
 
         private void Start()
         {
-            
             _armorHandler = GetComponent<ArmorHandler>();
             _rigidbody = GetComponent<Rigidbody2D>();
             _animationSwitcher = GetComponent<CharacterAnimationsSwitcher>();
@@ -183,7 +181,7 @@ namespace ComponentScripts.Entities.Character
                         else
                         {
                             _mover.Move(keyCode, _movingSpeed, transform, runSpeed, runStaminaDecreasingValuePerFrame);
-                            if (Input.GetKey(KeyCode.Mouse1) && _inventory.SecondHand is ShieldData)
+                            if (Input.GetKey(KeyCode.Mouse1) && _inventory.SecondHand.Value is ShieldData)
                                 _animationSwitcher.SetFrontWalkShieldAnimation();
                             else
                                 _animationSwitcher.SetFrontWalkAnimation();

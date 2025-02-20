@@ -12,10 +12,10 @@ namespace ComponentScripts.Entities.Character
         private Collider2D _collider;
 
         private Shelter _enteredShelter;
-        private float _nextHidingTimer;
-        private SpriteRenderer _spriteRenderer;
         private Vector3 _farHidedPosition;
         private CameraCharacterFollower _mainCamera;
+        private float _nextHidingTimer;
+        private SpriteRenderer _spriteRenderer;
         public bool IsInShelter { get; private set; }
 
         private void Start()
@@ -54,7 +54,7 @@ namespace ComponentScripts.Entities.Character
 
         private void EnterShelter()
         {
-            Vector3 currentPosition = transform.position;
+            var currentPosition = transform.position;
             _mainCamera.enabled = false;
             transform.position = _farHidedPosition;
             StartCoroutine(DisableHidedState(_enteredShelter.HidingTime, currentPosition));

@@ -27,9 +27,9 @@ namespace ComponentScripts.Entities.Character
 
         private void Update()
         {
-            if (_inventory.SecondHand != null && !_inventoryOpener.Inventory.activeSelf)
+            if (_inventory.SecondHand.Value != null && !_inventoryOpener.Inventory.activeSelf)
             {
-                if (!IsUsingShield && _inventory.SecondHand.Name == "Shield" && Input.GetKeyDown(KeyCode.Mouse1))
+                if (!IsUsingShield && _inventory.SecondHand.Value.Name == "Shield" && Input.GetKeyDown(KeyCode.Mouse1))
                 {
                     IsUsingShield = true;
                     if (!_characterMover.IsMoving)
@@ -54,9 +54,9 @@ namespace ComponentScripts.Entities.Character
 
         private void SetActualShield(ItemData item)
         {
-            if (_inventory.SecondHand is ShieldData)
+            if (_inventory.SecondHand.Value is ShieldData)
             {
-                ActualShield = (ShieldData)_inventory.SecondHand;
+                ActualShield = (ShieldData)_inventory.SecondHand.Value;
                 PercentOfBlockingDamage = ActualShield.PercentOfBlockingDamage;
             }
         }

@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using ComponentScripts;
 using ComponentScripts.Items;
 using ComponentScripts.Items.Tools;
 using ComponentScripts.Items.Weapons;
 using DataClasses;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using TMPro;
 using UnityEngine;
 
@@ -41,21 +43,21 @@ namespace Services.CharacterServices.InventoryScripts
                 spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = newItem.Amount.ToString();
         }
 
-        public void DropAllItems(ItemData[] items, Vector3 characterPosition, float droppingRadius)
+        public void DropAllItems(Dictionary<int, ItemData> items, Vector3 characterPosition, float droppingRadius)
         {
             foreach (var item in items)
-                if (item != null)
+                if (item.Value != null)
                 {
                     var spawnedItemPosition = new Vector3(
                         Random.Range(characterPosition.x - droppingRadius, characterPosition.x + droppingRadius),
                         Random.Range(characterPosition.y - droppingRadius, characterPosition.y + droppingRadius),
                         characterPosition.z);
-                    var spawnedItem = Instantiate(_itemsSpawner.GetItemPrefab(item), spawnedItemPosition,
+                    var spawnedItem = Instantiate(_itemsSpawner.GetItemPrefab(item.Value), spawnedItemPosition,
                         Quaternion.identity,
                         _itemsParent).GetComponent<Item>();
-                    spawnedItem.Amount = item.Amount;
+                    spawnedItem.Amount = item.Value.Amount;
                     if (!(spawnedItem is Weapon) && !(spawnedItem is Tool))
-                        spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = item.Amount.ToString();
+                        spawnedItem.GetComponentInChildren<TextMeshProUGUI>().text = item.Value.Amount.ToString();
                 }
         }
     }

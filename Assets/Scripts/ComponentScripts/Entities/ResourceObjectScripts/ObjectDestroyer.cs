@@ -1,4 +1,5 @@
 using ComponentScripts.Entities.ResourceObjects;
+using Interfaces.CharacterInterfaces.InventoryInterfaces;
 using Services.CharacterServices.InventoryScripts;
 using UnityEngine;
 

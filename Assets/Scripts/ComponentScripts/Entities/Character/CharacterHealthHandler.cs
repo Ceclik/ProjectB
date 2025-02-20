@@ -34,6 +34,5 @@ namespace ComponentScripts.Entities.Character
         {
             //TODO if player use bonus _healthService.IncreaseHealth(); check in Update();
         }
-
     }
 }

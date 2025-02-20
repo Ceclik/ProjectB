@@ -9,38 +9,25 @@ namespace Services.CharacterServices.InventoryScripts
 {
     public class InventoryUIHandlerService : IInventoryUIHandler
     {
-        public void UpdateHandsPanels(Inventory inventory, List<MainHandPanel> mainHand, List<SecondHandPanel> secondHand)
+        public void UpdateHandsPanels(Inventory inventory, MainHandPanel mainHand, SecondHandPanel secondHand)
         {
-            for (int i = 0; i < mainHand.Count; i++)
-            {
-                if (mainHand[i].DurabilityBar == null)
-                {
-                    mainHand[i].InitializeUiElements();
-                    secondHand[i].InitializeUiElements();
-                }
+            if (inventory.MainHand.Value != null)
+                mainHand.UpdateHandPanel((ToolData)inventory.MainHand.Value);
+            else if (inventory.MainHand.Value == null) mainHand.CleanItemPanel();
 
-                if (inventory.MainHand != null)
-                {
-                    mainHand[i].UpdateHandPanel((ToolData)inventory.MainHand);
-                }
-
-                if (inventory.SecondHand != null)
-                {
-                    secondHand[i].UpdateHandPanel((ToolData)inventory.SecondHand);
-                }
-            }
+            if (inventory.SecondHand.Value != null)
+                secondHand.UpdateHandPanel((ToolData)inventory.SecondHand.Value);
+            else if (inventory.SecondHand.Value == null) secondHand.CleanItemPanel();
         }
-        
+
         public void UpdateUI(Inventory inventory, List<RectTransform> panels)
         {
             for (var i = 0; i < panels.Count; i++)
             {
                 var itemPanel = panels[i].GetComponent<ItemPanel>();
-                
-                if (inventory.Items[i] != null)
-                {
-                    itemPanel.UpdateHandPanel(inventory.Items[i]);
-                }
+                if (itemPanel.DurabilityBar == null) itemPanel.InitializeUiElements();
+
+                if (inventory.Items[i] != null) itemPanel.UpdateHandPanel(inventory.Items[i]);
             }
         }
     }

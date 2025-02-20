@@ -7,9 +7,9 @@ namespace ComponentScripts.Entities
     {
         [SerializeField] private Color targetColor;
         [SerializeField] private float blinkDuration = 0.2f;
+        private Color _originalColor;
 
         private SpriteRenderer _spriteRenderer;
-        private Color _originalColor;
 
         private void Start()
         {
