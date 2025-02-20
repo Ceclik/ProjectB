@@ -31,8 +31,6 @@ namespace ComponentScripts.Entities.Character
             {
                 var mousePosition = Camera.main!.ScreenToWorldPoint(Input.mousePosition);
                 _resourceExtractor.ExtractResource(mousePosition, maxDistanceForExtract, _character);
-
-                if (mainHandTool.ActualDurability < 0) _itemsRemover.RemoveFromMainHand(_inventory);
             }
         }
     }

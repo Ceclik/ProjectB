@@ -21,6 +21,10 @@ namespace ComponentScripts.Entities.Character
         {
             var mainHandTool = (ToolData)_inventory.MainHand.Value;
             mainHandTool.ActualDurability -= durabilityDecreasePerUse;
+            if (mainHandTool.ActualDurability <= 0)
+            {
+                GetComponent<ItemsRemover>().RemoveFromMainHand(_inventory);
+            }
             inventoryUI.UpdateUIHands();
         }
 
@@ -30,6 +34,11 @@ namespace ComponentScripts.Entities.Character
             {
                 var shield = (ShieldData)_inventory.SecondHand.Value;
                 shield.ActualDurability -= durabilityDecreasePerUse;
+                if (shield.ActualDurability <= 0)
+                {
+                    GetComponent<ItemsRemover>().RemoveFromSecondHand(_inventory);
+                    GetComponent<ArmorHandler>().IsUsingShield = false;
+                }
                 inventoryUI.UpdateUIHands();
             }
         }

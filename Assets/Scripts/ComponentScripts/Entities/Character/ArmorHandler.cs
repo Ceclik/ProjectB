@@ -10,7 +10,7 @@ namespace ComponentScripts.Entities.Character
         private CharacterMover _characterMover;
         private Inventory _inventory;
         private InventoryOpener _inventoryOpener;
-        public bool IsUsingShield { get; private set; }
+        public bool IsUsingShield { get; set; }
 
         public float PercentOfBlockingDamage { get; private set; }
 

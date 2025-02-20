@@ -7,7 +7,6 @@ namespace ComponentScripts.Entities
     {
         [SerializeField] private Color targetColor;
         [SerializeField] private float blinkDuration = 0.2f;
-        private Color _originalColor;
 
         private SpriteRenderer _spriteRenderer;
 
@@ -18,10 +17,9 @@ namespace ComponentScripts.Entities
 
         public IEnumerator Blink()
         {
-            _originalColor = _spriteRenderer.color;
             _spriteRenderer.color = targetColor;
             yield return new WaitForSeconds(blinkDuration);
-            _spriteRenderer.color = _originalColor;
+            _spriteRenderer.color = Color.white;
         }
     }
 }
